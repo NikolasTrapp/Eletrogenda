@@ -7,14 +7,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Scheduling implements Serializable {
@@ -26,26 +28,30 @@ public class Scheduling implements Serializable {
 	private Date initialDate;
 	private Date finalDate;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "professor_id")
 	private Teacher teacher;
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	
+	@ManyToOne
 	@JoinColumn(name = "classroom_id")
 	private Classroom classroom;
-	@OneToMany(mappedBy = "scheduling")
+	
+	@ManyToMany
+	@JoinTable(name = "equipments_schedulings", 
+	joinColumns = @JoinColumn(name = "scheduling_id"),
+	inverseJoinColumns = @JoinColumn(name = "equipment_id"))
 	private List<Equipment> equipments = new ArrayList<>();
 
+	
 	public Scheduling() {
 	}
 
-	public Scheduling(Long id, Date initialDate, Date finalDate, Teacher teacher, Classroom classroom,
-			List<Equipment> equipments) {
+	public Scheduling(Long id, Date initialDate, Date finalDate, Teacher teacher, Classroom classroom) {
 		this.id = id;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
 		this.teacher = teacher;
 		this.classroom = classroom;
-		this.equipments = equipments;
 	}
 
 	@Override

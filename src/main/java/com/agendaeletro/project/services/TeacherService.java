@@ -28,5 +28,9 @@ public class TeacherService {
 		Teacher obj = teacherRepository.findByName(name);
 		return obj;
 	}
+	
+	public Teacher insert(Teacher teacher) {
+		return teacherRepository.save(teacher);
+	}
 
 }

@@ -1,15 +1,18 @@
 package com.agendaeletro.project.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Equipment implements Serializable {
@@ -22,19 +25,18 @@ public class Equipment implements Serializable {
 	private String description;
 	private Integer quantity;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "scheduling_id")
-	private Scheduling scheduling;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "equipments")
+	private List<Scheduling> schedulings = new ArrayList<>();
 
 	public Equipment() {
 	}
 
-	public Equipment(Long id, String name, String description, Integer quantity, Scheduling scheduling) {
+	public Equipment(Long id, String name, String description, Integer quantity) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
-		this.scheduling = scheduling;
 	}
 
 	// Getters e Setters
@@ -70,12 +72,12 @@ public class Equipment implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public void setScheduling(Scheduling scheduling) {
-		this.scheduling = scheduling;
+	public List<Scheduling> getSchedulings() {
+		return schedulings;
 	}
 
-	public Scheduling getSchedulings() {
-		return scheduling;
+	public void addSchedulings(Scheduling scheduling) {
+		this.schedulings.add(scheduling);
 	}
 
 	@Override
