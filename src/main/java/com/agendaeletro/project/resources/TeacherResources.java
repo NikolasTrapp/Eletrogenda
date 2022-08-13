@@ -1,15 +1,21 @@
 package com.agendaeletro.project.resources;
 
+import java.net.URI;
 import java.util.List;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Teacher;
 import com.agendaeletro.project.services.TeacherService;
@@ -41,8 +47,20 @@ public class TeacherResources {
 	
 	@PostMapping("/insertTeacher")
 	public ResponseEntity<Teacher> insert(@RequestBody Teacher teacher){
-		System.out.println(teacher);
 		teacher = service.insert(teacher);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(teacher.getId()).toUri();
+		return ResponseEntity.created(uri).body(teacher);
+	}
+	
+	@DeleteMapping(value = "/deleteTeacher/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value = "/updateTeacher/{id}")
+	public ResponseEntity<Teacher> update(@PathVariable Long id, @RequestBody Teacher teacher){
+		teacher = service.update(id, teacher);
 		return ResponseEntity.ok().body(teacher);
 	}
 

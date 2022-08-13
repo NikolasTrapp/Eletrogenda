@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.agendaeletro.project.entities.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -35,12 +34,12 @@ public class Teacher implements Serializable {
 	}
 
 	// Sobrecarga de construtor usando todos os atributos
-	public Teacher(Long id, String name, String email, String password, Role role) {
+	public Teacher(Long id, String name, String email, String password, String role) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		setRole(role);
+		this.role = role;
 	}
 
 	@Override
@@ -82,14 +81,12 @@ public class Teacher implements Serializable {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return Role.valueOf(role);
+	public String getRole() {
+		return role;
 	}
 
-	public void setRole(Role role) {
-		if (role != null) {
-			this.role = role.getRole();
-		}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void addScheduling(Scheduling scheduling) {

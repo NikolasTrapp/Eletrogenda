@@ -85,11 +85,11 @@ public class Scheduling implements Serializable {
 		this.finalDate = finalDate;
 	}
 
-	public Teacher getProfessor() {
+	public Teacher getTeacher() {
 		return teacher;
 	}
 
-	public void setProfessor(Teacher teacher) {
+	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
 

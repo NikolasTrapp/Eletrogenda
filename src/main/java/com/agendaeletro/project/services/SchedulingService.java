@@ -1,6 +1,7 @@
 package com.agendaeletro.project.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,18 @@ public class SchedulingService {
 
 	public List<Scheduling> queryAll() {
 		return schedulingReporitory.findAll();
+	}
+
+	public Scheduling queryById(Long id) {
+		Optional<Scheduling> obj = schedulingReporitory.findById(id);
+		return obj.get();
+	}
+
+	public Scheduling insert(Scheduling scheduling) {
+		return schedulingReporitory.save(scheduling);
+	}
+	
+	public void delete(Long id) {
+		schedulingReporitory.deleteById(id);;
 	}
 }

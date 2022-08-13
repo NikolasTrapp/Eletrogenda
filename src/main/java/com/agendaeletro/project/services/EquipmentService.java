@@ -23,4 +23,12 @@ public class EquipmentService {
 		Optional<Equipment> obj = equipmentRepository.findById(id);
 		return obj.get();
 	}
+
+	public Equipment insert(Equipment equipment) {
+		return equipmentRepository.save(equipment);
+	}
+	
+	public void delete(Long id) {
+		equipmentRepository.deleteById(id);;
+	}
 }
