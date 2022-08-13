@@ -1,65 +1,123 @@
 package com.agendaeletro.project.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-public class Scheduling implements Serializable{
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Scheduling implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Date initialDate;
 	private Date finalDate;
-	private Professor professor;
-	private Classroom classroom;
-	private Equipment equipment;
-	
-	public Scheduling() {}
 
-	public Scheduling(Date initialDate, Date finalDate, Professor professor, Classroom classroom, Equipment equipment) {
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "professor_id")
+	private Teacher teacher;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "classroom_id")
+	private Classroom classroom;
+	@OneToMany(mappedBy = "scheduling")
+	private List<Equipment> equipments = new ArrayList<>();
+
+	public Scheduling() {
+	}
+
+	public Scheduling(Long id, Date initialDate, Date finalDate, Teacher teacher, Classroom classroom,
+			List<Equipment> equipments) {
+		this.id = id;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
-		this.professor = professor;
+		this.teacher = teacher;
 		this.classroom = classroom;
-		this.equipment = equipment;
+		this.equipments = equipments;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Scheduling: initialDate=%s | finalDate=%s | professor=%s | classroom=%s | equipment=%s",
-				initialDate, finalDate, professor, classroom, equipment);
+		return String.format(
+				"Scheduling: id=%s | initialDate=%s | finalDate=%s | teacher=%s | classroom=%s | equipment=%s", id,
+				initialDate, finalDate, teacher, classroom, Arrays.asList(equipments));
 	}
 
-	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Date getInitialDate() {
 		return initialDate;
 	}
+
 	public void setInitialDate(Date initialDate) {
 		this.initialDate = initialDate;
 	}
+
 	public Date getFinalDate() {
 		return finalDate;
 	}
+
 	public void setFinalDate(Date finalDate) {
 		this.finalDate = finalDate;
 	}
-	public Professor getProfessor() {
-		return professor;
+
+	public Teacher getProfessor() {
+		return teacher;
 	}
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+
+	public void setProfessor(Teacher teacher) {
+		this.teacher = teacher;
 	}
+
 	public Classroom getClassroom() {
 		return classroom;
 	}
+
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
-	public Equipment getEquipment() {
-		return equipment;
+
+	public List<Equipment> getEquipment() {
+		return equipments;
 	}
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
+
+	public void addEquipment(Equipment equipment) {
+		this.equipments.add(equipment);
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Scheduling other = (Scheduling) obj;
+		return Objects.equals(id, other.id);
+	}
 
 }
