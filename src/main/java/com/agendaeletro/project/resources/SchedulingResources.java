@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,21 +36,28 @@ public class SchedulingResources {
 		List<Scheduling> list = service.queryAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@PostMapping("/insertScheduling")
-	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling){
+	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
 		System.out.println(scheduling);
 		scheduling.setTeacher(teacherService.queryById(scheduling.getTeacher().getId()));
 		scheduling.setClassroom(classroomService.queryById(scheduling.getClassroom().getId()));
 		scheduling = service.insert(scheduling);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
+				.toUri();
 		return ResponseEntity.created(uri).body(scheduling);
 	}
-	
+
 	@DeleteMapping(value = "/deleteScheduling/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping(value = "/updateScheduling/{id}")
+	public ResponseEntity<Scheduling> update(@PathVariable Long id, @RequestBody Scheduling scheduling) {
+		scheduling = service.update(id, scheduling);
+		return ResponseEntity.ok().body(scheduling);
 	}
 
 }

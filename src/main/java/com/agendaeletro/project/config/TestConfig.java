@@ -13,6 +13,7 @@ import com.agendaeletro.project.entities.Classroom;
 import com.agendaeletro.project.entities.Equipment;
 import com.agendaeletro.project.entities.Scheduling;
 import com.agendaeletro.project.entities.Teacher;
+import com.agendaeletro.project.entities.enums.Role;
 import com.agendaeletro.project.repositories.ClassroomRepository;
 import com.agendaeletro.project.repositories.EquipmentRepository;
 import com.agendaeletro.project.repositories.SchedulingReporitory;
@@ -36,8 +37,8 @@ public class TestConfig implements CommandLineRunner {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		Teacher p = new Teacher(null, "Eder", "eder@gmail.com", "123", "Teacher");
-		Teacher p1 = new Teacher(null, "Nikolas", "nikolas@gmail.com", "123", "Teacher");
+		Teacher p = new Teacher(null, "Eder", "eder@gmail.com", "123", Role.TEACHER);
+		Teacher p1 = new Teacher(null, "Nikolas", "nikolas@gmail.com", "123", Role.ADMIN);
 
 		Classroom c = new Classroom(null, "C20");
 		Classroom c1 = new Classroom(null, "D04");
