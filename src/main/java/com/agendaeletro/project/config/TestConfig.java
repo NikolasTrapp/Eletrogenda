@@ -22,8 +22,10 @@ import com.agendaeletro.project.repositories.TeacherRepository;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
+	//Esta é uma classe de testes, ela cria objetos de teste para testar o banco de ddados
 
 	@Autowired // Essa anotação faz a injeção de dependencia automáticamente
+	//criando os objetos de repositório
 	private TeacherRepository teacherRepository;
 	@Autowired
 	private EquipmentRepository equipmentRepository;
@@ -34,6 +36,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//Nesta função são criados os objetos assim que o servidor inicia
+		//os objetos são salvos num banco de dados na memória e são apagados
+		//ao término da aplicação
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

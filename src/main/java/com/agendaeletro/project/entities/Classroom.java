@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,32 +14,45 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity // Esta anotação define que esta classe é uma entidade
 public class Classroom implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	/*
+	 * A classe classroom representa uma sala de aula, ela implementa a interface
+	 * Serializable para poder ser convertida em bytes e trafegar na rede, esta
+	 * classe cria uma tabela classroom no banco de dados, com as colunas
+	 * correspondendo aos seus atributos
+	 */
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Anotações para definir que este atributo é um id e é gerado
+														// automáticamente
 	private Long id;
+	@Column(nullable = false, length = 100) // Estas anotações definem NOT NULL e limite de caracteres
 	private String name;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "classroom")
+	@JsonIgnore // Esta anotação serve para impedir o loop infinito de chamada de objetos
+	@OneToMany(mappedBy = "classroom") // Definindo relação um para muitos
 	private List<Scheduling> schedulings = new ArrayList<>();
 
+	// Construtor vazio
 	public Classroom() {
 	}
 
+	// Sobrecarga de construtor com parametros carregados
 	public Classroom(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
+	// Método to string para imprimir o objeto em forma de string
 	@Override
 	public String toString() {
 		return String.format("Classroom: id=%s | name=%s", id, name);
 	}
 
+	// Métodos getters e setters
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +77,7 @@ public class Classroom implements Serializable {
 		return schedulings;
 	}
 
+	// Métodos hashCode e equals para comprar objetos se necessário
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AgendaEletroApplication {
 
 	public static void main(String[] args) {
+		//aqui a aplicação é iniciada
 		SpringApplication.run(AgendaEletroApplication.class, args);
 	}
 

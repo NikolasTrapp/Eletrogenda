@@ -1,6 +1,7 @@
 package com.agendaeletro.project.resources;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Scheduling;
 import com.agendaeletro.project.services.ClassroomService;
+import com.agendaeletro.project.services.EquipmentService;
 import com.agendaeletro.project.services.SchedulingService;
 import com.agendaeletro.project.services.TeacherService;
+import com.agendaeletro.project.services.exceptions.DatabaseException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
 @CrossOrigin("*")
@@ -32,6 +35,8 @@ public class SchedulingResources {
 	private TeacherService teacherService;
 	@Autowired
 	private ClassroomService classroomService;
+	@Autowired
+	private EquipmentService equipmentService;
 
 	@GetMapping
 	public ResponseEntity<List<Scheduling>> queryAll() {
@@ -42,8 +47,12 @@ public class SchedulingResources {
 	@PostMapping("/insertScheduling")
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
 		System.out.println(scheduling);
+		if (!scheduling.compareTime()) {
+			throw new DatabaseException("Initial date is lower than final date.");
+		}
 		scheduling.setTeacher(teacherService.queryById(scheduling.getTeacher().getId()));
 		scheduling.setClassroom(classroomService.queryById(scheduling.getClassroom().getId()));
+		System.out.println(Arrays.asList(scheduling.getEquipment()));
 		scheduling = service.insert(scheduling);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
 				.toUri();

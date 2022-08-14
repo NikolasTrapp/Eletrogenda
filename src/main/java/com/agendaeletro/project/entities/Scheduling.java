@@ -35,7 +35,7 @@ public class Scheduling implements Serializable {
 	private Date finalDate;
 
 	@ManyToOne
-	@JoinColumn(name = "professor_id")
+	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 	
 	@ManyToOne
@@ -113,6 +113,18 @@ public class Scheduling implements Serializable {
 
 	public void addEquipment(Equipment equipment) {
 		this.equipments.add(equipment);
+	}
+	
+	public void clearEquipments() {
+		this.equipments.clear();
+	}
+	
+	public boolean compareTime() {
+		if (initialDate.getTime() >= finalDate.getTime()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override

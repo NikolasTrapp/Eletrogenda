@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachers operations</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <body>
+
+    <h2>Test get operation</h2>
 
     <div id="get-teachers">
         <table>
@@ -20,8 +23,90 @@
         <button id="get-teachers-button">Get teachers</button>
     </div>
 
-    <script src="../static/main.js"></script>
-
+    <br><br><br>
+    <h2>Test post operation</h2>
     
+    <div id="post-teachers">
+        <form onsubmit="return false;">
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" type="text">
+            </div>
+
+            <div>    
+                <label for="email">Email: </label>
+                <input id="email" type="email">
+            </div>
+
+            <div>
+                <label for="password">Password: </label>
+                <input id="password" type="password">
+            </div>
+
+            <div>
+                <label for="role">Role: </label>
+                <select id="role">
+                    <option id="ADMIN">ADMIN</option>
+                    <option id="TEACHER">TEACHER</option>
+                </select>
+            </div>
+
+            <button id="post-teacher-button">Submit</button>
+        </form>
+    </div>
+
+    <br><br><br>
+    <h2>Test delete operation</h2>
+
+    <div id="delete-teacher">
+        <form onsubmit="return false;">
+            <div>
+                <label for="teacherId">Teacher id: </label>
+                <input type="number" id="teacherId">
+            </div>
+
+            <button id="delete-teacher-button">Submit</button>
+        </form>
+    </div>
+
+    <br><br><br>
+    <h2>Test update operation</h2>
+
+    <div id="update-teacher">
+        <form onsubmit="return false;">
+            <div>
+                <label for="teacherIdUpdate">Teacher id: </label>
+                <input type="number" id="teacherIdUpdate">
+            </div>
+
+            <div>
+                <label for="nameUpdate">Name: </label>
+                <input id="nameUpdate" type="text">
+            </div>
+
+            <div>    
+                <label for="emailUpdate">Email: </label>
+                <input id="emailUpdate" type="email">
+            </div>
+
+            <div>
+                <label for="passwordUpdate">Password: </label>
+                <input id="passwordUpdate" type="password">
+            </div>
+
+            <div>
+                <label for="roleUpdate">Role: </label>
+                <select id="roleUpdate">
+                    <option id="ADMINUpdate">ADMIN</option>
+                    <option id="TEACHERUpdate">TEACHER</option>
+                </select>
+            </div>
+
+            <button id="update-teacher-button">Submit</button>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="/js/teachers.js"></script>
+
 </body>
 </html>
