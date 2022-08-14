@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.agendaeletro.project.services.SchedulingService;
 import com.agendaeletro.project.services.TeacherService;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
+@CrossOrigin("*")
 @RequestMapping(value = "/schedulings")
 public class SchedulingResources {
 
