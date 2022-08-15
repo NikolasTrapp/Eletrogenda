@@ -14,8 +14,9 @@ bt_update.addEventListener("click", updateEquipment);
 async function getEquipments(){
 
     const table_body = document.getElementById("equipments-table");
+    table_body.innerHTML = "";
 
-    const response = await fetch("http://localhost:8080/equipments");
+    const response = await fetch("http://191.52.6.227:8080/equipments");
     const data = await response.json();
 
     if (table_body.getElementsByTagName("tr").length === 0){
@@ -47,7 +48,7 @@ async function postEquipment(){
         quantity: quantity
     });
 
-    const response = await fetch("http://localhost:8080/equipments/insertEquipment", {
+    const response = await fetch("http://191.52.6.227:8080/equipments/insertEquipment", {
         method: "POST",
         body: data,
         headers: {
@@ -64,7 +65,7 @@ async function deleteEquipment(){
 
     let equipment_id = document.getElementById("equipmentId").value;
 
-    const response = await fetch(`http://localhost:8080/equipments/deleteEquipment/${equipment_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/equipments/deleteEquipment/${equipment_id}`, {
         method: "DELETE"
     });
 
@@ -86,7 +87,7 @@ async function updateEquipment(){
         quantity: quantity
     });
 
-    const response = await fetch(`http://localhost:8080/equipments/updateEquipment/${equipment_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/equipments/updateEquipment/${equipment_id}`, {
         method: "PUT",
         body: data,
         headers: {

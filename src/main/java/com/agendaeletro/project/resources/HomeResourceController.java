@@ -10,25 +10,35 @@ public class HomeResourceController {
 	public String index() {
 		return "index";
 	}
-	
+
 	@GetMapping("/teacherController")
 	public String teacherController() {
 		return "teachers";
 	}
-	
+
 	@GetMapping("/classroomController")
 	public String classroomController() {
 		return "classrooms";
 	}
-	
+
 	@GetMapping("/equipmentController")
 	public String equipmentController() {
 		return "equipments";
 	}
-	
+
 	@GetMapping("/schedulingController")
 	public String schedulingController() {
 		return "schedulings";
+	}
+
+	@GetMapping("/mainPage")
+	public String mainPage() {
+		return "main";
+	}
+
+	@GetMapping("/loginPage")
+	public String loginPage() {
+		return "login";
 	}
 
 }

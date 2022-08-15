@@ -39,9 +39,13 @@ public class ClassroomService {
 	}
 	
 	public Classroom update(Long id, Classroom classroom) {
+		try {			
 		Classroom entity = classroomRepository.getReferenceById(id);
 		updateData(entity, classroom);
 		return classroomRepository.save(entity);
+		} catch (ResourceNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Classroom entity, Classroom classroom) {

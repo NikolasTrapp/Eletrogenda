@@ -40,9 +40,13 @@ public class EquipmentService {
 	}
 	
 	public Equipment update(Long id, Equipment equipment) {
+		try {
 		Equipment entity = equipmentRepository.getReferenceById(id);
 		updateData(entity, equipment);
 		return equipmentRepository.save(entity);
+		} catch (ResourceNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Equipment entity, Equipment equipment) {

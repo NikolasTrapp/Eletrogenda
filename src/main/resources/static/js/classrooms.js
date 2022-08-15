@@ -13,8 +13,9 @@ bt_update.addEventListener("click", updateClassroom);
 async function getClassrooms(){
 
     const table_body = document.getElementById("classrooms-table");
+    table_body.innerHTML = "";
 
-    const response = await fetch("http://localhost:8080/classrooms");
+    const response = await fetch("http://191.52.6.227:8080/classrooms");
     const data = await response.json();
 
     if (table_body.getElementsByTagName("tr").length === 0){
@@ -38,7 +39,7 @@ async function postClassroom(){
         name: name,
     });
 
-    const response = await fetch("http://localhost:8080/classrooms/insertClassroom", {
+    const response = await fetch("http://191.52.6.227:8080/classrooms/insertClassroom", {
         method: "POST",
         body: data,
         headers: {
@@ -55,7 +56,7 @@ async function deleteClassroom(){
 
     let classroom_id = document.getElementById("classroomId").value;
 
-    const response = await fetch(`http://localhost:8080/classrooms/deleteClassroom/${classroom_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/classrooms/deleteClassroom/${classroom_id}`, {
         method: "DELETE"
     });
 
@@ -73,7 +74,7 @@ async function updateClassroom(){
         name: name
     });
 
-    const response = await fetch(`http://localhost:8080/classrooms/updateClassroom/${classroom_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/classrooms/updateClassroom/${classroom_id}`, {
         method: "PUT",
         body: data,
         headers: {

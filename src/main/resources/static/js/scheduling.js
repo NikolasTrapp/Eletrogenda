@@ -13,11 +13,10 @@ bt_update.addEventListener("click", updateScheduling);
 async function getSchedulings(){
 
     const table_body = document.getElementById("schedulings-table");
+    table_body.innerHTML = "";
 
-    const response = await fetch("http://localhost:8080/schedulings");
+    const response = await fetch("http://191.52.6.227:8080/schedulings");
     const data = await response.json();
-
-    console.log(data);
 
     if (table_body.getElementsByTagName("tr").length === 0){
 
@@ -62,7 +61,7 @@ async function postSchedulings(){
         data.equipment.push({"id": i.toString()});
     }
 
-    const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
+    const response = await fetch("http://191.52.6.227:8080/schedulings/insertScheduling", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -79,7 +78,7 @@ async function deleteScheduling(){
 
     let scheduling_id = document.getElementById("schedulingId").value;
 
-    const response = await fetch(`http://localhost:8080/schedulings/deleteScheduling/${scheduling_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/schedulings/deleteScheduling/${scheduling_id}`, {
         method: "DELETE"
     });
 
@@ -91,11 +90,13 @@ async function deleteScheduling(){
 async function updateScheduling(){
 
     let scheduling_id = document.getElementById("schedulingIdUpdate").value;
-    let initialDate = document.getElementById("initialDateUpdate").value + "T" + document.getElementById("initialHour").value + ":00Z";
-    let finalDate = document.getElementById("finalDateUpdate").value + "T" + document.getElementById("finalHour").value + ":00Z";
+    let initialDate = document.getElementById("initialDateUpdate").value + "T" + document.getElementById("initialHourUpdate").value + ":00Z";
+    let finalDate = document.getElementById("finalDateUpdate").value + "T" + document.getElementById("finalHourUpdate").value + ":00Z";
     let teacherId = document.getElementById("teacherIdUpdate").value;
     let classroomId = document.getElementById("classroomIdUpdate").value;
     let equipmentsId = document.getElementById("equipmentsIdUpdate").value.split(" ");
+    
+    console.log(initialDate, finalDate);
     
     const data = {
         initialDate: initialDate,
@@ -111,7 +112,7 @@ async function updateScheduling(){
 
     console.log(data);
 
-    const response = await fetch(`http://localhost:8080/schedulings/updateScheduling/${scheduling_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/schedulings/updateScheduling/${scheduling_id}`, {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {

@@ -13,8 +13,9 @@ bt_update.addEventListener("click", updateTeacher);
 async function getTeachers(){
 
     const table_body = document.getElementById("teachers-table");
+    table_body.innerHTML = "";
 
-    const response = await fetch("http://localhost:8080/teachers");
+    const response = await fetch("http://191.52.6.227:8080/teachers");
     const data = await response.json();
 
     if (table_body.getElementsByTagName("tr").length === 0){
@@ -50,7 +51,7 @@ async function postTeacher(){
         role: role
     });
 
-    const response = await fetch("http://localhost:8080/teachers/insertTeacher", {
+    const response = await fetch("http://191.52.6.227:8080/teachers/insertTeacher", {
         method: "POST",
         body: data,
         headers: {
@@ -67,7 +68,7 @@ async function deleteTeacher(){
 
     let teacher_id = document.getElementById("teacherId").value;
 
-    const response = await fetch(`http://localhost:8080/teachers/deleteTeacher/${teacher_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/teachers/deleteTeacher/${teacher_id}`, {
         method: "DELETE"
     });
 
@@ -91,7 +92,7 @@ async function updateTeacher(){
         role: role
     });
 
-    const response = await fetch(`http://localhost:8080/teachers/updateTeacher/${teacher_id}`, {
+    const response = await fetch(`http://191.52.6.227:8080/teachers/updateTeacher/${teacher_id}`, {
         method: "PUT",
         body: data,
         headers: {
