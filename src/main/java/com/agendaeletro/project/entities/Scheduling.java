@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,10 +38,12 @@ public class Scheduling implements Serializable {
 	// Anotações para o atributo initialDate para definir o padrão de data e hora
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Brazil/East")
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false, length = 254)
 	private Date initialDate;
 	// Anotações para o atributo finalDate para definir o padrão de data e hora
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Brazil/East")
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false, length = 254)
 	private Date finalDate;
 
 	@ManyToOne // Defininfo a relação de muitos para um com a tabela teacher

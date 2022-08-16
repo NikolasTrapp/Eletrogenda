@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,22 +20,22 @@ public class UserResources {
 
 	@Autowired // Esta notação faz o spring injetar automaticamente a dependencia
 	private TeacherRepository teacherRepository;
+	@Autowired
+	private PasswordEncoder encoder;
+
 
 	@PostMapping(value = "/validateLogin")
 	public ResponseEntity<Object> validateLogin(@RequestBody Map<String, String> user) {
-		System.out.println("Map received: " + user.values());
 		try {
-			Teacher t = teacherRepository.findUser(user.get("name"), user.get("email"), user.get("password"));
 
-			if (t != null) {
-				System.out.println("Teacher found: " + t);
+			Teacher t = teacherRepository.findUser(user.get("name"), user.get("email"));
+			if (t != null && encoder.matches(user.get("password"), t.getPassword())){
 				return ResponseEntity.status(HttpStatus.OK).body(Map.of("result", "ok", "details", "login approved"));
 			} else {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("result", "login denied", "details", "teacher not found"));
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("result", "error", "details", "login denied"));
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("result", "error", "details", e.getMessage()));
+		} catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "error", "details", e.getMessage()));
 		}
 	}
 

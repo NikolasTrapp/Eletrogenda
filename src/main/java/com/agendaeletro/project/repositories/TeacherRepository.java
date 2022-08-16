@@ -13,7 +13,9 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 	Teacher findByName(String name);
 
 	// Função para retornar o nome, email e senha de um determinado professor
-	@Query(value = "SELECT * FROM teacher t WHERE t.name = ?1 AND t.email = ?2 AND t.password = ?3", nativeQuery = true)
-	Teacher findUser(String name, String email, String password);
+	@Query(value = "SELECT * FROM teacher t WHERE t.name = ?1 AND t.email = ?2", nativeQuery = true)
+	Teacher findUser(String name, String email);
 
+	@Query(value = "SELECT * FROM teacher t WHERE t.name = ?1 OR t.email = ?2", nativeQuery = true)
+	Teacher findUserByEmailOrName(String name, String email);
 }

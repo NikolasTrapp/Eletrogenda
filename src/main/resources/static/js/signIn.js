@@ -24,6 +24,8 @@ async function checkSignIn(){
     });
 
     const response = await request.json();
+
+    console.log(response);
     
     if (response.result === "ok"){
         window.location.assign("/mainPage")

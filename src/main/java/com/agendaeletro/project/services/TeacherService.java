@@ -8,11 +8,14 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.agendaeletro.project.entities.Teacher;
+import com.agendaeletro.project.entities.enums.Role;
 import com.agendaeletro.project.repositories.TeacherRepository;
 import com.agendaeletro.project.services.exceptions.DatabaseException;
+import com.agendaeletro.project.services.exceptions.DuplicatedResourceException;
 import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -24,6 +27,8 @@ public class TeacherService {
 
 	@Autowired // Injeção de dependencia automático
 	private TeacherRepository teacherRepository;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	public List<Teacher> queryAll() {
 		return teacherRepository.findAll();
@@ -40,7 +45,14 @@ public class TeacherService {
 	}
 
 	public Teacher insert(Teacher teacher) {
-		return teacherRepository.save(teacher);
+		if (teacherRepository.findUserByEmailOrName(teacher.getName(), teacher.getEmail()) != null) {
+			throw new DuplicatedResourceException("It seems like you already have an account!");
+		} else {
+			teacher.setPassword(encoder.encode(teacher.getPassword()));
+			teacher.setRole(Role.TEACHER);
+			return teacherRepository.save(teacher);
+		}
+
 	}
 
 	public void delete(Long id) {
@@ -72,9 +84,6 @@ public class TeacherService {
 		}
 		if (teacher.getPassword() != null) {
 			entity.setPassword(teacher.getPassword());
-		}
-		if (teacher.getRole() != null) {
-			entity.setRole(teacher.getRole());
 		}
 	}
 

@@ -41,9 +41,14 @@ public class HomeResourceController {
 		return "mainPage";
 	}
 
-	@GetMapping("/loginPage")
+	@GetMapping("/login-page")
 	public String loginPage() {
-		return "login";
+		return "login-page";
+	}
+
+	@GetMapping("/signIn-page")
+	public String signInPage() {
+		return "signIn-page";
 	}
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendaeletro.project.entities.Teacher;
 import com.agendaeletro.project.services.TeacherService;
+import com.agendaeletro.project.services.exceptions.DuplicatedResourceException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
 @CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
@@ -56,9 +57,13 @@ public class TeacherResources {
 	@PostMapping("/insertTeacher")
 	public ResponseEntity<Object> insert(@RequestBody Teacher teacher) {
 		try {
+			System.out.println(teacher);	
 			teacher = service.insert(teacher);
 			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("result", "ok", "details",
 					String.format("Teacher %s inserted. Id: %d", teacher.getName(), teacher.getId())));
+		} catch (DuplicatedResourceException e){
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("result", "error", "details",
+					e.getMessage()));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(Map.of("result", "error", "details", e.getMessage()));

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,9 +24,13 @@ public class Teacher implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false, length = 254)
 	private String name;
+	@Column(nullable = false, length = 254)
 	private String email;
+	@Column(nullable = false, length = 254)
 	private String password;
+	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

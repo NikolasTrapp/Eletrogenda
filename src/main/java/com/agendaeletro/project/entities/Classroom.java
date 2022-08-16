@@ -28,7 +28,7 @@ public class Classroom implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Anotações para definir que este atributo é um id e é gerado											// automáticamente
 	private Long id;
-	@Column(nullable = false, length = 100) // Estas anotações definem NOT NULL e limite de caracteres
+	@Column(nullable = false, length = 50) // Estas anotações definem NOT NULL e limite de caracteres
 	private String name;
 
 	@JsonIgnore // Esta anotação serve para impedir o loop infinito de chamada de objetos

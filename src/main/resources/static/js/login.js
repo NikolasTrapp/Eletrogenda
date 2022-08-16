@@ -1,6 +1,8 @@
 const bt = document.getElementById("submit-button");
 bt.addEventListener("click", checkLogin);
 
+console.log("Oi");
+
 async function checkLogin(){
 	
     let name = document.getElementById("name").value;
