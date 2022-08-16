@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -93,6 +92,7 @@ public class Equipment implements Serializable {
 		this.schedulings.add(scheduling);
 	}
 
+	// Métodos hashCode e equals para comprar obejtos caso necessário
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -1,9 +1,10 @@
 package com.agendaeletro.project.resources;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,18 +15,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Teacher;
 import com.agendaeletro.project.services.TeacherService;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
-@CrossOrigin("*")
-@RequestMapping(value = "/teachers")
+@CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
+@RequestMapping(value = "/teachers") // Definindo rota de acesso às rotas referentes a esse controlador
 public class TeacherResources {
+	/*
+	 * Classe responsável por guardar as rotas essenciais destinadas á entidade
+	 * Equipment, esta classe controla operações como queryes, inserts, deletes
+	 * e updates, esta é a classe mais próxima do usuário.
+	 * As anotações GetMapping, PostMapping, PutMapping e DeleteMapping controlam
+	 * as operaçoes essenciais correspondentes aos seus métodos de requisiçao
+	 * e correspondentes a sua classe de entidade
+	 */
 
-	@Autowired
-	private TeacherService service;
+	@Autowired // Definindo que a injeção de dependencia será feita automáticamente
+	private TeacherService service; // Definindo camada de serviço do professor
 
 	@GetMapping
 	public ResponseEntity<List<Teacher>> queryAll() {
@@ -46,11 +54,15 @@ public class TeacherResources {
 	}
 
 	@PostMapping("/insertTeacher")
-	public ResponseEntity<Teacher> insert(@RequestBody Teacher teacher) {
-		teacher = service.insert(teacher);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(teacher.getId())
-				.toUri();
-		return ResponseEntity.created(uri).body(teacher);
+	public ResponseEntity<Object> insert(@RequestBody Teacher teacher) {
+		try {
+			teacher = service.insert(teacher);
+			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("result", "ok", "details",
+					String.format("Teacher %s inserted. Id: %d", teacher.getName(), teacher.getId())));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(Map.of("result", "error", "details", e.getMessage()));
+		}
 	}
 
 	@DeleteMapping(value = "/deleteTeacher/{id}")

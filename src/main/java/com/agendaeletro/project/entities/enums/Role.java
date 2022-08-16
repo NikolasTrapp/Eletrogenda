@@ -4,7 +4,7 @@ public enum Role {
 	
 	/*
 	 * Esta enum representa as possíveis opções para cadastrar um professor
-	 * ela serve como uma espécie de filtro
+	 * ela serve como uma camada de segurança e padronização do atributo Role
 	 * */
 	
 	ADMIN("Admin"),

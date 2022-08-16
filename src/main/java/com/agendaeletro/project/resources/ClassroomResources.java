@@ -20,12 +20,20 @@ import com.agendaeletro.project.entities.Classroom;
 import com.agendaeletro.project.services.ClassroomService;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
-@CrossOrigin("*")
-@RequestMapping(value = "/classrooms")
+@CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
+@RequestMapping(value = "/classrooms") // Rota de acesso às rotas referentes a esse controlador
 public class ClassroomResources {
+	/*
+	 * Classe responsável por guardar as rotas essenciais destinadas á entidade
+	 * Classroom, esta classe controla operações como queryes, inserts, deletes
+	 * e updates, esta é a classe mais próxima do usuário.
+	 * As anotações GetMapping, PostMapping, PutMapping e DeleteMapping controlam
+	 * as operaçoes essenciais correspondentes aos seus métodos de requisiçao
+	 * e correspondentes a sua classe de entidade
+	 */
 
-	@Autowired
-	private ClassroomService service;
+	@Autowired // Definindo que a injeção de dependencia será feita automáticamente
+	private ClassroomService service; // Definindo camada de serviço da sala de aula
 
 	@GetMapping
 	public ResponseEntity<List<Classroom>> queryAll() {

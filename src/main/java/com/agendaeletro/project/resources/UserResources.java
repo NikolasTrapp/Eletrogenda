@@ -1,11 +1,9 @@
 package com.agendaeletro.project.resources;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendaeletro.project.entities.Teacher;
 import com.agendaeletro.project.repositories.TeacherRepository;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
 @CrossOrigin("*")

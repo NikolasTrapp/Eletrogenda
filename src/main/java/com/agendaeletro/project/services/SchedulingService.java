@@ -14,8 +14,12 @@ import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class SchedulingService {
+	/*
+	 * Esta classe guarda as funções que realizam as operações do banco de dados
+	 * que são chamadas pela camada de recursos
+	 */
 
-	@Autowired
+	@Autowired // Injeção de dependencia automático
 	private SchedulingReporitory schedulingReporitory;
 
 	public List<Scheduling> queryAll() {

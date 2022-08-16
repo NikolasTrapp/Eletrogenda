@@ -19,24 +19,33 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Scheduling;
 import com.agendaeletro.project.services.ClassroomService;
-import com.agendaeletro.project.services.EquipmentService;
+//import com.agendaeletro.project.services.EquipmentService;
 import com.agendaeletro.project.services.SchedulingService;
 import com.agendaeletro.project.services.TeacherService;
 import com.agendaeletro.project.services.exceptions.DatabaseException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
-@CrossOrigin("*")
-@RequestMapping(value = "/schedulings")
+@CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
+@RequestMapping(value = "/schedulings") // Definindo rota de acesso às rotas referentes a esse controlador
 public class SchedulingResources {
 
+	/*
+	 * Classe responsável por guardar as rotas essenciais destinadas á entidade
+	 * Scheduling, esta classe controla operações como queryes, inserts, deletes
+	 * e updates, esta é a classe mais próxima do usuário.
+	 * As anotações GetMapping, PostMapping, PutMapping e DeleteMapping controlam
+	 * as operaçoes essenciais correspondentes aos seus métodos de requisiçao
+	 * e correspondentes a sua classe de entidade
+	 */
+
+	@Autowired // Definindo que a injeção de dependencia será feita automáticamente
+	private SchedulingService service; // Definindo camada de serviço do agendamento
 	@Autowired
-	private SchedulingService service;
+	private TeacherService teacherService; // Definindo camada de serviço do professor
 	@Autowired
-	private TeacherService teacherService;
+	private ClassroomService classroomService; // Definindo camada de serviço da sala de aula
 	@Autowired
-	private ClassroomService classroomService;
-	@Autowired
-	private EquipmentService equipmentService;
+	//private EquipmentService equipmentService; // Definindo camada de serviço do equipamento
 
 	@GetMapping
 	public ResponseEntity<List<Scheduling>> queryAll() {

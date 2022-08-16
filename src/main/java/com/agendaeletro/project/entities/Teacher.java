@@ -29,8 +29,8 @@ public class Teacher implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "teacher")
+	@JsonIgnore // Anotação paraa evitar loop infinito de chamada json
+	@OneToMany(mappedBy = "teacher") // Definindo relação de um para muitos e que esta é a classe correspondete a chave estrangeira
 	private List<Scheduling> schedulings = new ArrayList<>();
 
 	// construtor padrão

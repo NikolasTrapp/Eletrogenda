@@ -20,12 +20,20 @@ import com.agendaeletro.project.entities.Equipment;
 import com.agendaeletro.project.services.EquipmentService;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
-@CrossOrigin("*")
-@RequestMapping(value = "/equipments")
+@CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
+@RequestMapping(value = "/equipments") // Definindo rota de acesso às rotas referentes a esse controlador
 public class EquipmentResources {
+	/*
+	 * Classe responsável por guardar as rotas essenciais destinadas á entidade
+	 * Equipment, esta classe controla operações como queryes, inserts, deletes
+	 * e updates, esta é a classe mais próxima do usuário.
+	 * As anotações GetMapping, PostMapping, PutMapping e DeleteMapping controlam
+	 * as operaçoes essenciais correspondentes aos seus métodos de requisiçao
+	 * e correspondentes a sua classe de entidade
+	 */
 
-	@Autowired
-	private EquipmentService service;
+	@Autowired // Definindo que a injeção de dependencia será feita automáticamente
+	private EquipmentService service; // Definindo a camada de serviço do equipamento
 
 	@GetMapping
 	public ResponseEntity<List<Equipment>> queryAll() {

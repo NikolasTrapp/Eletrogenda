@@ -15,7 +15,7 @@ async function checkLogin(){
 
     console.log(data);
 
-    const request = await fetch("http://191.52.6.227:8080/validateLogin", {
+    const request = await fetch("http://localhost:8080/validateLogin", {
         method: "POST",
         body: data,
         headers: {
@@ -24,6 +24,12 @@ async function checkLogin(){
     });
 
     const response = await request.json();
-    console.log(response);
+    
+    
+    if (response.result === "ok"){
+        window.location.assign("/mainPage")
+    } else {
+        alert(response.details);
+    }
 
 }

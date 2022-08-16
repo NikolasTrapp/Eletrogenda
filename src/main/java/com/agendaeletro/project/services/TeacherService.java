@@ -17,8 +17,12 @@ import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class TeacherService {
+	/*
+	 * Esta classe guarda as funções que realizam as operações do banco de dados
+	 * que são chamadas pela camada de recursos
+	 */
 
-	@Autowired // Esta notação faz o spring injetar automaticamente a dependencia
+	@Autowired // Injeção de dependencia automático
 	private TeacherRepository teacherRepository;
 
 	public List<Teacher> queryAll() {

@@ -54,11 +54,13 @@ public class TestConfig implements CommandLineRunner {
 		Scheduling s = new Scheduling(null, sdf.parse("11/08/2022"), new Date(), p, c);
 		Scheduling s1 = new Scheduling(null, sdf.parse("09/08/2022"), new Date(), p1, c1);
 
+		// Adicionando os dados ao banco de dados
 		teacherRepository.saveAll(Arrays.asList(p, p1));
 		classroomRepository.saveAll(Arrays.asList(c, c1));
 		equipmentRepository.saveAll(Arrays.asList(e, e1));
 		schedulingReporitory.saveAll(Arrays.asList(s, s1));
 
+		//Adicionando equipamentos aos agendamentos
 		s.getEquipment().add(e);
 		s.getEquipment().add(e1);
 		s1.getEquipment().add(e);

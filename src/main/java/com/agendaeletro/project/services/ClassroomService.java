@@ -11,10 +11,14 @@ import com.agendaeletro.project.entities.Classroom;
 import com.agendaeletro.project.repositories.ClassroomRepository;
 import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
-@Service
+@Service // Anotação definindo que esta classe é um serviço
 public class ClassroomService {
+	/*
+	 * Esta classe guarda as funções que realizam as operações do banco de dados
+	 * que são chamadas pela camada de recursos
+	 */
 
-	@Autowired
+	@Autowired // Injeção de dependencia automático
 	private ClassroomRepository classroomRepository;
 
 	public List<Classroom> queryAll() {
@@ -32,17 +36,17 @@ public class ClassroomService {
 
 	public void delete(Long id) {
 		try {
-			classroomRepository.deleteById(id);			
+			classroomRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
-	
+
 	public Classroom update(Long id, Classroom classroom) {
-		try {			
-		Classroom entity = classroomRepository.getReferenceById(id);
-		updateData(entity, classroom);
-		return classroomRepository.save(entity);
+		try {
+			Classroom entity = classroomRepository.getReferenceById(id);
+			updateData(entity, classroom);
+			return classroomRepository.save(entity);
 		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
@@ -53,7 +57,5 @@ public class ClassroomService {
 			entity.setName(classroom.getName());
 		}
 	}
-	
-	
 
 }
