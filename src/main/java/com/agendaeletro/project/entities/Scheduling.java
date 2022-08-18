@@ -54,6 +54,10 @@ public class Scheduling implements Serializable {
 	@JoinColumn(name = "classroom_id") // criando uma coluna classroom_id
 	private Classroom classroom;
 
+	@ManyToOne
+	@JoinColumn(name = "class_id")
+	private Class group;
+
 	@ManyToMany // Defininfo a relação de muitos para muits com a tabela equipment
 	@JoinTable(name = "equipments_schedulings", // criando tabela equipments_schedulings
 			joinColumns = @JoinColumn(name = "scheduling_id"), // criando coluna scheduling_id

@@ -26,9 +26,9 @@ public class Teacher implements Serializable {
 	private Long id;
 	@Column(nullable = false, length = 254)
 	private String name;
-	@Column(nullable = false, length = 254)
+	@Column(nullable = false, length = 254, unique = true)
 	private String email;
-	@Column(nullable = false, length = 254)
+	@Column(nullable = false, length = 254, unique = true)
 	private String password;
 	@Column(nullable = false, length = 20)
 	@Enumerated(EnumType.STRING)

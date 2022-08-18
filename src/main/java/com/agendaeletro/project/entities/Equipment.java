@@ -28,7 +28,7 @@ public class Equipment implements Serializable {
 	@Id //definindo o atributo o qual corresponderá ao id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private Long id;
-	@Column(nullable = false, length = 100) // Estas anotações definem NOT NULL e limite de caracteres
+	@Column(nullable = false, length = 100, unique = true) // Estas anotações definem NOT NULL e limite de caracteres
 	private String name;
 	@Column(length = 150) // Esta anotação define o limite de caracteres
 	private String description;

@@ -15,7 +15,6 @@ import com.agendaeletro.project.entities.Teacher;
 import com.agendaeletro.project.entities.enums.Role;
 import com.agendaeletro.project.repositories.TeacherRepository;
 import com.agendaeletro.project.services.exceptions.DatabaseException;
-import com.agendaeletro.project.services.exceptions.DuplicatedResourceException;
 import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -45,13 +44,9 @@ public class TeacherService {
 	}
 
 	public Teacher insert(Teacher teacher) {
-		if (teacherRepository.findUserByEmailOrName(teacher.getName(), teacher.getEmail()) != null) {
-			throw new DuplicatedResourceException("It seems like you already have an account!");
-		} else {
-			teacher.setPassword(encoder.encode(teacher.getPassword()));
-			teacher.setRole(Role.TEACHER);
-			return teacherRepository.save(teacher);
-		}
+		teacher.setPassword(encoder.encode(teacher.getPassword()));
+		teacher.setRole(Role.TEACHER);
+		return teacherRepository.save(teacher);
 
 	}
 

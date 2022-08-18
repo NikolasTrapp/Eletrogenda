@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.agendaeletro.project.services.exceptions.DatabaseException;
-import com.agendaeletro.project.services.exceptions.DuplicatedResourceException;
 import com.agendaeletro.project.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice // Anotação para definir que esta classe é um controlador de exceções
@@ -38,12 +37,4 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 
-	@ExceptionHandler(DuplicatedResourceException.class)
-	public ResponseEntity<StandartError> duplicatedResource(DuplicatedResourceException e, HttpServletRequest request){
-		String error = "Duplicated resource detected";
-		HttpStatus status = HttpStatus.CONFLICT;
-		StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(),
-				request.getRequestURI());
-		return ResponseEntity.status(status).body(err);
-	}
 }

@@ -46,7 +46,6 @@ public class SchedulingService {
 	public Scheduling update(Long id, Scheduling scheduling) {
 		try {
 			Scheduling entity = schedulingReporitory.getReferenceById(id);
-			System.out.println(entity);
 			updateData(entity, scheduling);
 			return schedulingReporitory.save(entity);
 		} catch (ResourceNotFoundException e) {
