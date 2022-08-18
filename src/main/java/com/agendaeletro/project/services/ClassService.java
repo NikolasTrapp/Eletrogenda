@@ -19,6 +19,10 @@ public class ClassService {
         return classRepository.findAll();
     }
 
+    public Class queryById(Long id){
+        return classRepository.getReferenceById(id);
+    }
+
     public Class insert(Class c){
         return classRepository.save(c);
     }

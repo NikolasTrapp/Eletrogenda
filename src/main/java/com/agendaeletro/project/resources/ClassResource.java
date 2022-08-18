@@ -41,7 +41,7 @@ public class ClassResource {
         return ResponseEntity.created(uri).body(c);
     }
 
-    @DeleteMapping(value = "deleteClass{id}")
+    @DeleteMapping(value = "deleteClass/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

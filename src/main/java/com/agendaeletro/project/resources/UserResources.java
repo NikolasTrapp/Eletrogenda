@@ -23,19 +23,20 @@ public class UserResources {
 	@Autowired
 	private PasswordEncoder encoder;
 
-
 	@PostMapping(value = "/validateLogin")
 	public ResponseEntity<Object> validateLogin(@RequestBody Map<String, String> user) {
 		try {
-
 			Teacher t = teacherRepository.findUser(user.get("name"), user.get("email"));
-			if (t != null && encoder.matches(user.get("password"), t.getPassword())){
-				return ResponseEntity.status(HttpStatus.OK).body(Map.of("result", "ok", "details", "login approved"));
+			if (t != null && encoder.matches(user.get("password"), t.getPassword())) {
+				return ResponseEntity.status(HttpStatus.OK)
+						.body(Map.of("result", "ok", "details", "login approved"));
 			} else {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("result", "error", "details", "login denied"));
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+						.body(Map.of("result", "error", "details", "login denied"));
 			}
-		} catch (Exception e){
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("result", "error", "details", e.getMessage()));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(Map.of("result", "error", "details", e.getMessage()));
 		}
 	}
 

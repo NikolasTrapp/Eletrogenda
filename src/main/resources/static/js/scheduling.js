@@ -18,6 +18,8 @@ async function getSchedulings(){
     const response = await fetch("http://localhost:8080/schedulings");
     const data = await response.json();
 
+    console.log(data);
+
     if (table_body.getElementsByTagName("tr").length === 0){
 
         data.map(s=>{
@@ -32,7 +34,9 @@ async function getSchedulings(){
         teacher_id.innerHTML = s.teacher.id;
         let classroom_id = row.insertCell(4);
         classroom_id.innerHTML = s.classroom.id;
-        equipment = row.insertCell(5);
+        let class_id = row.insertCell(5);
+        class_id.innerHTML = s.group.id;
+        equipment = row.insertCell(6);
         for (var equip of s.equipment){
             equipment.innerHTML += equip.id + " ";
         }
@@ -47,6 +51,7 @@ async function postSchedulings(){
     let finalDate = document.getElementById("finalDate").value + "T" + document.getElementById("finalHour").value + ":00Z";
     let teacherId = document.getElementById("teacherId").value;
     let classroomId = document.getElementById("classroomId").value;
+    let classId = document.getElementById("classId").value;
     let equipmentsId = document.getElementById("equipmentsId").value.split(" ");
     
     const data = {
@@ -54,8 +59,11 @@ async function postSchedulings(){
         finalDate: finalDate,
         teacher: {"id": teacherId},
         classroom: {"id": classroomId},
+        group: {"id": classId},
         equipment: []
     }
+
+    console.log(data);
 
     for (var i of equipmentsId){
         data.equipment.push({"id": i.toString()});

@@ -57,7 +57,7 @@ public class Scheduling implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "class_id")
 	private Class group;
-
+	
 	@ManyToMany // Defininfo a relação de muitos para muits com a tabela equipment
 	@JoinTable(name = "equipments_schedulings", // criando tabela equipments_schedulings
 			joinColumns = @JoinColumn(name = "scheduling_id"), // criando coluna scheduling_id
@@ -67,29 +67,37 @@ public class Scheduling implements Serializable {
 	// Construtor vazio
 	public Scheduling() {
 	}
-
+	
 	// Sobrecarga de construtor com parâmetros
-	public Scheduling(Long id, Date initialDate, Date finalDate, Teacher teacher, Classroom classroom) {
+	public Scheduling(Long id, Date initialDate, Date finalDate, Teacher teacher, Classroom classroom, Class group, List<Equipment> equipments) {
 		this.id = id;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
 		this.teacher = teacher;
 		this.classroom = classroom;
+		this.group = group;
+		addEquipments(equipments);
+	}
+	
+	private void addEquipments(List<Equipment> equipments) {
+		for (Equipment e : equipments){
+			this.equipments.add(e);
+		}
 	}
 
 	// Método toString para retornar o agendamento em formato string
 	@Override
 	public String toString() {
 		return String.format(
-				"Scheduling: id=%s | initialDate=%s | finalDate=%s | teacher=%s | classroom=%s | equipment=%s", id,
-				initialDate, finalDate, teacher, classroom, Arrays.asList(equipments));
+			"Scheduling: id=%s | initialDate=%s | finalDate=%s | teacher=%s | classroom=%s | class=%s | equipment=%s", id,
+				initialDate, finalDate, teacher, classroom, group, Arrays.asList(equipments));
 	}
 
 	// Getters e setters
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -101,15 +109,15 @@ public class Scheduling implements Serializable {
 	public void setInitialDate(Date initialDate) {
 		this.initialDate = initialDate;
 	}
-
+	
 	public Date getFinalDate() {
 		return finalDate;
 	}
-
+	
 	public void setFinalDate(Date finalDate) {
 		this.finalDate = finalDate;
 	}
-
+	
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -121,25 +129,37 @@ public class Scheduling implements Serializable {
 	public Classroom getClassroom() {
 		return classroom;
 	}
-
+	
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
-
+	
 	public List<Equipment> getEquipment() {
 		return equipments;
 	}
-
+	
 	public void addEquipment(Equipment equipment) {
 		this.equipments.add(equipment);
 	}
-
+	
 	public void clearEquipments() {
 		this.equipments.clear();
 	}
 
+	public Class getGroup() {
+		return group;
+	}
+
+	public void setGroup(Class group) {
+		this.group = group;
+	}
+
 	public boolean compareTime() {
-		if (initialDate.getTime() >= finalDate.getTime()) {
+		Date today = new Date();
+		System.out.println(today);
+		System.out.println(initialDate.before(today));
+		System.out.println(initialDate.after(finalDate));
+		if (initialDate.after(finalDate) || initialDate.before(today)) {
 			return false;
 		} else {
 			return true;

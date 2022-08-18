@@ -71,14 +71,14 @@ public class TeacherService {
 	}
 
 	private void updateData(Teacher entity, Teacher teacher) {
-		if (teacher.getName() != null) {
+		if (!teacher.getName().isBlank()) {
 			entity.setName(teacher.getName());
 		}
-		if (teacher.getEmail() != null) {
+		if (!teacher.getEmail().isBlank()) {
 			entity.setEmail(teacher.getEmail());
 		}
-		if (teacher.getPassword() != null) {
-			entity.setPassword(teacher.getPassword());
+		if (!teacher.getPassword().isBlank()) {
+			entity.setPassword(encoder.encode(teacher.getPassword()));
 		}
 	}
 

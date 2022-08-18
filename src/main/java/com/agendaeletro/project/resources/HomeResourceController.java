@@ -26,6 +26,11 @@ public class HomeResourceController {
 		return "classrooms";
 	}
 
+	@GetMapping("/classesController")
+	public String classesController() {
+		return "classes";
+	}
+
 	@GetMapping("/equipmentController")
 	public String equipmentController() {
 		return "equipments";

@@ -53,7 +53,7 @@ public class ClassroomService {
 	}
 
 	private void updateData(Classroom entity, Classroom classroom) {
-		if (classroom.getName() != null) {
+		if (!classroom.getName().isBlank()) {
 			entity.setName(classroom.getName());
 		}
 	}
