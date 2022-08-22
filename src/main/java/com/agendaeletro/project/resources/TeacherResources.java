@@ -3,6 +3,8 @@ package com.agendaeletro.project.resources;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,9 +56,10 @@ public class TeacherResources {
 	}
 
 	@PostMapping("/insertTeacher")
-	public ResponseEntity<Object> insert(@RequestBody Teacher teacher) {
+	public ResponseEntity<Object> insert(@RequestBody Teacher teacher, HttpServletRequest request) {
 		try {	
 			teacher = service.insert(teacher);
+			request.getSession().setAttribute("teacher", teacher);
 			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("result", "ok", "details",
 					String.format("Teacher %s inserted. Id: %d", teacher.getName(), teacher.getId())));
 		} catch (Exception e) {

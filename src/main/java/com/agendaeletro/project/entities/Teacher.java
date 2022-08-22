@@ -90,8 +90,8 @@ public class Teacher implements Serializable {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getRole() {
+		return String.format("%s", role);
 	}
 
 	public void setRole(Role role) {
