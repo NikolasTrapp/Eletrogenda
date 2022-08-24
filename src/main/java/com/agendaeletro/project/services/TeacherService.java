@@ -44,8 +44,8 @@ public class TeacherService {
 	}
 
 	public Teacher insert(Teacher teacher) {
-		teacher.setPassword(encoder.encode(teacher.getPassword()));
-		teacher.setRole(Role.TEACHER);
+		teacher.setPassword(encoder.encode(teacher.getPassword())); // Criptografar
+		teacher.setRole(Role.TEACHER); // Definir a permissão padrão
 		return teacherRepository.save(teacher);
 
 	}

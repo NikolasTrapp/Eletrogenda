@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -154,12 +155,12 @@ public class Scheduling implements Serializable {
 		this.group = group;
 	}
 
+	//Método para comparar se o tempo é válido
 	public boolean compareTime() {
-		Date today = new Date();
-		System.out.println(today);
-		System.out.println(initialDate.before(today));
-		System.out.println(initialDate.after(finalDate));
-		if (initialDate.after(finalDate) || initialDate.before(today)) {
+		Date today = new Date(); // Pegar a data atual
+		int diferenca = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
+		// Verificar se a data inicial é posterior a data final, ou data inicial é anterior a data atual e a diferença menor de 45 minutos
+		if (initialDate.after(finalDate) || initialDate.before(today) || diferenca < 45) {
 			return false;
 		} else {
 			return true;
