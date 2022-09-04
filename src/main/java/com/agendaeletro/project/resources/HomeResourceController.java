@@ -3,7 +3,6 @@ package com.agendaeletro.project.resources;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.agendaeletro.project.entities.Teacher;
@@ -21,41 +20,11 @@ public class HomeResourceController {
 		return "index";
 	}
 
-	@GetMapping("/teacherController")
-	public String teacherController() {
-		return "teachers";
-	}
-
-	@GetMapping("/classroomController")
-	public String classroomController() {
-		return "classrooms";
-	}
-
-	@GetMapping("/classesController")
-	public String classesController() {
-		return "classes";
-	}
-
-	@GetMapping("/equipmentController")
-	public String equipmentController() {
-		return "equipments";
-	}
-
-	@GetMapping("/schedulingController")
-	public String schedulingController(HttpServletRequest request) {
-		Teacher t = (Teacher) request.getSession().getAttribute("teacher");
-		if (t != null && t.getRole().equals("ADMIN")){
-			return "schedulings";
-		} else {
-			return "redirect:/login-page";
-		}
-	}
-
 	@GetMapping("/mainPage")
 	public String mainPage(HttpServletRequest request) {
 		Teacher t = (Teacher) request.getSession().getAttribute("teacher");
 		if (t != null){
-			return "mainPage";
+			return "schedule";
 		} else {
 			return "redirect:/login-page";
 		}
