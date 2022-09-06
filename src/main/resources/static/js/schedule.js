@@ -11,7 +11,7 @@ async function getData() {
     const request = await fetch("http://localhost:8080/schedulings");
     // Dados
     const data = await request.json();
-
+    //retorna os dados
     return data;
 }
 
@@ -38,11 +38,11 @@ function generateCalendar(month, year) {
 
         //Criando as colunas (dias)
         for (let j = 0; j < 7; j++) {
-            let col = document.createElement("div");
-            col.setAttribute("class", "col");
-            col.setAttribute("data-toggle", "modal");
-            col.setAttribute("data-target", "#modalWindow");
-            if (i === 0 && j < firstDay) {
+            let col = document.createElement("div"); // Cria a coluna/celula
+            col.setAttribute("class", "col"); // Adiciona a classe col para a coluna
+            col.setAttribute("data-toggle", "modal"); // Adiciona o trigger para abrir a modal
+            col.setAttribute("data-target", "#modalWindow"); // Define o target da modal
+            if (i === 0 && j < firstDay) { // Se estiver na primeira coluna e j for menor que o dia da semana que a mesma incia:
                 let daysFromPreviousMonth = 32 - new Date(year, month - 1, 32).getDate(); // Numero de dias do mes passado
                 let colText = document.createTextNode(daysFromPreviousMonth - firstDay + previousMonthDate); // Criando texto dos dias da semana do mes passado
                 col.appendChild(colText); // Adicionando o texto na celula
@@ -75,37 +75,46 @@ function generateCalendar(month, year) {
         calendar.appendChild(row); // Adicionando a semana no calendário
     }
 
+    //Assim que a função getData retornar os dados, a função populateScheduling é chamada com os dados no parametro
     getData().then(data => populateSchedulings(data));
+    // Aicionar o evento de clique a todos os elementos com a classe .com para adicionar os valores aos campos da janela modal
     document.querySelectorAll(".col").forEach((element) => element.addEventListener("click", loadData));
 }
 
 
 function populateSchedulings(data) {
-    for (let scheduling of data) {
+    //Função para adicionar os agendamentos ao calendário
+    for (let scheduling of data) { //Para cada agendamento nos dados recebidos
+        //Pegar o id do dia do agendamento (caso este dia esteja na tela)
         let col = document.getElementById(scheduling.initialDate.substring(0, 10))
         if (col != null) {
-            let c = document.createTextNode(scheduling.id);
-            col.appendChild(c);
+            let c = document.createTextNode(scheduling.id); // Criar um texto com o id do agendamento
+            col.appendChild(c); // Adicionando o id do agendamento da coluna
         }
     }
 }
 
-
 function next() {
+    // Função para passar os meses
+    // Se o mes atual for 11 (Janeiro) o ano atual será acrescentado em 1 caso contrário manterá o valor
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+    // Define o mes atual
     currentMonth = (currentMonth + 1) % 12;
-    generateCalendar(currentMonth, currentYear);
+    generateCalendar(currentMonth, currentYear); // Invoca a função de gerar o calendário
 }
 
 
 function previous() {
+    // Função para retartar um mes
+    // Se o mes for == 0 (Janeiro) o ano será reduzido em 1 caso contrário menterá o valor
     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+    // Caso o mes seja janeiro, o mes será definido para 11 (dezembro) senão só reduzirá 1
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-    generateCalendar(currentMonth, currentYear);
+    generateCalendar(currentMonth, currentYear); // Invoca função de gerar calendário
 }
 
 
-generateCalendar(currentMonth, currentYear);
+generateCalendar(currentMonth, currentYear); // Gerar calendário
 
 
 //Modal
@@ -135,8 +144,9 @@ async function loadData() {
     const classes = await getClassesFromBack.json();
 
     const classesDropDown = document.getElementById("class-list");
-    classesDropDown.innerHTML = "";
+    classesDropDown.innerHTML = ""; // Limpando dropdows caso haja algum item (pra não duplicar)
 
+    // Para cada objeto recebido do back será feito a lógica de comandos dentro das chaves
     classes.map(c => {
         let option = document.createElement("option");
         option.setAttribute("value", c.id);
@@ -181,6 +191,7 @@ async function sendData(){
     console.log(classroom, classs, equipments);
     console.log(data);
 
+    // Enviando os dados para o backend
     const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
         method: "POST",
         body: data,

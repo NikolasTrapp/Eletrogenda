@@ -81,9 +81,7 @@ public class Scheduling implements Serializable {
 	}
 	
 	private void addEquipments(List<Equipment> equipments) {
-		for (Equipment e : equipments){
-			this.equipments.add(e);
-		}
+		this.equipments.addAll(equipments);
 	}
 
 	// Método toString para retornar o agendamento em formato string
@@ -91,7 +89,7 @@ public class Scheduling implements Serializable {
 	public String toString() {
 		return String.format(
 			"Scheduling: id=%s | initialDate=%s | finalDate=%s | teacher=%s | classroom=%s | class=%s | equipment=%s", id,
-				initialDate, finalDate, teacher, classroom, group, Arrays.asList(equipments));
+				initialDate, finalDate, teacher, classroom, group, equipments.toString());
 	}
 
 	// Getters e setters
