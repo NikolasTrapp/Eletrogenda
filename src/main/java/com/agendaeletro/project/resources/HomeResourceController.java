@@ -17,7 +17,8 @@ public class HomeResourceController {
      */
 
     @GetMapping("/")
-    public String index() {
+    public String index(HttpServletRequest request) {
+        System.out.println(request.getRemoteAddr());
         return "index";
     }
 

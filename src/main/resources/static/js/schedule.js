@@ -41,7 +41,7 @@ function generateCalendar(month, year) {
             let col = document.createElement("div"); // Cria a coluna/celula
             col.setAttribute("class", "col"); // Adiciona a classe col para a coluna
             col.setAttribute("data-toggle", "modal"); // Adiciona o trigger para abrir a modal
-            col.setAttribute("data-target", "#modalWindow"); // Define o target da modal
+            col.setAttribute("data-target", "#daySchedulings"); // Define o target da modal
             if (i === 0 && j < firstDay) { // Se estiver na primeira coluna e j for menor que o dia da semana que a mesma incia:
                 let daysFromPreviousMonth = 32 - new Date(year, month - 1, 32).getDate(); // Numero de dias do mes passado
                 let colText = document.createTextNode(daysFromPreviousMonth - firstDay + previousMonthDate); // Criando texto dos dias da semana do mes passado
@@ -78,7 +78,7 @@ function generateCalendar(month, year) {
     //Assim que a função getData retornar os dados, a função populateScheduling é chamada com os dados no parametro
     getData().then(data => populateSchedulings(data));
     // Aicionar o evento de clique a todos os elementos com a classe .com para adicionar os valores aos campos da janela modal
-    document.querySelectorAll(".col").forEach((element) => element.addEventListener("click", loadData));
+    document.querySelectorAll(".col").forEach((element) => element.addEventListener("click", loadSchedulings));
 }
 
 
@@ -121,8 +121,33 @@ generateCalendar(currentMonth, currentYear); // Gerar calendário
 const bt_submit = document.getElementById("submit-button");
 bt_submit.addEventListener("click", sendData);
 
+async function loadSchedulings() {
+    document.getElementById("list-modal-title").innerHTML = "Agendamento - " + (this.id).replaceAll("-", "/");
+    const getClassroomsFromBack = await fetch("http://localhost:8080/schedulings"); // pegando os dados do backend
+    const schedulings = await getClassroomsFromBack.json(); // reconvertendo os dados para json
+
+    console.log(schedulings);
+    let modalBody = document.getElementById("modal-body");
+    modalBody.innerHTML = "";
+    
+    schedulings.map(s => {
+        let p = document.createElement("p");
+        if (s.initialDate.substring(0, 10) === this.id) {
+            let texto = document.createTextNode(`{${s.initialDate.substring(11, 16)} até ${s.finalDate.substring(11, 16)} - 
+                Professor: ${s.teacher.name} - 
+                Turma: ${s.group.name} - 
+                Sala: ${s.classroom.name} - 
+                Equipamentos: ${s.equipment.map(e => " " + e.quantity + " " + e.name + "(s)")}}`);
+            p.appendChild(texto);
+            modalBody.appendChild(p);
+
+        }
+    });
+}
+
 async function loadData() {
-    document.getElementById("modal-title").innerHTML = "Agendamento - " + (this.id).replaceAll("-", "/");
+    let titleModalList = document.getElementById("list-modal-title").id.substring(13).replaceAll("/", "-");
+    document.getElementById("list-modal-title").innerHTML = "Agendamento - " + (titleModalList).replaceAll("-", "/");
     //Função que popula/preenche os dropdowns (select) da janela modal
 
     const getClassroomsFromBack = await fetch("http://localhost:8080/classrooms"); // pegando os dados do backend
@@ -169,7 +194,7 @@ async function loadData() {
 
 }
 
-async function sendData(){
+async function sendData() {
     // pegando os id's dos elementos selecionados:
     let initialHour = document.getElementById("initialHour").value;
     let finalHour = document.getElementById("finalHour").value;
@@ -180,12 +205,12 @@ async function sendData(){
     console.log(day);
 
     let data = JSON.stringify({
-        initialDate: `${day}T${initialHour}:00Z`, // terá que pegar data dos id's 
-        finalDate:`${day}T${finalHour}:00Z`,
-        teacher: {"id": "1"}, // terá que pegar da sessão (ainda n sei como)
-        classroom: {"id": classroom},
-        class: {"id": classs},
-        equipment: [{"id": equipments}]
+        initialDate: `${day}T${initialHour}:00`, // terá que pegar data dos id's 
+        finalDate: `${day}T${finalHour}:00`,
+        teacher: { "id": "1" }, // terá que pegar da sessão (ainda n sei como)
+        classroom: { "id": classroom },
+        class: { "id": classs },
+        equipment: [{ "id": equipments }]
     });
 
     console.log(classroom, classs, equipments);

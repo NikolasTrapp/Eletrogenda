@@ -1,7 +1,36 @@
-table {
-    border: 1px solid black;
+#month {
+    justify-content: center;
+    display: flex!important;
 }
 
-table td, th{
-    border: 1px solid black;
+#monthAndYear {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: x-large;
+    display: inline-block!important;
+}
+
+#title {
+    text-align: center;
+    font-size: xx-large;
+}
+
+#next, #previous, #title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.col {
+    justify-content: center;
+    display: flex;
+    border: 1px ridge;
+    padding: 25px;
+    margin: auto;
+
+}
+
+#schedule-container {
+    margin-top: 15px;
 }
