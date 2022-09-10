@@ -36,26 +36,63 @@
 
     </div>
 
-    <button id="showModal" onclick="showmodal()">show modal</button>
-
     <!--Janela modal-->
     <div class="modal-window" id="listOfSchedulingsPerDay">
         <div class="modal">
             <div class="modal-header">
-                <div id="close-button" onclick="hidemodal()">X</div>
+                <span id="close-listOfSchedulingsPerDay" onclick="hideListModal()">×</span>
+                <h1 id="listModalTitle">Titulo</h1>
             </div>
             <div class="modal-body" id="listOfSchedulingsBody">
+                <ul id="schedulings-list">
 
+                </ul>
             </div>
             <div class="modal-footer">
-                <button class="btn" onclick="hidemodal()">Close</button>
-                <button class="btn">Add new</button>
+                <button class="btn" onclick="hideListModal()">Close</button>
+                <button class="btn" onclick="showAddModal()">Add new</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Janela modal-->
+    <div class="modal-window" id="addNewScheduling">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="close-addModal" onclick="hideAddModal()">×</span>
+                <h1 id="addModalTitle">Titulo</h1>
+            </div>
+            <div class="modal-body" id="listOfSchedulingsBody">
+                <div>
+                    <label for="initialHour">Hora inicial: </label>
+                    <input type="time" id="initialHour">
+                </div>
+                <div>
+                    <label for="finalHour">Hora final: </label>
+                    <input type="time" id="finalHour">
+                </div>
+                <div>
+                    <label for="classroom-list">Selecione a sala de aula: </label>
+                    <select id="classroom-list"></select>
+                </div>
+                <div>
+                    <label for="class-list">Selecione a turma: </label>
+                    <select id="class-list"></select>
+                </div>
+                <div>
+                    <label for="equipment-list">Selecione os equipamentos: </label>
+                    <select id="equipment-list"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="hideAddModal()">Close</button>
+                <button class="btn" type="submit" onclick="sendData()">Send</button>
             </div>
         </div>
     </div>
 
 
-    
+
 
     <script type="text/javascript" src="../static/js/schedule.js"></script>
 </body>

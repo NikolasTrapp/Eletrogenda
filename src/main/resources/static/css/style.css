@@ -63,10 +63,24 @@
 
 #listOfSchedulingsPerDay {
     display: none;
+    z-index: 3;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
-#showListOfSchedulingsPerDay {
-    width: 100vw;
-    height: 100vw;
-    display: flex;
+#addNewScheduling {
+    display: none;
+    z-index: 3;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }

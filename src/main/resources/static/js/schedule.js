@@ -4,17 +4,13 @@ let currentYear = today.getFullYear(); // Ano atual
 let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
 let monthAndYear = document.getElementById("monthAndYear"); // Titulo do mes do calendario
+let data; // Agendamentos
 
-// Função para pegar os agendamentos
 async function getData() {
-    // Requisição
-    const request = await fetch("http://localhost:8080/schedulings");
-    // Dados
-    const data = await request.json();
-    //retorna os dados
-    return data;
+    const request = await fetch("http://localhost:8080/schedulings"); // Pegando os agendamentos
+    const schedulings = await request.json(); // Guardando-os em uma variavel no escopo globar para serem usandos quantas vezes necessário
+    return schedulings; // Retornando os dados
 }
-
 
 function generateCalendar(month, year) {
     //Pegando o dia da semana que a mesma começa
@@ -26,7 +22,7 @@ function generateCalendar(month, year) {
     let calendar = document.getElementById("calendar");
     calendar.innerHTML = ""; // Limpar calendário
 
-    monthAndYear.innerHTML = months[month] + " " + year; // Ageitando o titulo do calendário
+    monthAndYear.innerHTML = months[month] + " " + year; // Ajeitando o titulo do calendário
 
     let date = 1; // Dia do mes atual
     let previousMonthDate = 1; // Dia do mes anterior
@@ -40,6 +36,7 @@ function generateCalendar(month, year) {
         for (let j = 0; j < 7; j++) {
             let col = document.createElement("div"); // Cria a coluna/celula
             col.setAttribute("class", "col"); // Adiciona a classe col para a coluna
+            col.setAttribute("onclick", "showListModal(this)")
             if (i === 0 && j < firstDay) { // Se estiver na primeira coluna e j for menor que o dia da semana que a mesma incia:
                 let daysFromPreviousMonth = 32 - new Date(year, month - 1, 32).getDate(); // Numero de dias do mes passado
                 let colText = document.createTextNode(daysFromPreviousMonth - firstDay + previousMonthDate); // Criando texto dos dias da semana do mes passado
@@ -57,7 +54,7 @@ function generateCalendar(month, year) {
                 day = ((month + 1 === 12) ? year + 1 : year) + "-" +
                     ((month + 2 < 10) ? "0" + (month + 2) : (month + 2 === 13) ? "01" : month + 2) + "-" +
                     ((nextMonthDate < 10) ? "0" + nextMonthDate : nextMonthDate)
-                col.id = day;
+                col.id = day; // Atribuindo o id
                 row.appendChild(col); // Adicionando celula do dia na semana
                 nextMonthDate++;
             }
@@ -73,12 +70,11 @@ function generateCalendar(month, year) {
         calendar.appendChild(row); // Adicionando a semana no calendário
     }
 
-    //Assim que a função getData retornar os dados, a função populateScheduling é chamada com os dados no parametro
-    getData().then(data => populateSchedulings(data));
+    populateSchedulings(); // Colocar os agendamentos nas celulas
 }
 
 
-function populateSchedulings(data) {
+function populateSchedulings() {
     //Função para adicionar os agendamentos ao calendário
     for (let scheduling of data) { //Para cada agendamento nos dados recebidos
         //Pegar o id do dia do agendamento (caso este dia esteja na tela)
@@ -109,42 +105,34 @@ function previous() {
     generateCalendar(currentMonth, currentYear); // Invoca função de gerar calendário
 }
 
-
-generateCalendar(currentMonth, currentYear); // Gerar calendário
-
-
-/*
-//Modal
-const bt_submit = document.getElementById("submit-button");
-bt_submit.addEventListener("click", sendData);
-
-async function loadSchedulings() {
-    document.getElementById("list-modal-title").innerHTML = "Agendamento - " + (this.id).replaceAll("-", "/");
-    const getClassroomsFromBack = await fetch("http://localhost:8080/schedulings"); // pegando os dados do backend
-    const schedulings = await getClassroomsFromBack.json(); // reconvertendo os dados para json
-
-    console.log(schedulings);
-    let modalBody = document.getElementById("modal-body");
-    modalBody.innerHTML = "";
-    
-    schedulings.map(s => {
-        let p = document.createElement("p");
-        if (s.initialDate.substring(0, 10) === this.id) {
-            let texto = document.createTextNode(`{${s.initialDate.substring(11, 16)} até ${s.finalDate.substring(11, 16)} - 
-                Professor: ${s.teacher.name} - 
-                Turma: ${s.group.name} - 
-                Sala: ${s.classroom.name} - 
-                Equipamentos: ${s.equipment.map(e => " " + e.quantity + " " + e.name + "(s)")}}`);
-            p.appendChild(texto);
-            modalBody.appendChild(p);
+function showListModal(pressedDiv) {
+    const modal = document.getElementById("listOfSchedulingsPerDay");
+    document.getElementById("listModalTitle").textContent = pressedDiv.id;
+    let list = document.getElementById("schedulings-list");
+    list.innerHTML = "";
+    for (scheduling of data) {
+        if (scheduling.initialDate.substring(0, 10) === pressedDiv.id) {
+            let li = document.createElement("li");
+            let text = document.createTextNode(scheduling.initialDate);
+            li.appendChild(text);
+            list.appendChild(li);
         }
-    });
+    }
+    modal.style.display = "block";
 }
 
-async function loadData() {
-    let titleModalList = document.getElementById("list-modal-title").id.substring(13).replaceAll("/", "-");
-    document.getElementById("list-modal-title").innerHTML = "Agendamento - " + (titleModalList).replaceAll("-", "/");
-    //Função que popula/preenche os dropdowns (select) da janela modal
+function hideListModal() {
+    const modal = document.getElementById("listOfSchedulingsPerDay");
+    modal.style.display = "none";
+}
+
+async function showAddModal() {
+    const listModal = document.getElementById("listOfSchedulingsPerDay");
+    listModal.style.display = "none";
+    const addModal = document.getElementById("addNewScheduling");
+    const listModalTitle = document.getElementById("listModalTitle").textContent;
+    document.getElementById("addModalTitle").textContent = listModalTitle;
+    addModal.style.display = "block";
 
     const getClassroomsFromBack = await fetch("http://localhost:8080/classrooms"); // pegando os dados do backend
     const classrooms = await getClassroomsFromBack.json(); // reconvertendo os dados para json
@@ -190,6 +178,11 @@ async function loadData() {
 
 }
 
+function hideAddModal() {
+    const addModal = document.getElementById("addNewScheduling")
+    addModal.style.display = "none";
+}
+
 async function sendData() {
     // pegando os id's dos elementos selecionados:
     let initialHour = document.getElementById("initialHour").value;
@@ -197,20 +190,17 @@ async function sendData() {
     let classroom = document.getElementById("classroom-list").value;
     let classs = document.getElementById("class-list").value;
     let equipments = document.getElementById("equipment-list").value;
-    let day = document.getElementById("modal-title").textContent.substring(13).replaceAll("/", "-");
+    let day = document.getElementById("addModalTitle").textContent;
     console.log(day);
 
     let data = JSON.stringify({
-        initialDate: `${day}T${initialHour}:00`, // terá que pegar data dos id's 
-        finalDate: `${day}T${finalHour}:00`,
+        initialDate: `${day}T${initialHour}:00Z`, // terá que pegar data dos id's 
+        finalDate: `${day}T${finalHour}:00Z`,
         teacher: { "id": "1" }, // terá que pegar da sessão (ainda n sei como)
         classroom: { "id": classroom },
-        class: { "id": classs },
+        group: { "id": classs },
         equipment: [{ "id": equipments }]
     });
-
-    console.log(classroom, classs, equipments);
-    console.log(data);
 
     // Enviando os dados para o backend
     const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
@@ -222,19 +212,14 @@ async function sendData() {
     });
 
     const responseText = await response.text();
-    console.log(responseText);
-
-
-}*/
-
-
-
-function showmodal(){
-    const modal = document.getElementById("listOfSchedulingsPerDay");
-    modal.setAttribute("id", "showListOfSchedulingsPerDay");
+    window.location.reload();
 }
 
-function hidemodal(){
-    const modal = document.getElementById("showListOfSchedulingsPerDay");
-    modal.setAttribute("id", "listOfSchedulingsPerDay");
-}
+// Chamar a função getData, esperar ela retornar os valores
+getData().then(
+    (schedulings) => {
+        data = schedulings // Atribuir os valores à variável no escopo global
+        generateCalendar(currentMonth, currentYear) // Chamar a função de gerar o calendario
+    }).catch( // Se der erro:
+        (err) => alert(err) // Mostra o erro podre
+    );

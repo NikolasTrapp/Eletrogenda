@@ -158,11 +158,7 @@ public class Scheduling implements Serializable {
 		Date today = new Date(); // Pegar a data atual
 		int diferenca = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
 		// Verificar se a data inicial é posterior a data final, ou data inicial é anterior a data atual e a diferença menor de 45 minutos
-		if (initialDate.after(finalDate) || initialDate.before(today) || diferenca < 45) {
-			return false;
-		} else {
-			return true;
-		}
+		return !initialDate.after(finalDate) && !initialDate.before(today) && diferenca >= 45;
 	}
 
 	// Métodos hashCode e equals para comprar objetos caso necessário
