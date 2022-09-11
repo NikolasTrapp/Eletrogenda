@@ -45,9 +45,6 @@ public class SchedulingResources {
 
 	@PostMapping("/insertScheduling")
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
-		if (!scheduling.compareTime()) {
-			throw new DatabaseException("Invalid date.");
-		}
 		scheduling = service.insert(scheduling);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
 				.toUri();

@@ -3,6 +3,7 @@ package com.agendaeletro.project.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.agendaeletro.project.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class SchedulingService {
 	}
 
 	public Scheduling insert(Scheduling scheduling) {
+		if (!scheduling.compareTime()) {
+			throw new DatabaseException("Invalid date format.");
+		}
 		return schedulingReporitory.save(scheduling);
 	}
 

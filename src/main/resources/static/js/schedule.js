@@ -118,7 +118,7 @@ function showListModal(pressedDiv) {
             list.appendChild(li);
         }
     }
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 function hideListModal() {
@@ -132,7 +132,7 @@ async function showAddModal() {
     const addModal = document.getElementById("addNewScheduling");
     const listModalTitle = document.getElementById("listModalTitle").textContent;
     document.getElementById("addModalTitle").textContent = listModalTitle;
-    addModal.style.display = "block";
+    addModal.style.display = "flex";
 
     const getClassroomsFromBack = await fetch("http://localhost:8080/classrooms"); // pegando os dados do backend
     const classrooms = await getClassroomsFromBack.json(); // reconvertendo os dados para json
@@ -191,16 +191,17 @@ async function sendData() {
     let classs = document.getElementById("class-list").value;
     let equipments = document.getElementById("equipment-list").value;
     let day = document.getElementById("addModalTitle").textContent;
-    console.log(day);
 
     let data = JSON.stringify({
         initialDate: `${day}T${initialHour}:00Z`, // terá que pegar data dos id's 
         finalDate: `${day}T${finalHour}:00Z`,
-        teacher: { "id": "1" }, // terá que pegar da sessão (ainda n sei como)
-        classroom: { "id": classroom },
-        group: { "id": classs },
-        equipment: [{ "id": equipments }]
+        teacher: {"id": JSON.parse(sessionStorage.getItem("teacher")).id},
+        classroom: {"id": classroom},
+        group: {"id": classs },
+        equipment: [{"id": equipments}]
     });
+
+    console.log(data);
 
     // Enviando os dados para o backend
     const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
@@ -212,8 +213,35 @@ async function sendData() {
     });
 
     const responseText = await response.text();
-    window.location.reload();
+    const addModal = document.getElementById("addNewScheduling")
+    addModal.style.display = "none";
+    
 }
+
+// function mostrarTudo(id){
+//     for (s of data){
+//         if (s.id === id) {
+//             console.log(s.id);
+//             console.log(s.initialDate);
+//             console.log(s.finalDate);
+//             console.log(s.group.id);
+//             console.log(s.group.name);
+//             console.log(s.classroom.id);
+//             console.log(s.classroom.name);
+//             console.log(s.teacher.id);
+//             console.log(s.teacher.name);
+//             console.log(s.teacher.email);
+//             console.log(s.teacher.password);
+//             console.log(s.teacher.role);
+//             for (e of s.equipment){
+//                 console.log(e.id);
+//                 console.log(e.name);
+//                 console.log(e.description);
+//                 console.log(e.quantity);
+//             }
+//         }
+//     }
+// }
 
 // Chamar a função getData, esperar ela retornar os valores
 getData().then(

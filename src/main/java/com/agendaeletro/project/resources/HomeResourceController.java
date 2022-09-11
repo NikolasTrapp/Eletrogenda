@@ -38,7 +38,7 @@ public class HomeResourceController {
         return "signIn-page";
     }
 
-    @GetMapping("/signOut")
+    @GetMapping("/logout")
     public String signOut(HttpServletRequest request) {
         //Se a sessão não estiver vazia, será invalidada, caso contrário
         if (request.getSession().getAttribute("teacher") != null) request.getSession().invalidate();

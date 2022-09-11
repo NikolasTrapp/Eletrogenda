@@ -32,7 +32,7 @@ public class UserResources {
 			if (t != null && encoder.matches(user.get("password"), t.getPassword())) {
 				request.getSession().setAttribute("teacher", t);
 				return ResponseEntity.status(HttpStatus.OK)
-						.body(Map.of("result", "ok", "details", "login approved"));
+						.body(Map.of("result", "ok", "details", "login approved", "teacher_id", t.getId()));
 			} else {
 				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 						.body(Map.of("result", "error", "details", "login denied"));

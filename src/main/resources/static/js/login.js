@@ -1,8 +1,6 @@
 const bt = document.getElementById("submit-button");
 bt.addEventListener("click", checkLogin);
 
-console.log("Oi");
-
 async function checkLogin(){
 	
     let name = document.getElementById("name").value;
@@ -15,8 +13,6 @@ async function checkLogin(){
         password: password 
     });
 
-    console.log(data);
-
     const request = await fetch("http://localhost:8080/validateLogin", {
         method: "POST",
         body: data,
@@ -27,9 +23,9 @@ async function checkLogin(){
 
     const response = await request.json();
     
-    
     if (response.result === "ok"){
-        window.location.assign("/mainPage")
+        sessionStorage.setItem("teacher", JSON.stringify({"id": response.teacher_id, "name": name, "email": email}));
+        window.location.assign("/mainPage");
     } else {
         alert(response.details);
     }
