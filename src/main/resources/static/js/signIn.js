@@ -28,7 +28,8 @@ async function checkSignIn(){
     console.log(response);
     
     if (response.result === "ok"){
-        window.location.assign("/mainPage")
+        sessionStorage.setItem("teacher", JSON.stringify({"id": response.teacher_id, "name": name, "email": email}));
+        window.location.assign("/mainPage");
     } else {
         alert(response.details);
     }

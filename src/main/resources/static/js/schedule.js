@@ -36,7 +36,7 @@ function generateCalendar(month, year) {
         for (let j = 0; j < 7; j++) {
             let col = document.createElement("div"); // Cria a coluna/celula
             col.setAttribute("class", "col"); // Adiciona a classe col para a coluna
-            col.setAttribute("onclick", "showListModal(this)")
+            col.setAttribute("onclick", "showListModal(this)");
             if (i === 0 && j < firstDay) { // Se estiver na primeira coluna e j for menor que o dia da semana que a mesma incia:
                 let daysFromPreviousMonth = 32 - new Date(year, month - 1, 32).getDate(); // Numero de dias do mes passado
                 let colText = document.createTextNode(daysFromPreviousMonth - firstDay + previousMonthDate); // Criando texto dos dias da semana do mes passado
@@ -46,14 +46,14 @@ function generateCalendar(month, year) {
                     (daysFromPreviousMonth - firstDay + previousMonthDate); // Ajustando o id deste dia
                 col.id = day;
                 row.appendChild(col); // Adicionando celula do dia na semana
-                previousMonthDate++
+                previousMonthDate++;
             }
             else if (date > daysInMonth) {
                 let colText = document.createTextNode(nextMonthDate); // Criando texto dos dias da semana do mes seguinte
                 col.appendChild(colText); // Adicionando o texto na celula
                 day = ((month + 1 === 12) ? year + 1 : year) + "-" +
                     ((month + 2 < 10) ? "0" + (month + 2) : (month + 2 === 13) ? "01" : month + 2) + "-" +
-                    ((nextMonthDate < 10) ? "0" + nextMonthDate : nextMonthDate)
+                    ((nextMonthDate < 10) ? "0" + nextMonthDate : nextMonthDate);
                 col.id = day; // Atribuindo o id
                 row.appendChild(col); // Adicionando celula do dia na semana
                 nextMonthDate++;
@@ -106,81 +106,95 @@ function previous() {
 }
 
 function showListModal(pressedDiv) {
+    // Função para apresentar a janela modal referente aos agendamentos do dia pressionado
+    // Pegar a janela modal
     const modal = document.getElementById("listOfSchedulingsPerDay");
+    //Adicionar o titulo à janela (data pressionada)
     document.getElementById("listModalTitle").textContent = pressedDiv.id;
+    // Adicionar os agendamentos a uma lista no corpo da janela modal
     let list = document.getElementById("schedulings-list");
-    list.innerHTML = "";
+    list.innerHTML = ""; // Limpando a janela para evitar itens duplicados
     for (scheduling of data) {
         if (scheduling.initialDate.substring(0, 10) === pressedDiv.id) {
             let li = document.createElement("li");
-            let text = document.createTextNode(scheduling.initialDate);
+            let text = document.createTextNode(`${scheduling.initialDate} - ${scheduling.finalDate}`);
             li.appendChild(text);
             list.appendChild(li);
         }
     }
-    modal.style.display = "flex";
+    modal.style.display = "flex"; // Fazendo a modal aparecer
 }
 
-function hideListModal() {
-    const modal = document.getElementById("listOfSchedulingsPerDay");
+function hideModal(id) {
+    // Função para esconder a modal através do id fornecido
+    const modal = document.getElementById(id);
     modal.style.display = "none";
+    if (id === "addNewScheduling") {
+        modal.removeEventListener("change", addEquipment);
+    }
 }
 
 async function showAddModal() {
-    const listModal = document.getElementById("listOfSchedulingsPerDay");
-    listModal.style.display = "none";
+    hideModal('listOfSchedulingsPerDay'); // Escondendo a modal de lista de equipamentos
     const addModal = document.getElementById("addNewScheduling");
     const listModalTitle = document.getElementById("listModalTitle").textContent;
     document.getElementById("addModalTitle").textContent = listModalTitle;
+    const equipmentsList = document.getElementById("listOfEquipments");
+    equipmentsList.innerHTML = "";
     addModal.style.display = "flex";
 
     const getClassroomsFromBack = await fetch("http://localhost:8080/classrooms"); // pegando os dados do backend
     const classrooms = await getClassroomsFromBack.json(); // reconvertendo os dados para json
-
     const classroomsDropDown = document.getElementById("classroom-list"); // pegando o dropdown das salas de aula
-    classroomsDropDown.innerHTML = ""; // limpando o dropdown caso já houvesse dados populados
-
-    // função map que percorre cada elemento da lista e aplica a função lambda para cada elemento da lista
-    classrooms.map(c => {
-        let option = document.createElement("option"); // criando uma opção
-        option.setAttribute("value", c.id); // atribuindo o id da sala como id da opção
-        option.append(c.name); // adicionando o nome da sala na opção
-        classroomsDropDown.appendChild(option); // adicionando a opção no dropdown
-    });
+    populateDropDowns(classroomsDropDown, classrooms);
 
     //tudo se repete para as turmas e equipamentos:
     const getClassesFromBack = await fetch("http://localhost:8080/class");
     const classes = await getClassesFromBack.json();
-
     const classesDropDown = document.getElementById("class-list");
-    classesDropDown.innerHTML = ""; // Limpando dropdows caso haja algum item (pra não duplicar)
-
-    // Para cada objeto recebido do back será feito a lógica de comandos dentro das chaves
-    classes.map(c => {
-        let option = document.createElement("option");
-        option.setAttribute("value", c.id);
-        option.append(c.name);
-        classesDropDown.appendChild(option);
-    });
+    populateDropDowns(classesDropDown, classes);
 
     const getEquipmentsFromBack = await fetch("http://localhost:8080/equipments");
     const equipments = await getEquipmentsFromBack.json();
-
     const equipmentsDropDown = document.getElementById("equipment-list");
-    equipmentsDropDown.innerHTML = "";
-
-    equipments.map(e => {
-        let option = document.createElement("option");
-        option.setAttribute("value", e.id);
-        option.append(e.name);
-        equipmentsDropDown.appendChild(option);
-    });
-
+    populateDropDowns(equipmentsDropDown, equipments);
+    equipmentsDropDown.addEventListener("change", addEquipment);
 }
 
-function hideAddModal() {
-    const addModal = document.getElementById("addNewScheduling")
-    addModal.style.display = "none";
+function addEquipment() {
+    const equipmentsList = document.getElementById("listOfEquipments");
+    let idList = [];
+    Array.from(equipmentsList.rows).forEach(tr => (idList.includes(tr.cells[0].id)) ? null : idList.push(tr.cells[0].id));
+
+    if (this.options[this.selectedIndex].text != "nenhum(a)" && !idList.includes(this.value)) {
+        let row = equipmentsList.insertRow();
+        let name = row.insertCell(0);
+        name.innerHTML = this.options[this.selectedIndex].text;
+        name.id = this.value;
+        let del = row.insertCell(1);
+        let del_link = document.createElement("a");
+        del_link.setAttribute("href", "#");
+        del_link.innerHTML = "remove";
+        del_link.addEventListener("click", function () {
+            equipmentsList.removeChild(row);
+        });
+        del.appendChild(del_link);
+    }
+}
+
+function populateDropDowns(dropdown, data) {
+    dropdown.innerHTML = "";
+    let noneOption = document.createElement("option");
+    noneOption.value = "0";
+    noneOption.text = "nenhum(a)";
+    dropdown.appendChild(noneOption);
+    noneOption.selected;
+    data.map(item => {
+        let option = document.createElement("option");
+        option.value = item.id;
+        option.text = item.name;
+        dropdown.appendChild(option);
+    })
 }
 
 async function sendData() {
@@ -189,19 +203,17 @@ async function sendData() {
     let finalHour = document.getElementById("finalHour").value;
     let classroom = document.getElementById("classroom-list").value;
     let classs = document.getElementById("class-list").value;
-    let equipments = document.getElementById("equipment-list").value;
+    let equipments = document.getElementById("listOfEquipments");
     let day = document.getElementById("addModalTitle").textContent;
 
     let data = JSON.stringify({
-        initialDate: `${day}T${initialHour}:00Z`, // terá que pegar data dos id's 
-        finalDate: `${day}T${finalHour}:00Z`,
-        teacher: {"id": JSON.parse(sessionStorage.getItem("teacher")).id},
-        classroom: {"id": classroom},
-        group: {"id": classs },
-        equipment: [{"id": equipments}]
+        initialDate: `${day}T${initialHour}:00`,
+        finalDate: `${day}T${finalHour}:00`,
+        teacher: { "id": JSON.parse(sessionStorage.getItem("teacher")).id },
+        classroom: { "id": classroom },
+        group: { "id": classs },
+        equipment: Array.from(equipments.rows).map((tr) => ({"id": tr.cells[0].id}))
     });
-
-    console.log(data);
 
     // Enviando os dados para o backend
     const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
@@ -215,39 +227,13 @@ async function sendData() {
     const responseText = await response.text();
     const addModal = document.getElementById("addNewScheduling")
     addModal.style.display = "none";
-    
 }
-
-// function mostrarTudo(id){
-//     for (s of data){
-//         if (s.id === id) {
-//             console.log(s.id);
-//             console.log(s.initialDate);
-//             console.log(s.finalDate);
-//             console.log(s.group.id);
-//             console.log(s.group.name);
-//             console.log(s.classroom.id);
-//             console.log(s.classroom.name);
-//             console.log(s.teacher.id);
-//             console.log(s.teacher.name);
-//             console.log(s.teacher.email);
-//             console.log(s.teacher.password);
-//             console.log(s.teacher.role);
-//             for (e of s.equipment){
-//                 console.log(e.id);
-//                 console.log(e.name);
-//                 console.log(e.description);
-//                 console.log(e.quantity);
-//             }
-//         }
-//     }
-// }
 
 // Chamar a função getData, esperar ela retornar os valores
 getData().then(
     (schedulings) => {
-        data = schedulings // Atribuir os valores à variável no escopo global
-        generateCalendar(currentMonth, currentYear) // Chamar a função de gerar o calendario
+        data = schedulings; // Atribuir os valores à variável no escopo global
+        generateCalendar(currentMonth, currentYear); // Chamar a função de gerar o calendario
     }).catch( // Se der erro:
         (err) => alert(err) // Mostra o erro podre
     );

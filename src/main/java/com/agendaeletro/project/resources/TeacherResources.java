@@ -61,7 +61,7 @@ public class TeacherResources {
 			teacher = service.insert(teacher);
 			request.getSession().setAttribute("teacher", teacher);
 			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("result", "ok", "details",
-					String.format("Teacher %s inserted. Id: %d", teacher.getName(), teacher.getId())));
+					String.format("Teacher %s inserted. Id: %d", teacher.getName(), teacher.getId()), "teacher_id", teacher.getId()));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(Map.of("result", "error", "details", e.getMessage()));

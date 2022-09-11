@@ -40,7 +40,7 @@
     <div class="modal-window" id="listOfSchedulingsPerDay">
         <div class="modal">
             <div class="modal-header">
-                <span id="close-listOfSchedulingsPerDay" onclick="hideListModal()">×</span>
+                <span id="close-listOfSchedulingsPerDay" onclick="hideModal('listOfSchedulingsPerDay')">×</span>
                 <h1 id="listModalTitle">Titulo</h1>
             </div>
             <div class="modal-body" id="listOfSchedulingsBody">
@@ -49,7 +49,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button class="btn" onclick="hideListModal()">Close</button>
+                <button class="btn" onclick="hideModal('listOfSchedulingsPerDay')">Close</button>
                 <button class="btn" onclick="showAddModal()">Add new</button>
             </div>
         </div>
@@ -59,7 +59,7 @@
     <div class="modal-window" id="addNewScheduling">
         <div class="modal">
             <div class="modal-header">
-                <span id="close-addModal" onclick="hideAddModal()">×</span>
+                <span id="close-addModal" onclick="hideModal('addNewScheduling')">×</span>
                 <h1 id="addModalTitle">Titulo</h1>
             </div>
             <div class="modal-body" id="addSchedulingsBody">
@@ -81,11 +81,18 @@
                 </div>
                 <div>
                     <label for="equipment-list">Selecione os equipamentos: </label>
-                    <select id="equipment-list"></select>
+                    <select id="equipment-list">
+                        <!--Equipments list (options) goes here-->
+                    </select>
+                    <table>
+                        <tbody id="listOfEquipments">
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn" onclick="hideAddModal()">Close</button>
+                <button class="btn" onclick="hideModal('addNewScheduling')">Close</button>
                 <button class="btn" type="submit" onclick="sendData()">Send</button>
             </div>
         </div>

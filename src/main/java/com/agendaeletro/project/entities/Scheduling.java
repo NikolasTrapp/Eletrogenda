@@ -37,12 +37,12 @@ public class Scheduling implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	// Anotações para o atributo initialDate para definir o padrão de data e hora
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Brazil/East")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Brazil/East")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, length = 254)
 	private Date initialDate;
 	// Anotações para o atributo finalDate para definir o padrão de data e hora
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Brazil/East")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Brazil/East")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, length = 254)
 	private Date finalDate;
