@@ -1,3 +1,4 @@
+sessionStorage.setItem("teacher", JSON.stringify({"id": "1", "name": "Nikolas", "email": "nikolas@gmail.com"}));
 let today = new Date(); // Pegando o dia de hoje
 let currentMonth = today.getMonth(); // Mes atual (-1)
 let currentYear = today.getFullYear(); // Ano atual
@@ -5,9 +6,11 @@ let months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho
 
 let monthAndYear = document.getElementById("monthAndYear"); // Titulo do mes do calendario
 let data; // Agendamentos
+springApiUrl = "http://localhost:8080";
+jsonServerApiUrl = "http://localhost:3000";
 
 async function getData() {
-    const request = await fetch("http://localhost:8080/schedulings"); // Pegando os agendamentos
+    const request = await fetch(`${jsonServerApiUrl}/schedulings`); // Pegando os agendamentos
     const schedulings = await request.json(); // Guardando-os em uma variavel no escopo globar para serem usandos quantas vezes necessário
     return schedulings; // Retornando os dados
 }
@@ -80,7 +83,7 @@ function populateSchedulings() {
         //Pegar o id do dia do agendamento (caso este dia esteja na tela)
         let col = document.getElementById(scheduling.initialDate.substring(0, 10))
         if (col != null) {
-            let c = document.createTextNode(scheduling.id); // Criar um texto com o id do agendamento
+            let c = document.createTextNode(" " + scheduling.id); // Criar um texto com o id do agendamento
             col.appendChild(c); // Adicionando o id do agendamento da coluna
         }
     }
@@ -143,18 +146,18 @@ async function showAddModal() {
     equipmentsList.innerHTML = "";
     addModal.style.display = "flex";
 
-    const getClassroomsFromBack = await fetch("http://localhost:8080/classrooms"); // pegando os dados do backend
+    const getClassroomsFromBack = await fetch(`${jsonServerApiUrl}/classrooms`); // pegando os dados do backend
     const classrooms = await getClassroomsFromBack.json(); // reconvertendo os dados para json
     const classroomsDropDown = document.getElementById("classroom-list"); // pegando o dropdown das salas de aula
     populateDropDowns(classroomsDropDown, classrooms);
 
     //tudo se repete para as turmas e equipamentos:
-    const getClassesFromBack = await fetch("http://localhost:8080/class");
+    const getClassesFromBack = await fetch(`${jsonServerApiUrl}/class`);
     const classes = await getClassesFromBack.json();
     const classesDropDown = document.getElementById("class-list");
     populateDropDowns(classesDropDown, classes);
 
-    const getEquipmentsFromBack = await fetch("http://localhost:8080/equipments");
+    const getEquipmentsFromBack = await fetch(`${jsonServerApiUrl}/equipments`);
     const equipments = await getEquipmentsFromBack.json();
     const equipmentsDropDown = document.getElementById("equipment-list");
     populateDropDowns(equipmentsDropDown, equipments);
@@ -216,7 +219,7 @@ async function sendData() {
     });
 
     // Enviando os dados para o backend
-    const response = await fetch("http://localhost:8080/schedulings/insertScheduling", {
+    const response = await fetch(`${jsonServerApiUrl}/schedulings`, {
         method: "POST",
         body: data,
         headers: {
@@ -225,9 +228,12 @@ async function sendData() {
     });
 
     const responseText = await response.text();
+    console.log(responseText);
     const addModal = document.getElementById("addNewScheduling")
     addModal.style.display = "none";
 }
+
+
 
 // Chamar a função getData, esperar ela retornar os valores
 getData().then(
