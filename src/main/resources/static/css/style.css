@@ -61,21 +61,6 @@
     font-family: inherit;
 }
 
-/* #listOfSchedulingsPerDay {
-    display: none;
-    z-index: 3;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    margin: auto;
-} */
-
 .modal-window {
     display: none;
     z-index: 3;
@@ -93,6 +78,4 @@
     background-color: white;
     border: 1px solid;
     padding: 100px;
-    /* justify-content: center;
-    align-items: center; */
 }
