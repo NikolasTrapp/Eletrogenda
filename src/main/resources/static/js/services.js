@@ -3,7 +3,13 @@
     http://localhost:8080/name
 
     JSON server:
+    Para usar o json server é preciso ter o Node.js instalado
+    Instalar o serviço do JSON server: 
+    npm install -g json-server
+    rodar o JSON server:
+    navegar até o diretório "src\main\resources\static\js" e digitar o comando:
     json-server --watch db.json
+    padrão de rota do JSON server:
     http://localhost:3000/name
 
     Routes names:
@@ -74,7 +80,7 @@ async function sendData() {
 
     console.log(data);
 
-    const responseText = await postData("http://191.52.6.109:8080/schedulings/insertScheduling", data);
+    const responseText = await postData("http://localhost:3000/schedulings", data);
     const addModal = document.getElementById("addNewScheduling");
     addModal.style.display = "none";
 }

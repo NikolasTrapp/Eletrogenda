@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Scheduling;
 import com.agendaeletro.project.services.SchedulingService;
-import com.agendaeletro.project.services.exceptions.DatabaseException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
 @CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens

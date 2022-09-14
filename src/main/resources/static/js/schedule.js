@@ -99,7 +99,7 @@ function previous() {
 }
 
 // Chamar a função getData, esperar ela retornar os valores
-getData("http://191.52.6.109:8080/schedulings").then(
+getData("http://localhost:3000/schedulings").then(
     (schedulings) => {
         data = schedulings; // Atribuir os valores à variável no escopo global
         generateCalendar(currentMonth, currentYear); // Chamar a função de gerar o calendario
