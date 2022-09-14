@@ -13,7 +13,7 @@ async function checkLogin(){
         password: password 
     });
 
-    const request = await fetch("http://localhost:8080/validateLogin", {
+    const request = await fetch("http://191.52.6.109:8080/validateLogin", {
         method: "POST",
         body: data,
         headers: {
@@ -30,4 +30,9 @@ async function checkLogin(){
         alert(response.details);
     }
 
+}
+
+function clear(text){
+    let newtext = text.replace('>', '').replace('<', '').replace('&lt;', '').replace('&gt;', '');
+    return newtext;
 }

@@ -15,7 +15,7 @@ async function checkSignIn(){
 
     console.log(data);
 
-    const request = await fetch("http://localhost:8080/teachers/insertTeacher", {
+    const request = await fetch("http://191.52.6.109:8080/teachers/insertTeacher", {
         method: "POST",
         body: data,
         headers: {
@@ -34,4 +34,9 @@ async function checkSignIn(){
         alert(response.details);
     }
 
+}
+
+function clear(text){
+    let newtext = text.replace('>', '').replace('<', '').replace('&lt;', '').replace('&gt;', '');
+    return newtext;
 }

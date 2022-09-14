@@ -1,6 +1,5 @@
 function hideModal(id) {
     // Função para esconder a modal através do id fornecido
-    console.log("oi")
     const modal = document.getElementById(id);
     modal.style.display = "none";
     if (id === "addNewScheduling") {
@@ -17,15 +16,15 @@ async function showAddModal() {
     equipmentsList.innerHTML = "";
     addModal.style.display = "flex";
 
-    const classrooms = await getData("http://localhost:3000/classrooms"); // Pegando os dados para json
+    const classrooms = await getData("http://191.52.6.109:8080/classrooms"); // Pegando os dados para json
     const classroomsDropDown = document.getElementById("classroom-list"); // pegando o dropdown das salas de aula
     populateDropDowns(classroomsDropDown, classrooms);
 
-    const classes = await getData("http://localhost:3000/class");
+    const classes = await getData("http://191.52.6.109:8080/class");
     const classesDropDown = document.getElementById("class-list");
     populateDropDowns(classesDropDown, classes);
 
-    const equipments = await getData("http://localhost:3000/equipments");
+    const equipments = await getData("http://191.52.6.109:8080/equipments");
     const equipmentsDropDown = document.getElementById("equipment-list");
     populateDropDowns(equipmentsDropDown, equipments);
     equipmentsDropDown.addEventListener("change", addEquipment);

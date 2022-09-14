@@ -26,7 +26,7 @@ sessionStorage.setItem("teacher", JSON.stringify({"id": "1", "name": "Nikolas", 
 async function getData(url) {
     const request = await fetch(url); // pegando os dados do backend
     const data = await request.json(); // transformando os dados em json
-    return data // Retornando os dados
+    return data; // Retornando os dados
 }
 
 async function postData(url, data) {
@@ -74,7 +74,7 @@ async function sendData() {
 
     console.log(data);
 
-    const responseText = await postData("http://localhost:3000/schedulings", data);
+    const responseText = await postData("http://191.52.6.109:8080/schedulings/insertScheduling", data);
     const addModal = document.getElementById("addNewScheduling");
     addModal.style.display = "none";
 }
