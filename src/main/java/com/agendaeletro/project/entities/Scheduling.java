@@ -1,10 +1,7 @@
 package com.agendaeletro.project.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
@@ -158,9 +155,14 @@ public class Scheduling implements Serializable {
 	//Método para comparar se o tempo é válido
 	public boolean compareTime() {
 		Date today = new Date(); // Pegar a data atual
+		Calendar gc = new GregorianCalendar(); // Criar um objeto Calendar
+		gc.setTime(initialDate); // Adicionar o valor da data iniciar para o calendar
+		// Pegar a diferença de tempo entre a data inicial e a data final:
 		int diferenca = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
-		// Verificar se a data inicial é posterior a data final, ou data inicial é anterior a data atual e a diferença menor de 45 minutos
-		return !initialDate.after(finalDate) && !initialDate.before(today) && diferenca >= 45;
+		// Verificar se a data inicial é posterior a data final, ou data inicial
+		// é anterior a data atual e a diferença menor de 45 minutos e o dia da
+		// semana é diferente de domingo, ou seja, diferente de 1:
+		return !initialDate.after(finalDate) && !initialDate.before(today) && diferenca >= 45 && gc.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY;
 	}
 
 	// Métodos hashCode e equals para comprar objetos caso necessário

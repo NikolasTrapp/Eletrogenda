@@ -17,7 +17,7 @@ async function checkSignIn(){
 
     //Esta rota não tem como por para o json server, ela consta no arquivo UserResources
     //em: src\main\java\com\agendaeletro\project\resources\UserResources.java
-    const request = await fetch("http://191.52.6.109:8080/teachers/insertTeacher", {
+    const request = await fetch("http://localhost:8080/teachers/insertTeacher", {
         method: "POST",
         body: data,
         headers: {

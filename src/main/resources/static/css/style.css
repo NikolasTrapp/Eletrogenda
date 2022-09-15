@@ -37,7 +37,9 @@
     box-shadow: 7px 10px #007bffe1;
 }
 
-.col:hover{background-color:#F0812B ; color: #fffcff;}
+.col:hover{
+    background-color:#F0812B ; color: #fffcff;
+}
 
 #schedule-container {
     margin-top: 15px;
@@ -49,11 +51,10 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    
-    
 }
 
-.btn {padding: 1.2%;
+.btn {
+    padding: 1.2%;
     margin: auto;
     color: white;
     background-color: #007bffe1;
@@ -68,7 +69,9 @@
     font-family: inherit;
 }
 
-.btn:hover{background-color: #F0812B;color: white;}
+.btn:hover{
+    background-color: #F0812B;color: white;
+}
 
 .modal-window {
     display: none;
@@ -92,24 +95,20 @@
 
 #addModalTitle{
     width: 10%;
-    color: #F0812B;}
-
-    .h11RHc {
-        background: #ea4335;
-        text-align: center;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-    }
-
-
-
-
-
-body{	 background-image: linear-gradient(to right, rgba(70,130,180), rgba(244,164,96));
-    
+    color: #F0812B;
 }
 
+.h11RHc {
+    background: #ea4335;
+    text-align: center;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+body{
+    background-image: linear-gradient(to right, rgba(70,130,180), rgba(244,164,96));
+}
 
 .btn-3 {
     --outline: 2px solid white;
@@ -122,7 +121,6 @@ body{	 background-image: linear-gradient(to right, rgba(70,130,180), rgba(244,16
 
 .btn-3:hover,
 .btn-3:focus {
-
   outline: var(--outline);
   outline-offset: -6px;
 }

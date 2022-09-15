@@ -1,0 +1,61 @@
+// Exemplos de objetos json de cada entidade:
+// Scheduling (Agendamento - só precisa do id dos objetos classroom, group, equipment e teacher pois o spring já faz a atribuição automática ao informar a primary key do objeto em questão):
+{
+    "id": 1,
+    "initialDate": "20/09/2022 20:25",
+    "finalDate": "20/09/2022 21:25",
+    "teacher": {
+        "id": 1,
+        "name": "Teste",
+        "email": "teste@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    "classroom": {
+        "id": 2,
+        "name": "A02"
+    },
+    "group": {
+        "id": 4,
+        "name": "202 INFO"
+    },
+    "equipment": [
+        {
+            "id": 1,
+            "name": "Martelo",
+            "description": "poc poc poc poc",
+            "quantity": 15
+        },
+        {
+            "id": 2,
+            "name": "Serrote",
+            "description": "",
+            "quantity": 20
+        }
+    ]
+}
+// Teacher (professor):
+{
+    "id": 1,
+    "name": "Nikolas",
+    "email": "nikolas@gmail.com",
+    "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
+    "role": "ADMIN"
+}
+// Group (turmas):
+{
+    "id": 1,
+    "name": "301 INFO"
+}
+// Classroom (sala de aula):
+{
+    "id": 1,
+    "name": "A01"
+}
+//Equipment (equipamentos):
+{
+    "id": 1,
+    "name": "Martelo",
+    "description": "poc poc poc poc",
+    "quantity": 15
+}

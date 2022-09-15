@@ -71,9 +71,9 @@ function populateSchedulings() {
     //Função para adicionar os agendamentos ao calendário
     for (let scheduling of data) { //Para cada agendamento nos dados recebidos
         //Pegar o id do dia do agendamento (caso este dia esteja na tela)
-        let col = document.getElementById(scheduling.initialDate.substring(0, 10)+ " ");
+        let col = document.getElementById(scheduling.initialDate.substring(0, 10));
         if (col != null) {
-            let c = document.createTextNode(scheduling.id); // Criar um texto com o id do agendamento
+            let c = document.createTextNode(" " + scheduling.id); // Criar um texto com o id do agendamento
             col.appendChild(c); // Adicionando o id do agendamento da coluna
         }
     }
@@ -102,7 +102,8 @@ function previous() {
 getData("http://localhost:3000/schedulings").then(
     (schedulings) => {
         data = schedulings; // Atribuir os valores à variável no escopo global
-        generateCalendar(currentMonth, currentYear); // Chamar a função de gerar o calendario
     }).catch( // Se der erro:
         (err) => alert(err) // Mostra o erro podre
-    );
+    ).finally(() => {
+        generateCalendar(currentMonth, currentYear); // Chamar a função de gerar o calendario
+    });

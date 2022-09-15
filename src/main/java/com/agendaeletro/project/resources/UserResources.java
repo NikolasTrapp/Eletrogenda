@@ -27,6 +27,7 @@ public class UserResources {
 
 	@PostMapping(value = "/validateLogin")
 	public ResponseEntity<Object> validateLogin(@RequestBody Map<String, String> user, HttpServletRequest request) {
+		System.out.println("Hello moto");
 		try {
 			Teacher t = teacherRepository.findUser(user.get("name"), user.get("email"));
 			if (t != null && encoder.matches(user.get("password"), t.getPassword())) {
