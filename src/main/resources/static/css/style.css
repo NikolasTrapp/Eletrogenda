@@ -81,6 +81,38 @@ body {
     background-color: rgb(2, 63, 15); color: white;
 }
 
+.modal-window {
+    display: none;
+    z-index: 3;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #007bffe1;
+    color: #fffcff;
+    padding: 5%;
+}
+
+#addModalTitle {
+    width: 10%;
+    color: #F0812B;
+}
+
+.h11RHc {
+    background: #ea4335;
+    text-align: center;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
 .btn-3 {
     --outline: 2px solid black;
     border: 2px solid var(--clr);
@@ -88,7 +120,7 @@ body {
     color: black;
     outline: var(--outline);
     transition: outline-offset 200ms ease;
-  }
+}
 
 .btn-3:hover {
     --outline: 2px solid white;
