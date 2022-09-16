@@ -3,6 +3,7 @@ package com.agendaeletro.project.resources;
 import java.net.URI;
 import java.util.List;
 
+import com.agendaeletro.project.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.agendaeletro.project.entities.Scheduling;
 import com.agendaeletro.project.services.SchedulingService;
-import com.agendaeletro.project.services.exceptions.DatabaseException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
 @CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
@@ -45,10 +45,14 @@ public class SchedulingResources {
 
 	@PostMapping("/insertScheduling")
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
-		scheduling = service.insert(scheduling);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
-				.toUri();
-		return ResponseEntity.created(uri).body(scheduling);
+		try{
+			scheduling = service.insert(scheduling);
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
+					.toUri();
+			return ResponseEntity.created(uri).body(scheduling);
+		} catch (DatabaseException err) {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 
 	@DeleteMapping(value = "/deleteScheduling/{id}")

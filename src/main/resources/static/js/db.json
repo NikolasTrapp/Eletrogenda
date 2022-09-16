@@ -1,303 +1,352 @@
 {
-    "teachers": [
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Nikolas",
+      "email": "nikolas@gmail.com",
+      "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "name": "Eder",
+      "email": "eder@gmail.com",
+      "password": "$2a$10$8bQjFloiEnb0oYCX954AZuYQfQyc9qjLoZEs/9rZ2u10IEzb5Jstm",
+      "role": "TEACHER"
+    },
+    {
+      "id": 3,
+      "name": "Hylson",
+      "email": "hylson@gmail.com",
+      "password": "$2a$10$hPWOR/lTSi6OkabOZn0rTuxU5vjs2C9QhKLRNEBJTWz1CmeZjAtJa",
+      "role": "TEACHER"
+    },
+    {
+      "id": 4,
+      "name": "Cleber",
+      "email": "cleber@gmail.com",
+      "password": "$2a$10$iCMFGDuFEWSQWciv4ei/SOpob5MbX6uhXjuJzA.dpKqSZWgCW18tu",
+      "role": "TEACHER"
+    },
+    {
+      "id": 5,
+      "name": "Riad",
+      "email": "riad@gmail.com",
+      "password": "$2a$10$F8b5UH5oMbseqnRBO6YVROpVxlmtc08CRE0NtO2Lk0ndAl1Oa8UEC",
+      "role": "TEACHER"
+    },
+    {
+      "id": 6,
+      "name": "Dalton",
+      "email": "dalton@gmail.com",
+      "password": "$2a$10$ab.Q7PKf3WDs5MCP39SIrOwKuCA0hsqreH7poq21H/PY7EeWQGMNG",
+      "role": "TEACHER"
+    },
+    {
+      "id": 11,
+      "name": "Nikolass",
+      "email": "nikolas@gmsail.com",
+      "password": "$2a$10$P9yY0nm5TD6xZoP6PAEYN.XgGnKoQW3dPLHQwsoewfm5V7S1H90cO",
+      "role": "TEACHER"
+    }
+  ],
+  "equipments": [
+    {
+      "id": 1,
+      "name": "Martelo",
+      "description": "poc poc poc poc",
+      "quantity": 15
+    },
+    {
+      "id": 2,
+      "name": "Serrote",
+      "description": "",
+      "quantity": 20
+    },
+    {
+      "id": 3,
+      "name": "Solda",
+      "description": "",
+      "quantity": 25
+    },
+    {
+      "id": 4,
+      "name": "Ferro",
+      "description": "",
+      "quantity": 30
+    },
+    {
+      "id": 5,
+      "name": "Madeira",
+      "description": "30 cm",
+      "quantity": 40
+    },
+    {
+      "id": 6,
+      "name": "Prego",
+      "description": "5 tortos",
+      "quantity": 50
+    }
+  ],
+  "classrooms": [
+    {
+      "id": 1,
+      "name": "A01"
+    },
+    {
+      "id": 2,
+      "name": "A02"
+    },
+    {
+      "id": 3,
+      "name": "A03"
+    },
+    {
+      "id": 4,
+      "name": "A04"
+    },
+    {
+      "id": 5,
+      "name": "A05"
+    },
+    {
+      "id": 6,
+      "name": "A06"
+    }
+  ],
+  "class": [
+    {
+      "id": 1,
+      "name": "301 INFO"
+    },
+    {
+      "id": 2,
+      "name": "302 INFO"
+    },
+    {
+      "id": 3,
+      "name": "201 INFO"
+    },
+    {
+      "id": 4,
+      "name": "202 INFO"
+    },
+    {
+      "id": 5,
+      "name": "101 INFO"
+    },
+    {
+      "id": 6,
+      "name": "102 ELETRO"
+    }
+  ],
+  "schedulings": [
+    {
+      "id": 1,
+      "initialDate": "20/09/2022 20:25",
+      "finalDate": "20/09/2022 21:25",
+      "teacher": {
+        "id": 1,
+        "name": "Nikolas",
+        "email": "nikolas@gmail.com",
+        "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
+        "role": "ADMIN"
+      },
+      "classroom": {
+        "id": 2,
+        "name": "A02"
+      },
+      "group": {
+        "id": 4,
+        "name": "202 INFO"
+      },
+      "equipment": [
         {
-            "id": 1,
-            "name": "Nikolas",
-            "email": "nikolas@gmail.com",
-            "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
-            "role": "ADMIN"
+          "id": 1,
+          "name": "Martelo",
+          "description": "poc poc poc poc",
+          "quantity": 15
         },
         {
-            "id": 2,
-            "name": "Eder",
-            "email": "eder@gmail.com",
-            "password": "$2a$10$8bQjFloiEnb0oYCX954AZuYQfQyc9qjLoZEs/9rZ2u10IEzb5Jstm",
-            "role": "TEACHER"
+          "id": 1,
+          "name": "Martelo",
+          "description": "poc poc poc poc",
+          "quantity": 15
         },
         {
-            "id": 3,
-            "name": "Hylson",
-            "email": "hylson@gmail.com",
-            "password": "$2a$10$hPWOR/lTSi6OkabOZn0rTuxU5vjs2C9QhKLRNEBJTWz1CmeZjAtJa",
-            "role": "TEACHER"
+          "id": 2,
+          "name": "Serrote",
+          "description": "",
+          "quantity": 20
         },
         {
-            "id": 4,
-            "name": "Cleber",
-            "email": "cleber@gmail.com",
-            "password": "$2a$10$iCMFGDuFEWSQWciv4ei/SOpob5MbX6uhXjuJzA.dpKqSZWgCW18tu",
-            "role": "TEACHER"
+          "id": 2,
+          "name": "Serrote",
+          "description": "",
+          "quantity": 20
         },
         {
-            "id": 5,
-            "name": "Riad",
-            "email": "riad@gmail.com",
-            "password": "$2a$10$F8b5UH5oMbseqnRBO6YVROpVxlmtc08CRE0NtO2Lk0ndAl1Oa8UEC",
-            "role": "TEACHER"
+          "id": 3,
+          "name": "Solda",
+          "description": "",
+          "quantity": 25
         },
         {
-            "id": 6,
-            "name": "Dalton",
-            "email": "dalton@gmail.com",
-            "password": "$2a$10$ab.Q7PKf3WDs5MCP39SIrOwKuCA0hsqreH7poq21H/PY7EeWQGMNG",
-            "role": "TEACHER"
+          "id": 3,
+          "name": "Solda",
+          "description": "",
+          "quantity": 25
         },
         {
-            "id": 11,
-            "name": "Nikolass",
-            "email": "nikolas@gmsail.com",
-            "password": "$2a$10$P9yY0nm5TD6xZoP6PAEYN.XgGnKoQW3dPLHQwsoewfm5V7S1H90cO",
-            "role": "TEACHER"
+          "id": 4,
+          "name": "Ferro",
+          "description": "",
+          "quantity": 30
+        },
+        {
+          "id": 4,
+          "name": "Ferro",
+          "description": "",
+          "quantity": 30
+        },
+        {
+          "id": 5,
+          "name": "Madeira",
+          "description": "30 cm",
+          "quantity": 40
+        },
+        {
+          "id": 6,
+          "name": "Prego",
+          "description": "5 tortos",
+          "quantity": 50
         }
-    ],
-    "equipments": [
+      ]
+    },
+    {
+      "id": 2,
+      "initialDate": "20/09/2022 13:30",
+      "finalDate": "20/09/2022 14:15",
+      "teacher": {
+        "id": 1,
+        "name": "Nikolas",
+        "email": "nikolas@gmail.com",
+        "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
+        "role": "ADMIN"
+      },
+      "classroom": {
+        "id": 1,
+        "name": "A01"
+      },
+      "group": {
+        "id": 6,
+        "name": "102 ELETRO"
+      },
+      "equipment": [
         {
-            "id": 1,
-            "name": "Martelo",
-            "description": "poc poc poc poc",
-            "quantity": 15
+          "id": 1,
+          "name": "Martelo",
+          "description": "poc poc poc poc",
+          "quantity": 15
         },
         {
-            "id": 2,
-            "name": "Serrote",
-            "description": "",
-            "quantity": 20
+          "id": 2,
+          "name": "Serrote",
+          "description": "",
+          "quantity": 20
         },
         {
-            "id": 3,
-            "name": "Solda",
-            "description": "",
-            "quantity": 25
+          "id": 2,
+          "name": "Serrote",
+          "description": "",
+          "quantity": 20
         },
         {
-            "id": 4,
-            "name": "Ferro",
-            "description": "",
-            "quantity": 30
+          "id": 3,
+          "name": "Solda",
+          "description": "",
+          "quantity": 25
         },
         {
-            "id": 5,
-            "name": "Madeira",
-            "description": "30 cm",
-            "quantity": 40
+          "id": 3,
+          "name": "Solda",
+          "description": "",
+          "quantity": 25
         },
         {
-            "id": 6,
-            "name": "Prego",
-            "description": "5 tortos",
-            "quantity": 50
+          "id": 4,
+          "name": "Ferro",
+          "description": "",
+          "quantity": 30
+        },
+        {
+          "id": 4,
+          "name": "Ferro",
+          "description": "",
+          "quantity": 30
+        },
+        {
+          "id": 5,
+          "name": "Madeira",
+          "description": "30 cm",
+          "quantity": 40
+        },
+        {
+          "id": 6,
+          "name": "Prego",
+          "description": "5 tortos",
+          "quantity": 50
         }
-    ],
-    "classrooms": [
+      ]
+    },
+    {
+      "initialDate": "02/09/2022 20:20",
+      "finalDate": "02/09/2022 21:20",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "1"
+      },
+      "group": {
+        "id": "2"
+      },
+      "equipment": [
         {
-            "id": 1,
-            "name": "A01"
-        },
-        {
-            "id": 2,
-            "name": "A02"
-        },
-        {
-            "id": 3,
-            "name": "A03"
-        },
-        {
-            "id": 4,
-            "name": "A04"
-        },
-        {
-            "id": 5,
-            "name": "A05"
-        },
-        {
-            "id": 6,
-            "name": "A06"
+          "id": "2"
         }
-    ],
-    "class": [
-        {
-            "id": 1,
-            "name": "301 INFO"
-        },
-        {
-            "id": 2,
-            "name": "302 INFO"
-        },
-        {
-            "id": 3,
-            "name": "201 INFO"
-        },
-        {
-            "id": 4,
-            "name": "202 INFO"
-        },
-        {
-            "id": 5,
-            "name": "101 INFO"
-        },
-        {
-            "id": 6,
-            "name": "102 ELETRO"
-        }
-    ],
-    "schedulings": [
-        {
-            "id": 1,
-            "initialDate": "20/09/2022 20:25",
-            "finalDate": "20/09/2022 21:25",
-            "teacher": {
-                "id": 1,
-                "name": "Nikolas",
-                "email": "nikolas@gmail.com",
-                "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
-                "role": "ADMIN"
-            },
-            "classroom": {
-                "id": 2,
-                "name": "A02"
-            },
-            "group": {
-                "id": 4,
-                "name": "202 INFO"
-            },
-            "equipment": [
-                {
-                    "id": 1,
-                    "name": "Martelo",
-                    "description": "poc poc poc poc",
-                    "quantity": 15
-                },
-                {
-                    "id": 1,
-                    "name": "Martelo",
-                    "description": "poc poc poc poc",
-                    "quantity": 15
-                },
-                {
-                    "id": 2,
-                    "name": "Serrote",
-                    "description": "",
-                    "quantity": 20
-                },
-                {
-                    "id": 2,
-                    "name": "Serrote",
-                    "description": "",
-                    "quantity": 20
-                },
-                {
-                    "id": 3,
-                    "name": "Solda",
-                    "description": "",
-                    "quantity": 25
-                },
-                {
-                    "id": 3,
-                    "name": "Solda",
-                    "description": "",
-                    "quantity": 25
-                },
-                {
-                    "id": 4,
-                    "name": "Ferro",
-                    "description": "",
-                    "quantity": 30
-                },
-                {
-                    "id": 4,
-                    "name": "Ferro",
-                    "description": "",
-                    "quantity": 30
-                },
-                {
-                    "id": 5,
-                    "name": "Madeira",
-                    "description": "30 cm",
-                    "quantity": 40
-                },
-                {
-                    "id": 6,
-                    "name": "Prego",
-                    "description": "5 tortos",
-                    "quantity": 50
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "initialDate": "20/09/2022 13:30",
-            "finalDate": "20/09/2022 14:15",
-            "teacher": {
-                "id": 1,
-                "name": "Nikolas",
-                "email": "nikolas@gmail.com",
-                "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
-                "role": "ADMIN"
-            },
-            "classroom": {
-                "id": 1,
-                "name": "A01"
-            },
-            "group": {
-                "id": 6,
-                "name": "102 ELETRO"
-            },
-            "equipment": [
-                {
-                    "id": 1,
-                    "name": "Martelo",
-                    "description": "poc poc poc poc",
-                    "quantity": 15
-                },
-                {
-                    "id": 2,
-                    "name": "Serrote",
-                    "description": "",
-                    "quantity": 20
-                },
-                {
-                    "id": 2,
-                    "name": "Serrote",
-                    "description": "",
-                    "quantity": 20
-                },
-                {
-                    "id": 3,
-                    "name": "Solda",
-                    "description": "",
-                    "quantity": 25
-                },
-                {
-                    "id": 3,
-                    "name": "Solda",
-                    "description": "",
-                    "quantity": 25
-                },
-                {
-                    "id": 4,
-                    "name": "Ferro",
-                    "description": "",
-                    "quantity": 30
-                },
-                {
-                    "id": 4,
-                    "name": "Ferro",
-                    "description": "",
-                    "quantity": 30
-                },
-                {
-                    "id": 5,
-                    "name": "Madeira",
-                    "description": "30 cm",
-                    "quantity": 40
-                },
-                {
-                    "id": 6,
-                    "name": "Prego",
-                    "description": "5 tortos",
-                    "quantity": 50
-                }
-            ]
-        }
-    ]
+      ],
+      "id": 3
+    },
+    {
+      "initialDate": "02/09/2022 15:23",
+      "finalDate": "02/09/2022 20:23",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "0"
+      },
+      "group": {
+        "id": "0"
+      },
+      "equipment": [],
+      "id": 4
+    },
+    {
+      "initialDate": "08/09/2022 08:33",
+      "finalDate": "08/09/2022 09:33",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "0"
+      },
+      "group": {
+        "id": "0"
+      },
+      "equipment": [],
+      "id": 5
+    }
+  ]
 }

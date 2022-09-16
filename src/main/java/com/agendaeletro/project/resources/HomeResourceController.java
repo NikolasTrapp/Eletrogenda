@@ -43,7 +43,6 @@ public class HomeResourceController {
         //Se a sessão não estiver vazia, será invalidada, caso contrário
         if (request.getSession().getAttribute("teacher") != null) request.getSession().invalidate();
         return "redirect:/login-page";
-
     }
 
 }

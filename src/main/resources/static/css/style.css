@@ -26,12 +26,19 @@
     margin-bottom: 0;
 }
 
-.col {
+.col {background-color: #fffcff;
     justify-content: center;
     display: flex;
-    border: 1px ridge;
-    padding: 32px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 40px;
     width: 50px;
+    box-shadow: 7px 10px #007bffe1;
+}
+
+.col:hover{
+    background-color:#F0812B ; color: #fffcff;
 }
 
 #schedule-container {
@@ -47,18 +54,23 @@
 }
 
 .btn {
-    padding: auto;
+    padding: 1.2%;
     margin: auto;
-    /* width: 30px;
-    height: 30px; */
     color: white;
     background-color: #007bffe1;
-    font-size: large;
+    font-size: 30px;
+    width: 70px;
+    height: 80px;
     display: inline-block;
     text-align: center;
-    border: 1px solid #007bff;
+    border: 2px solid;
+    border-radius: 10%;
     text-transform: none;
     font-family: inherit;
+}
+
+.btn:hover{
+    background-color: #F0812B;color: white;
 }
 
 .modal-window {
@@ -75,7 +87,40 @@
 }
 
 .modal {
-    background-color: white;
-    border: 1px solid;
-    padding: 100px;
+    background-color: #007bffe1;
+    color: #fffcff;
+    padding: 5%;
+
+}
+
+#addModalTitle{
+    width: 10%;
+    color: #F0812B;
+}
+
+.h11RHc {
+    background: #ea4335;
+    text-align: center;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+body{
+    background-image: linear-gradient(to right, rgba(70,130,180), rgba(244,164,96));
+}
+
+.btn-3 {
+    --outline: 2px solid white;
+    border: 2px solid var(--clr);
+    background: var(--clr);
+    color: white;
+    outline: var(--outline);
+    transition: outline-offset 200ms ease;
+  }
+
+.btn-3:hover,
+.btn-3:focus {
+  outline: var(--outline);
+  outline-offset: -6px;
 }

@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Schedule</title>
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css">
 </head>
 
 <body>
     <div id="main-container">
-        <div id="title">Schedule</div>
+        <div id="title" style="font-weight: bold; color: white;">Agenda</div>
 
         <div id="month">
-            <button class="btn" id="previous" onclick="previous()">&lt;</button>
-            <p id="monthAndYear" class="d-inline-block">Month</p>
-            <button class="btn" id="next" onclick="next()">&gt;</button>
+            <button class="btn btn-3" id="previous" onclick="previous()">&lt;</button>
+            <p id="monthAndYear" class="d-inline-block" style="color: white; font-weight: bold;">Month</p>
+            <button class="btn btn-3" id="next" onclick="next()">&gt;</button>
         </div>
 
         <div id="schedule-container">
             <div class="row">
-                <div class="col">Dom</div>
-                <div class="col">Seg</div>
-                <div class="col">Ter</div>
-                <div class="col">Qua</div>
-                <div class="col">Qui</div>
-                <div class="col">Sex</div>
-                <div class="col">Sab</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Dom</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Seg</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Ter</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Qua</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Qui</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Sex</div>
+                <div class="col" style="background-color: #007bffe1 ; color: white; font-weight: bold;">Sab</div>
             </div>
             <div id="calendar">
                 <!--Content goes here-->
@@ -97,9 +97,9 @@
     </div>
 
 
-    <script type="text/javascript" src="/js/services.js"></script>
-    <script type="text/javascript" src="/js/schedule.js"></script>
-    <script type="text/javascript" src="/js/modal.js"></script>
+    <script type="text/javascript" src="../static/js/services.js"></script>
+    <script type="text/javascript" src="../static/js/schedule.js"></script>
+    <script type="text/javascript" src="../static/js/modal.js"></script>
 </body>
 
 </html>
