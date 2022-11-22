@@ -1,0 +1,78 @@
+* {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+}
+
+body {
+    background-color: beige;
+}
+
+.menu{
+    display: flex;
+    padding: 0;
+}
+
+#monthAndYear {
+    font-size: x-large;
+    display: inline-block;
+}
+
+.schedule-btn {
+    --outline: 2px solid black;
+    border: 2px solid var(--clr);
+    background: var(--clr);
+    color: black;
+    outline: var(--outline);
+    transition: outline-offset 200ms ease;
+    width: 60px;
+    height: 50px;
+}
+
+.schedule-btn:hover {
+    --outline: 2px solid white;
+    background-color: rgb(2, 63, 15);
+    color: white;
+}
+
+.schedule-btn:focus {
+  outline: var(--outline);
+  outline-offset: -6px;
+}
+
+#schedule-container{
+    padding-top: 20px;
+}
+
+.week-header{
+    background-color: #349a46;
+    color: white;
+    font-weight:bold;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.day{
+    background-color: #fffcff;
+    padding: 25px;
+    width: 45px;
+}
+
+.col{
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    box-shadow: 7px 10px 0px 2px rgb(2, 63, 15);
+}
+
+.col:hover{
+    background-color:#052904 ; color: #fffcff;
+}
+
+/* IDEIAS: Colocaria o vermelho (do IF) em coisas importantes como alertas e lembretes;
+        Usar menos cores e mais tons que combinem entre sí;
+        Fundos claros e confortáveis mas não o branco chapado porque também pode incomodar a visão;
+        Geralmente os calendários tem cores mais pastéis e claras para serem mais confortáveis;
+        
+        Se quiserem se complicar mais no final quando tiverem tudo ponto, seria interessante ter
+        uma versão padrão e uma noturna.*/
