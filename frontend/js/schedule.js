@@ -116,7 +116,6 @@ getData("schedulings").then(
     (schedulings) => {
         data = schedulings; // Atribuir os valores à variável no escopo global
         loadValuesToDropdowns();
-        console.log(data);
     }).catch( // Se der erro:
         (err) => alert(err) // Mostra o erro podre
     ).finally(() => {

@@ -29,7 +29,7 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({ "id": "1", "name": "Nikolas", "email": "nikolas@gmail.com" }));
 
-const adress = "192.168.1.4:3000";
+const adress = "localhost:8080";
 
 async function getData(entity) {
     const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
@@ -43,6 +43,7 @@ async function postData(url, data) {
      * e os dados a serem enviados e retorna a resposta que o servidor deu
      */
     // Enviando os dados:
+    console.log(data);
     const response = await fetch(url, {
         method: "POST",
         body: data,
@@ -76,7 +77,7 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         equipment: equipments
     });
 
-    const responseText = await postData(`http://${adress}/schedulings`, data);
+    const responseText = await postData(`http://${adress}/schedulings/insertScheduling`, data);
     console.log(responseText);
 }
 

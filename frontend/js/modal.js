@@ -71,7 +71,7 @@ async function loadValuesToDropdowns(){
 function populateDropDowns(dropdown, data) {
     data.map(element => {
         const option = document.createElement("option");
-        option.value = element.name;
+        option.value = element.id;
         option.text = element.name;
         dropdown.appendChild(option);
     });

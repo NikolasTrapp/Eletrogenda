@@ -21,7 +21,7 @@ import com.nikolastrapp.agendaeletro.services.SchedulingService;
 import com.nikolastrapp.agendaeletro.services.exceptions.DatabaseException;
 
 @RestController // Anotação para definir que esta classe é uma classe controladora
-@CrossOrigin("*") // Permitindo o compartilhamento de recursos entre diferentes origens
+@CrossOrigin(origins = "*") // Permitindo o compartilhamento de recursos entre diferentes origens
 @RequestMapping(value = "/schedulings") // Definindo rota de acesso às rotas referentes a esse controlador
 public class SchedulingResources {
 
@@ -44,6 +44,7 @@ public class SchedulingResources {
 		return ResponseEntity.ok().body(list);
 	}
 
+	@CrossOrigin(origins = "*")
 	@PostMapping("/insertScheduling")
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
 		try{
