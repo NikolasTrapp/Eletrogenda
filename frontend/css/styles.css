@@ -6,6 +6,10 @@ body {
     background-color: beige;
 }
 
+#logo{
+    margin-left: 83px;
+}
+
 .menu{
     display: flex;
     padding: 0;
@@ -53,9 +57,12 @@ body {
 }
 
 .day{
-    background-color: #fffcff;
-    padding: 25px;
-    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    /* padding: 25px; */
+    height: 80px;
 }
 
 .col{
@@ -67,6 +74,18 @@ body {
 
 .col:hover{
     background-color:#052904 ; color: #fffcff;
+}
+
+.circle {
+    background: red;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    align-self: flex-end;
+    /* margin: 0.5px; */
+    margin: auto;
+    position: relative;
+    
 }
 
 /* IDEIAS: Colocaria o vermelho (do IF) em coisas importantes como alertas e lembretes;

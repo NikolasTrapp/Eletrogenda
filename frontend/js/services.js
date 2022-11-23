@@ -29,10 +29,10 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({ "id": "1", "name": "Nikolas", "email": "nikolas@gmail.com" }));
 
-const adress = "localhost:8080"
+const adress = "localhost:3000";
 
 async function getData(entity) {
-    const request = await fetch(`http://${adress}/${entity}`); // pegando os dados do backend
+    const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
     const data = await request.json(); // transformando os dados em json
     return data; // Retornando os dados
 }
@@ -56,25 +56,13 @@ async function postData(url, data) {
     return responseText; // Retornando a resposta
 }
 
-async function sendData() {
-    /**
-     * Esta função está ligada ao clique de enviar da janela modal addNewScheduling
-     */
+async function sendData(initialHour, finalHour, group, classroom, teacher, equipments) {
     // pegando os id's dos elementos selecionados:
-    let day = document.getElementById("addModalTitle").textContent;
-    let initialHour = document.getElementById("initialHour").value;
-    let finalHour = document.getElementById("finalHour").value;
-    let classroom = document.getElementById("classroom-list").value;
-    let classs = document.getElementById("class-list").value;
-    let equipmentsList = document.getElementById("listOfEquipments");
-    // Pegando os equipamentos da tabela de equipamentos criada pela modal
-    let equipments = Array.from(equipmentsList.rows).map(
-        (tr) => ({ "id": tr.cells[0].id })
-    );
+    let day = document.getElementById("add-schedule-modal-label").textContent;
 
     // Verificando se a hora compreende entre (08:00 e 12:00) ou (13:30 e 17:30)
     if (verificarHora(initialHour, finalHour)){
-        alert("Hora inválida informada!");
+        alert("Invalid hour!");
         return null; // Sair da função
     }
 
@@ -82,17 +70,14 @@ async function sendData() {
     let data = JSON.stringify({
         initialDate: `${day} ${initialHour}`,
         finalDate: `${day} ${finalHour}`,
-        teacher: { "id": JSON.parse(sessionStorage.getItem("teacher")).id },
+        teacher: teacher,
         classroom: { "id": classroom },
-        group: { "id": classs },
+        group: { "id": group },
         equipment: equipments
     });
 
     const responseText = await postData(`http://${adress}/schedulings`, data);
-    const addModal = document.getElementById("addNewScheduling");
-    addModal.style.display = "none"; // Escondendo a modal
-
-    console.log(responseText); // Exibindo resposta do backend
+    console.log(responseText);
 }
 
 function verificarHora(initialHour, finalHour) {
