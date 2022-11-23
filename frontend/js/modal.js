@@ -1,12 +1,3 @@
-function hideModal(id) {
-    // Função para esconder a modal através do id fornecido
-    const modal = document.getElementById(id);
-    modal.style.display = "none";
-    if (id === "addNewScheduling") {
-        modal.removeEventListener("change", addEquipment);
-    }
-}
-
 async function showAddModal() {
     hideModal('listOfSchedulingsPerDay'); // Escondendo a modal de lista de equipamentos
     const addModal = document.getElementById("addNewScheduling");

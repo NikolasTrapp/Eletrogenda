@@ -38,7 +38,8 @@ public class SchedulingResources {
 	private SchedulingService service; // Definindo camada de serviço do agendamento
 
 	@GetMapping
-	public ResponseEntity<List<Scheduling>> queryAll() {
+	public ResponseEntity<List<Scheduling>> queryAll(){
+		
 		List<Scheduling> list = service.queryAll();
 		return ResponseEntity.ok().body(list);
 	}
@@ -47,6 +48,7 @@ public class SchedulingResources {
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
 		try{
 			scheduling = service.insert(scheduling);
+			System.out.println("Oi");
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
 					.toUri();
 			return ResponseEntity.created(uri).body(scheduling);

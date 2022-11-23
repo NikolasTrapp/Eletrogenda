@@ -34,8 +34,11 @@ public class SchedulingService {
 
 	public Scheduling insert(Scheduling scheduling) {
 		if (!scheduling.compareTime()) {
+			System.out.println("oi");
 			throw new DatabaseException("Invalid date format.");
 		}
+		System.out.println("linguiça");
+		System.out.println(scheduling);
 		return schedulingReporitory.save(scheduling);
 	}
 

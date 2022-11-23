@@ -16,12 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity // Anotação para definir que esta classe é uma entidade
 public class Scheduling implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String TIME_ZONE="Brazil/East";
 
 	/*
 	 * A classe Scheduling representa um agendamento, ela implementa a interface
@@ -33,14 +35,16 @@ public class Scheduling implements Serializable {
 	@Id // Anotações para definir que este atributo é o id e tem auto increment
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// Anotações para o atributo initialDate para definir o padrão de data e hora
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = "Brazil/East")
+	
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = TIME_ZONE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, length = 254)
 	private Date initialDate;
-	// Anotações para o atributo finalDate para definir o padrão de data e hora
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = "Brazil/East")
+	
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone = TIME_ZONE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, length = 254)
@@ -156,13 +160,14 @@ public class Scheduling implements Serializable {
 	public boolean compareTime() {
 		Date today = new Date(); // Pegar a data atual
 		Calendar gc = new GregorianCalendar(); // Criar um objeto Calendar
-		gc.setTime(initialDate); // Adicionar o valor da data iniciar para o calendar
+		gc.setTime(initialDate); // Adicionar o valor da data inicial para o calendar
 		// Pegar a diferença de tempo entre a data inicial e a data final:
-		int diferenca = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
-		// Verificar se a data inicial é posterior a data final, ou data inicial
-		// é anterior a data atual e a diferença menor de 45 minutos e o dia da
-		// semana é diferente de domingo, ou seja, diferente de 1:
-		return !initialDate.after(finalDate) && !initialDate.before(today) && diferenca >= 45 && gc.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY;
+		int diference = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
+		boolean isGreater = initialDate.after(today);
+		boolean haveMoreThan45 = diference >= 45;
+		boolean isSunday = gc.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY;
+		System.out.printf("%b, %b, %b, %b", !initialDate.after(finalDate), !initialDate.before(today), haveMoreThan45, isSunday);
+		return isGreater && haveMoreThan45 && isSunday;
 	}
 
 	// Métodos hashCode e equals para comprar objetos caso necessário
