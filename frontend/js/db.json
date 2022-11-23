@@ -347,6 +347,69 @@
       },
       "equipment": [],
       "id": 5
+    },
+    {
+      "initialDate": "02/11/2022 08:00",
+      "finalDate": "02/11/2022 08:45",
+      "teacher": {
+        "id": "1",
+        "name": "Nikolas",
+        "email": "nikolas@gmail.com"
+      },
+      "classroom": {
+        "id": "A01"
+      },
+      "group": {
+        "id": "202 INFO"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        },
+        {
+          "id": "3"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "initialDate": "24/11/2022 11:15",
+      "finalDate": "24/11/2022 12:00",
+      "teacher": {
+        "id": "1",
+        "name": "Nikolas",
+        "email": "nikolas@gmail.com"
+      },
+      "classroom": {
+        "id": "A02"
+      },
+      "group": {
+        "id": "101 INFO"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        },
+        {
+          "id": "3"
+        },
+        {
+          "id": "4"
+        },
+        {
+          "id": "5"
+        },
+        {
+          "id": "6"
+        }
+      ],
+      "id": 7
     }
   ]
 }

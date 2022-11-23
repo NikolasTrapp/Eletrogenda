@@ -29,7 +29,7 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({ "id": "1", "name": "Nikolas", "email": "nikolas@gmail.com" }));
 
-const adress = "localhost:3000";
+const adress = "192.168.1.4:3000";
 
 async function getData(entity) {
     const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend

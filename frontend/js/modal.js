@@ -24,14 +24,21 @@ function showListModal() {
 }
 
 function getValues(){
-
     let initialDate = document.getElementById("initialDate").value;
     let finalDate = document.getElementById("finalDate").value;
     let group = document.querySelector("select[name=classes-select]").value;
     let classroom = document.querySelector("select[name=classrooms-select]").value;   
     let teacher = JSON.parse(sessionStorage.getItem("teacher"));
+    let nodeEquipments = document.querySelectorAll(".checked .item-text");
+    let equipments = [];
 
-    console.log(initialDate, finalDate ,group, classroom, teacher);
+    nodeEquipments.forEach(e => {
+        equipments.push({
+            id: e.getAttribute("rel")
+        });
+    });
+
+    sendData(initialDate, finalDate, group, classroom, teacher, equipments)
 }
 
 async function loadValuesToDropdowns(){
@@ -44,8 +51,21 @@ async function loadValuesToDropdowns(){
     populateDropDowns(classroomsSelect, classrooms);
 
     const equipments = await getData("equipments");
-    const equipmentsSelect = document.querySelector("select[name=equipments-select]");
-    populateDropDowns(equipmentsSelect, equipments);
+    const equipmentsSelect = document.querySelector(".list-items");
+    equipments.map(e => {
+        const li = document.createElement("li");
+        li.className = "item";
+        const spanCheckbox = document.createElement("span");
+        spanCheckbox.className = "checkbox";
+        const spanText = document.createElement("span");
+        spanText.className = "item-text";
+        spanText.textContent = e.name;
+        spanText.setAttribute("rel", e.id);
+        li.appendChild(spanCheckbox);
+        li.appendChild(spanText);
+        equipmentsSelect.appendChild(li);
+    });
+    configurateDropdown();
 }
 
 function populateDropDowns(dropdown, data) {

@@ -165,7 +165,7 @@ public class Scheduling implements Serializable {
 		int diference = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
 		boolean isGreater = initialDate.after(today);
 		boolean haveMoreThan45 = diference >= 45;
-		boolean isSunday = gc.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY;
+		boolean isSunday = gc.get(Calendar.DAY_OF_WEEK) != 	Calendar.SUNDAY;
 		System.out.printf("%b, %b, %b, %b", !initialDate.after(finalDate), !initialDate.before(today), haveMoreThan45, isSunday);
 		return isGreater && haveMoreThan45 && isSunday;
 	}
