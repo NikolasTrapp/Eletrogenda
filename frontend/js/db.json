@@ -142,166 +142,8 @@
   ],
   "schedulings": [
     {
-      "id": 1,
-      "initialDate": "20/09/2022 20:25",
-      "finalDate": "20/09/2022 21:25",
-      "teacher": {
-        "id": 1,
-        "name": "Nikolas",
-        "email": "nikolas@gmail.com",
-        "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
-        "role": "ADMIN"
-      },
-      "classroom": {
-        "id": 2,
-        "name": "A02"
-      },
-      "group": {
-        "id": 4,
-        "name": "202 INFO"
-      },
-      "equipment": [
-        {
-          "id": 1,
-          "name": "Martelo",
-          "description": "poc poc poc poc",
-          "quantity": 15
-        },
-        {
-          "id": 1,
-          "name": "Martelo",
-          "description": "poc poc poc poc",
-          "quantity": 15
-        },
-        {
-          "id": 2,
-          "name": "Serrote",
-          "description": "",
-          "quantity": 20
-        },
-        {
-          "id": 2,
-          "name": "Serrote",
-          "description": "",
-          "quantity": 20
-        },
-        {
-          "id": 3,
-          "name": "Solda",
-          "description": "",
-          "quantity": 25
-        },
-        {
-          "id": 3,
-          "name": "Solda",
-          "description": "",
-          "quantity": 25
-        },
-        {
-          "id": 4,
-          "name": "Ferro",
-          "description": "",
-          "quantity": 30
-        },
-        {
-          "id": 4,
-          "name": "Ferro",
-          "description": "",
-          "quantity": 30
-        },
-        {
-          "id": 5,
-          "name": "Madeira",
-          "description": "30 cm",
-          "quantity": 40
-        },
-        {
-          "id": 6,
-          "name": "Prego",
-          "description": "5 tortos",
-          "quantity": 50
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "initialDate": "20/09/2022 13:30",
-      "finalDate": "20/09/2022 14:15",
-      "teacher": {
-        "id": 1,
-        "name": "Nikolas",
-        "email": "nikolas@gmail.com",
-        "password": "$2a$10$7e8tpicL6nWGa0drRFCnde2q8j5l3MyE.rrkNtJIQlKhae2Xs23ka",
-        "role": "ADMIN"
-      },
-      "classroom": {
-        "id": 1,
-        "name": "A01"
-      },
-      "group": {
-        "id": 6,
-        "name": "102 ELETRO"
-      },
-      "equipment": [
-        {
-          "id": 1,
-          "name": "Martelo",
-          "description": "poc poc poc poc",
-          "quantity": 15
-        },
-        {
-          "id": 2,
-          "name": "Serrote",
-          "description": "",
-          "quantity": 20
-        },
-        {
-          "id": 2,
-          "name": "Serrote",
-          "description": "",
-          "quantity": 20
-        },
-        {
-          "id": 3,
-          "name": "Solda",
-          "description": "",
-          "quantity": 25
-        },
-        {
-          "id": 3,
-          "name": "Solda",
-          "description": "",
-          "quantity": 25
-        },
-        {
-          "id": 4,
-          "name": "Ferro",
-          "description": "",
-          "quantity": 30
-        },
-        {
-          "id": 4,
-          "name": "Ferro",
-          "description": "",
-          "quantity": 30
-        },
-        {
-          "id": 5,
-          "name": "Madeira",
-          "description": "30 cm",
-          "quantity": 40
-        },
-        {
-          "id": 6,
-          "name": "Prego",
-          "description": "5 tortos",
-          "quantity": 50
-        }
-      ]
-    },
-    {
-      "initialDate": "02/09/2022 20:20",
-      "finalDate": "02/09/2022 21:20",
+      "initialDate": "02/12/2022 08:00",
+      "finalDate": "02/12/2022 08:45",
       "teacher": {
         "id": "1"
       },
@@ -309,58 +151,7 @@
         "id": "1"
       },
       "group": {
-        "id": "2"
-      },
-      "equipment": [
-        {
-          "id": "2"
-        }
-      ],
-      "id": 3
-    },
-    {
-      "initialDate": "02/09/2022 15:23",
-      "finalDate": "02/09/2022 20:23",
-      "teacher": {
         "id": "1"
-      },
-      "classroom": {
-        "id": "0"
-      },
-      "group": {
-        "id": "0"
-      },
-      "equipment": [],
-      "id": 4
-    },
-    {
-      "initialDate": "08/09/2022 08:33",
-      "finalDate": "08/09/2022 09:33",
-      "teacher": {
-        "id": "1"
-      },
-      "classroom": {
-        "id": "0"
-      },
-      "group": {
-        "id": "0"
-      },
-      "equipment": [],
-      "id": 5
-    },
-    {
-      "initialDate": "02/11/2022 08:00",
-      "finalDate": "02/11/2022 08:45",
-      "teacher": {
-        "id": "1",
-        "name": "Nikolas",
-        "email": "nikolas@gmail.com"
-      },
-      "classroom": {
-        "id": "A01"
-      },
-      "group": {
-        "id": "202 INFO"
       },
       "equipment": [
         {
@@ -373,21 +164,132 @@
           "id": "3"
         }
       ],
+      "id": 1
+    },
+    {
+      "initialDate": "03/12/2022 08:00",
+      "finalDate": "03/12/2022 09:30",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "2"
+      },
+      "group": {
+        "id": "2"
+      },
+      "equipment": [
+        {
+          "id": "2"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "initialDate": "04/12/2022 08:00",
+      "finalDate": "04/12/2022 10:30",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "3"
+      },
+      "group": {
+        "id": "3"
+      },
+      "equipment": [
+        {
+          "id": "4"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "initialDate": "05/12/2022 08:00",
+      "finalDate": "05/12/2022 11:15",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "2"
+      },
+      "group": {
+        "id": "5"
+      },
+      "equipment": [
+        {
+          "id": "2"
+        },
+        {
+          "id": "3"
+        },
+        {
+          "id": "5"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "initialDate": "06/12/2022 08:00",
+      "finalDate": "06/12/2022 12:00",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "5"
+      },
+      "group": {
+        "id": "5"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        },
+        {
+          "id": "4"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "initialDate": "07/12/2022 13:30",
+      "finalDate": "07/12/2022 14:15",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "6"
+      },
+      "group": {
+        "id": "2"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        },
+        {
+          "id": "5"
+        }
+      ],
       "id": 6
     },
     {
-      "initialDate": "24/11/2022 11:15",
-      "finalDate": "24/11/2022 12:00",
+      "initialDate": "08/12/2022 13:30",
+      "finalDate": "08/12/2022 17:30",
       "teacher": {
-        "id": "1",
-        "name": "Nikolas",
-        "email": "nikolas@gmail.com"
+        "id": "1"
       },
       "classroom": {
-        "id": "A02"
+        "id": "5"
       },
       "group": {
-        "id": "101 INFO"
+        "id": "5"
       },
       "equipment": [
         {
@@ -412,18 +314,57 @@
       "id": 7
     },
     {
-      "initialDate": "01/12/2022 08:45",
-      "finalDate": "01/12/2022 09:30",
+      "initialDate": "09/12/2022 08:00",
+      "finalDate": "09/12/2022 13:30",
       "teacher": {
-        "id": "1",
-        "name": "Nikolas",
-        "email": "nikolas@gmail.com"
+        "id": "1"
       },
       "classroom": {
-        "id": "A03"
+        "id": "2"
       },
       "group": {
-        "id": "201 INFO"
+        "id": "2"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        }
+      ],
+      "id": 8
+    },
+    {
+      "initialDate": "02/12/2022 08:00",
+      "finalDate": "02/12/2022 09:30",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "4"
+      },
+      "group": {
+        "id": "3"
+      },
+      "equipment": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        }
+      ],
+      "id": 9
+    },
+    {
+      "initialDate": "02/12/2022 13:30",
+      "finalDate": "02/12/2022 14:15",
+      "teacher": {
+        "id": "1"
+      },
+      "classroom": {
+        "id": "3"
+      },
+      "group": {
+        "id": "4"
       },
       "equipment": [
         {
@@ -431,15 +372,9 @@
         },
         {
           "id": "3"
-        },
-        {
-          "id": "4"
-        },
-        {
-          "id": "6"
         }
       ],
-      "id": 8
+      "id": 10
     }
   ]
 }

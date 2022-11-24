@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nikolastrapp.agendaeletro.entities.enums.Color;
 
 @Entity // Esta anotação define que esta classe é uma entidade
 public class Classroom implements Serializable {
@@ -34,21 +35,25 @@ public class Classroom implements Serializable {
 	@JsonIgnore // Esta anotação serve para impedir o loop infinito de chamada de objetos
 	@OneToMany(mappedBy = "classroom") // Definindo relação um para muitos
 	private List<Scheduling> schedulings = new ArrayList<>();
+	
+	@Column(nullable = false, length = 50, unique = true)
+	private Color color;
 
 	// Construtor vazio
 	public Classroom() {
 	}
 
 	// Sobrecarga de construtor com parametros carregados
-	public Classroom(Long id, String name) {
+	public Classroom(Long id, String name, Color color) {
 		this.id = id;
 		this.name = name;
+		this.color = color;
 	}
 
 	// Método to string para imprimir o objeto em forma de string
 	@Override
 	public String toString() {
-		return String.format("Classroom: id=%s | name=%s", id, name);
+		return String.format("Classroom: id=%s | name=%s | color=%s", id, name, color);
 	}
 
 	// Métodos getters e setters
@@ -66,6 +71,14 @@ public class Classroom implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 	public void addScheduling(Scheduling scheduling) {

@@ -56,6 +56,9 @@ public class ClassroomService {
 		if (!classroom.getName().isBlank()) {
 			entity.setName(classroom.getName());
 		}
+		if (!classroom.getColor().getColor().isBlank()) {
+			entity.setColor(classroom.getColor());
+		}
 	}
 
 }

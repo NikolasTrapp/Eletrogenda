@@ -1,0 +1,138 @@
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+TEACHERS--==--==--==--==--==--==:
+
+[
+    {
+        "id": 1,
+        "name": "Nikolas",
+        "email": "nikolas@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 2,
+        "name": "Paulo",
+        "email": "paulo@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 3,
+        "name": "Carlos",
+        "email": "carlos@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 4,
+        "name": "Gustavo",
+        "email": "gustavo@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 5,
+        "name": "Eder",
+        "email": "eder@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 6,
+        "name": "Uriarte",
+        "email": "uriarte@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 7,
+        "name": "Hylson",
+        "email": "hylson@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 8,
+        "name": "Ladeira",
+        "email": "ladeira@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 9,
+        "name": "Rodacki",
+        "email": "rodacki@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    },
+    {
+        "id": 10,
+        "name": "Vital",
+        "email": "vital@gmail.com",
+        "password": "123",
+        "role": "TEACHER"
+    }
+]
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+CLASSROOMS--==--==--==--==--==--==:
+
+[
+    {
+        "id": 1,
+        "name": "D01",
+        "color": "BLACK"
+    },
+    {
+        "id": 2,
+        "name": "D02",
+        "color": "YELLOW"
+    },
+    {
+        "id": 3,
+        "name": "D03",
+        "color": "RED"
+    },
+    {
+        "id": 4,
+        "name": "D04",
+        "color": "GRAY"
+    },
+    {
+        "id": 5,
+        "name": "D05",
+        "color": "GREEN"
+    },
+    {
+        "id": 6,
+        "name": "D06",
+        "color": "BLUE"
+    },
+    {
+        "id": 7,
+        "name": "D07",
+        "color": "WHITE"
+    },
+    {
+        "id": 8,
+        "name": "D08",
+        "color": "PURPLE"
+    },
+    {
+        "id": 9,
+        "name": "D09",
+        "color": "PINK"
+    },
+    {
+        "id": 10,
+        "name": "D10",
+        "color": "ORANGE"
+    },
+    {
+        "id": 11,
+        "name": "D11",
+        "color": "BROWN"
+    }
+]
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==

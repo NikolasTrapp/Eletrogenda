@@ -73,7 +73,6 @@ function populateSchedulings() {
         //Pegar o id do dia do agendamento (caso este dia esteja na tela)
         let col = document.getElementById(scheduling.initialDate.substring(0, 10));
         if (col != null) {
-            console.log("oi");
             const div = document.createElement("div");
             div.className = "circle";
             col.appendChild(div);

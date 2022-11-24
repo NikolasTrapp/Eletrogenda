@@ -27,9 +27,9 @@
 */
 
 //Para caso de não querer fazer login manualmente
-sessionStorage.setItem("teacher", JSON.stringify({ "id": "1", "name": "Nikolas", "email": "nikolas@gmail.com" }));
+sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
 
-const adress = "localhost:8080";
+const adress = "192.168.1.4:8080";
 
 async function getData(entity) {
     const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
@@ -43,7 +43,6 @@ async function postData(url, data) {
      * e os dados a serem enviados e retorna a resposta que o servidor deu
      */
     // Enviando os dados:
-    console.log(data);
     const response = await fetch(url, {
         method: "POST",
         body: data,
@@ -78,19 +77,12 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
     });
 
     const responseText = await postData(`http://${adress}/schedulings/insertScheduling`, data);
-    console.log(responseText);
 }
 
 function verificarHora(initialHour, finalHour) {
     let initialH = new Date('2022-01-01 ' + initialHour);
     let finalH = new Date('2022-01-01 ' + finalHour);
 
-    let firstHour = new Date('2022-01-01 08:00');
-    let secondHour = new Date('2022-01-01 12:00');
-    let thirdHour = new Date('2022-01-01 13:30');
-    let fourthHour = new Date('2022-01-01 17:30');
-
-    return !(initialH >= firstHour && initialH <= secondHour && finalH >= firstHour && finalH <= secondHour)||
-    (initialH >= thirdHour && initialH <= fourthHour && finalH >= thirdHour && finalH <= fourthHour);
+    return initialH >= finalH;
     
 }
