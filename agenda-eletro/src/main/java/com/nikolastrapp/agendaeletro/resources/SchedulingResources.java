@@ -44,12 +44,10 @@ public class SchedulingResources {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@CrossOrigin(origins = "*")
 	@PostMapping("/insertScheduling")
 	public ResponseEntity<Scheduling> insert(@RequestBody Scheduling scheduling) {
 		try{
 			scheduling = service.insert(scheduling);
-			System.out.println("Oi");
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(scheduling.getId())
 					.toUri();
 			return ResponseEntity.created(uri).body(scheduling);

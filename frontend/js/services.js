@@ -30,7 +30,7 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
 
-const adress = "192.168.1.3:3000";
+const adress = "localhost:8080";
 
 async function getData(entity) {
     const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
@@ -53,7 +53,7 @@ async function postData(url, data) {
     });
 
     // Pegando a resposta
-    const responseText = await response.text();
+    const responseText = await response.json();
     return responseText; // Retornando a resposta
 }
 
@@ -77,7 +77,13 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         equipment: equipments
     });
 
-    const responseText = await postData(`http://${adress}/schedulings/`, data);
+    const responseText = await postData(`http://${adress}/schedulings/insertScheduling`, data);
+    if (responseText.status === 400){
+        alert(responseText.error);
+    } else {
+        alert("sucesso pai");
+        window.location.reload();
+    }
 }
 
 function verificarHora(initialHour, finalHour) {

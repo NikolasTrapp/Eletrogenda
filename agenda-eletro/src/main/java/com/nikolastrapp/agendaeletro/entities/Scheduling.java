@@ -166,7 +166,6 @@ public class Scheduling implements Serializable {
 		boolean isGreater = initialDate.after(today);
 		boolean haveMoreThan45 = diference >= 45;
 		boolean isSunday = gc.get(Calendar.DAY_OF_WEEK) != 	Calendar.SUNDAY;
-		System.out.printf("%b, %b, %b, %b", !initialDate.after(finalDate), !initialDate.before(today), haveMoreThan45, isSunday);
 		return isGreater && haveMoreThan45 && isSunday;
 	}
 
@@ -186,6 +185,12 @@ public class Scheduling implements Serializable {
 			return false;
 		Scheduling other = (Scheduling) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public boolean isCompatible(Date iDate, Date fDate) {
+		boolean a = (initialDate.after(iDate) || initialDate.equals(iDate)) && (initialDate.before(fDate) || initialDate.equals(fDate));
+		boolean b = (finalDate.after(iDate) || finalDate.equals(iDate)) && (finalDate.before(fDate) || finalDate.equals(fDate));
+		return a || b;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.nikolastrapp.agendaeletro.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,13 +12,14 @@ import com.nikolastrapp.agendaeletro.entities.Equipment;
 import com.nikolastrapp.agendaeletro.entities.Scheduling;
 import com.nikolastrapp.agendaeletro.repositories.SchedulingReporitory;
 import com.nikolastrapp.agendaeletro.services.exceptions.DatabaseException;
+import com.nikolastrapp.agendaeletro.services.exceptions.NotCompatibleDate;
 import com.nikolastrapp.agendaeletro.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class SchedulingService {
 	/*
-	 * Esta classe guarda as funções que realizam as operações do banco de dados
-	 * que são chamadas pela camada de recursos
+	 * Esta classe guarda as funções que realizam as operações do banco de dados que
+	 * são chamadas pela camada de recursos
 	 */
 
 	@Autowired // Injeção de dependencia automático
@@ -34,11 +36,13 @@ public class SchedulingService {
 
 	public Scheduling insert(Scheduling scheduling) {
 		if (!scheduling.compareTime()) {
-			System.out.println("oi");
 			throw new DatabaseException("Invalid date format.");
 		}
-		System.out.println("linguiça");
-		System.out.println(scheduling);
+		ArrayList<Scheduling> schedulings = schedulingReporitory.getClassesClassrooms(scheduling.getGroup().getId(),
+				scheduling.getClassroom().getId());
+		for (Scheduling s : schedulings) {
+			if (scheduling.isCompatible(s.getInitialDate(), s.getFinalDate())) throw new NotCompatibleDate();
+		}
 		return schedulingReporitory.save(scheduling);
 	}
 
