@@ -1,5 +1,5 @@
---==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
-TEACHERS--==--==--==--==--==--==:
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+TEACHERS:
 
 [
     {
@@ -74,8 +74,8 @@ TEACHERS--==--==--==--==--==--==:
     }
 ]
 
---==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
-CLASSROOMS--==--==--==--==--==--==:
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+CLASSROOMS:
 
 [
     {
@@ -136,3 +136,256 @@ CLASSROOMS--==--==--==--==--==--==:
 ]
 
 --==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+CLASSES:
+
+[
+    {
+        "id": 1,
+        "name": "301 Eletro"
+    },
+    {
+        "id": 2,
+        "name": "302 Eletro"
+    },
+    {
+        "id": 3,
+        "name": "201 Eletro"
+    },
+    {
+        "id": 4,
+        "name": "202 Eletro"
+    },
+    {
+        "id": 5,
+        "name": "101 Eletro"
+    },
+    {
+        "id": 6,
+        "name": "102 Eletro"
+    },
+    {
+        "id": 7,
+        "name": "301 Meca"
+    },
+    {
+        "id": 8,
+        "name": "302 Meca"
+    },
+    {
+        "id": 9,
+        "name": "201 Meca"
+    },
+    {
+        "id": 10,
+        "name": "202 Meca"
+    },
+    {
+        "id": 11,
+        "name": "101 Meca"
+    },
+    {
+        "id": 12,
+        "name": "102 Meca"
+    }
+]
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+EQUIPMENTS:
+
+[
+    {
+        "id": 1,
+        "name": "Martelo",
+        "description": "Poc poc poc poc",
+        "quantity": 12
+    },
+    {
+        "id": 2,
+        "name": "Serrote",
+        "description": "",
+        "quantity": 15
+    },
+    {
+        "id": 3,
+        "name": "Ferro de solda",
+        "description": "",
+        "quantity": 31
+    },
+    {
+        "id": 4,
+        "name": "Fita dupla face",
+        "description": "",
+        "quantity": 80
+    },
+    {
+        "id": 5,
+        "name": "Marreta",
+        "description": "",
+        "quantity": 25
+    },
+    {
+        "id": 6,
+        "name": "Prego",
+        "description": "",
+        "quantity": 300
+    },
+    {
+        "id": 7,
+        "name": "Furadeira",
+        "description": "",
+        "quantity": 5
+    },
+    {
+        "id": 8,
+        "name": "Alicate",
+        "description": "",
+        "quantity": 20
+    },
+    {
+        "id": 9,
+        "name": "Chave de boca",
+        "description": "Tamanho 14",
+        "quantity": 7
+    },
+    {
+        "id": 10,
+        "name": "Luvas de proteção",
+        "description": "",
+        "quantity": 36
+    },
+    {
+        "id": 11,
+        "name": "Mascaras de proteção",
+        "description": "",
+        "quantity": 36
+    },
+    {
+        "id": 12,
+        "name": "Maçarico",
+        "description": "Não esquentar muito",
+        "quantity": 3
+    }
+]
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==
+SCHEDULINGS:
+
+[
+    {
+        "id": 1,
+        "initialDate": "01/12/2022 08:00",
+        "finalDate": "01/12/2022 08:45",
+        "teacher": {
+            "id": 1,
+            "name": "Nikolas",
+            "email": "nikolas@gmail.com",
+            "password": "$2a$10$JNOpuashWLI9aiS9o2Zl0OoyA1AxxrvAluf3rvmQQ8Ruy/8EVVYbi",
+            "role": "TEACHER"
+        },
+        "classroom": {
+            "id": 1,
+            "name": "D01",
+            "color": "BLACK"
+        },
+        "group": {
+            "id": 1,
+            "name": "301 Eletro"
+        },
+        "equipment": [
+            {
+                "id": 1,
+                "name": "Martelo",
+                "description": "Poc poc poc poc",
+                "quantity": 12
+            },
+            {
+                "id": 2,
+                "name": "Serrote",
+                "description": "",
+                "quantity": 15
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "initialDate": "01/12/2022 08:00",
+        "finalDate": "01/12/2022 09:30",
+        "teacher": {
+            "id": 2,
+            "name": "Paulo",
+            "email": "paulo@gmail.com",
+            "password": "$2a$10$tMHxA4BTcQQXBQEYW0yVCeI.i9S53ZgZZ2fl81AAMw93ESjwFoK/u",
+            "role": "TEACHER"
+        },
+        "classroom": {
+            "id": 3,
+            "name": "D03",
+            "color": "RED"
+        },
+        "group": {
+            "id": 2,
+            "name": "302 Eletro"
+        },
+        "equipment": [
+            {
+                "id": 3,
+                "name": "Ferro de solda",
+                "description": "",
+                "quantity": 31
+            },
+            {
+                "id": 4,
+                "name": "Fita dupla face",
+                "description": "",
+                "quantity": 80
+            },
+            {
+                "id": 5,
+                "name": "Marreta",
+                "description": "",
+                "quantity": 25
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "initialDate": "02/12/2022 13:30",
+        "finalDate": "02/12/2022 16:45",
+        "teacher": {
+            "id": 5,
+            "name": "Eder",
+            "email": "eder@gmail.com",
+            "password": "$2a$10$78AWNTElh0KpmCrCYFmzrOTcynUaZCpn0YUJpUxWWSN6hs9tJGFgG",
+            "role": "TEACHER"
+        },
+        "classroom": {
+            "id": 2,
+            "name": "D02",
+            "color": "YELLOW"
+        },
+        "group": {
+            "id": 3,
+            "name": "201 Eletro"
+        },
+        "equipment": [
+            {
+                "id": 1,
+                "name": "Martelo",
+                "description": "Poc poc poc poc",
+                "quantity": 12
+            },
+            {
+                "id": 2,
+                "name": "Serrote",
+                "description": "",
+                "quantity": 15
+            },
+            {
+                "id": 3,
+                "name": "Ferro de solda",
+                "description": "",
+                "quantity": 31
+            }
+        ]
+    }
+]

@@ -1,4 +1,6 @@
 function showListModal() {
+    document.querySelector("#show-details").innerHTML = "";
+
     // Pegar a div que conterá a lista de agendamentos deste dia modal
     const schedules = document.getElementById("schedules");
     //Adicionar o titulo à janela (data pressionada)
@@ -15,56 +17,65 @@ function showListModal() {
         }
     }
 
-    if(count === 0) schedules.innerHTML = "<tr><td colspan=14>Any schedule found!</td></tr>";
+    if (count === 0) schedules.innerHTML = "<tr><td colspan=14>Any schedule found!</td></tr>";
     document.getElementById("bt-add").setAttribute("rel", this.id);
 }
 
-function createMarker(scheduling){
+function createMarker(scheduling) {
     let div = document.createElement("div"); // Criando o marcador
     div.addEventListener("click", () => {
-        showAlert(scheduling, "danger");
+        showScheduleDetails(scheduling);
     });
     div.className = "day-marker"; // Adicionando a classe de estilos ao marcador
     div.style = `background-color: ${scheduling.classroom.color};` // Adicionando cor ao marcador
+    div.textContent = scheduling.classroom.name;
     let tr = document.createElement("tr"); // Criando linha do marcador
     let td = document.createElement("td"); // Criando a celula do marcador
-    td.colSpan=getColSpan(scheduling.initialDate, scheduling.finalDate)+1; // Pegando o tamanho do marcador
+    td.colSpan = getColSpan(scheduling.initialDate, scheduling.finalDate) + 1; // Pegando o tamanho do marcador
     getPositionFromMarker(schedules, tr, scheduling.initialDate, scheduling.finalDate);
     td.appendChild(div); // Adicionando o marcador a celula
     tr.appendChild(td); // Adicionando a celula a linha
     return tr;
 }
 
-function getColSpan(inititalHour, finalHour){
-    let i = new Date(convertData(inititalHour)).getTime() / 60000;
-    let f = new Date(convertData(finalHour)).getTime() / 60000;
-    return Math.floor((f-i)/45);
+function getColSpan(inititalHour, finalHour) {
+    const i = new Date(convertData(inititalHour)).getTime() / 60000;
+    const f = new Date(convertData(finalHour)).getTime() / 60000;
+    let d = Math.floor((f - i) / 45);
+    d += (checkHour(finalHour) >= "09:45" && checkHour(inititalHour) < "13:30") ? 1 : 0;
+    d += (checkHour(finalHour) >= "16:00") ? 1 : 0;
+    return d;
 }
 
-function getPositionFromMarker(tbody, tr, initialHour, finalHour){
-    let partesI = initialHour.substring(11).split(":");
-    let partesF = finalHour.substring(11).split(":");
-    let minutes = partesI[0] * 60;
-    let diference = (partesF[0] > "12") ? minutes + parseInt(partesI[1]) - (13*60+30) : minutes + parseInt(partesI[1]) - 8*60;
-    let position = (partesF[0] > "12") ? Math.floor(diference / 45) + 6 : Math.floor(diference / 45);
+function getPositionFromMarker(tbody, tr, initialHour, finalHour) {
+    let partsI = initialHour.substring(11).split(":");
+    let partsF = finalHour.substring(11).split(":");
+    let minutes = partsI[0] * 60;
+    let diference = (partsF[0] > "12") ? minutes + parseInt(partsI[1]) - (13 * 60 + 30) : minutes + parseInt(partsI[1]) - 8 * 60;
+    let position = (partsF[0] > "12") ? Math.floor(diference / 45) + 7 : Math.floor(diference / 45);
 
-    for (let i = 0; i < position; i++){
+    for (let i = 0; i < position; i++) {
         let td = document.createElement("td");
         tr.appendChild(td);
     }
     tbody.appendChild(tr);
 }
 
-function convertData(data){
-    parts = data.split(/[ /]/);
-    return parts[2]+"-"+parts[1]+"-"+parts[0]+" "+parts[3];
+function convertData(data) {
+    const parts = data.split(/[ /]/);
+    return parts[2] + "-" + parts[1] + "-" + parts[0] + " " + parts[3];
 }
 
-function getValues(){
+function checkHour(data){
+    const parts = data.split(/[ /]/);
+    return parts[3];
+}
+
+function getValues() {
     let initialDate = document.querySelector("#initialHour");
     let finalDate = document.querySelector("#finalHour");
     let group = document.querySelector("select[name=classes-select]").value;
-    let classroom = document.querySelector("select[name=classrooms-select]").value;   
+    let classroom = document.querySelector("select[name=classrooms-select]").value;
     let teacher = JSON.parse(sessionStorage.getItem("teacher"));
     let nodeEquipments = document.querySelectorAll(".checked .item-text");
     let equipments = [];
@@ -80,7 +91,7 @@ function getValues(){
     sendData(initialDate.options[initialDate.selectedIndex].value, finalDate.options[finalDate.selectedIndex].value, group, classroom, teacher, equipments)
 }
 
-async function loadValuesToDropdowns(){
+async function loadValuesToDropdowns() {
     const classes = await getData("class");
     const classesSelect = document.querySelector("select[name=classes-select]");
     populateDropDowns(classesSelect, classes);
@@ -117,34 +128,29 @@ function populateDropDowns(dropdown, data) {
 
 }
 
-const alertPlaceholder = document.getElementById('alertPlaceholder');
+const alertPlaceholder = document.getElementById('show-details');
 
-// const showAlert = (message, type) => {
-//   const wrapper = document.createElement('div')
-//   wrapper.innerHTML = [
-//     `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-//     `   <div>${message}</div>`,
-//     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-//     '</div>'
-//   ].join('');
 
-//   alertPlaceholder.append(wrapper);
-// }
+function showScheduleDetails(scheduling) {
 
-function showAlert(scheduling, type){
     alertPlaceholder.innerHTML = "";
-    const wrapper = document.createElement('div');
-    wrapper.classList = `alert alert-${type} alert-dismissible`;
-    wrapper.setAttribute("role", "alert");
-    const message = document.createElement("div");
-    const initialDate = document.createElement("span").textContent = "Initial date: " + scheduling.initialDate;
-    const finalDate = document.createElement("span").textContent = "Final date: " +  scheduling.finalDate; 
-    const teacher = document.createElement('span').textContent = "Teacher name: " +  scheduling.teacher.name;
-    const group = document.createElement('span').textContent = "Class: " +  scheduling.group.name;
-    const classroom = document.createElement('span').textContent = "Classroom: " +  scheduling.classroom.name;
-    const equipments = document.createElement('span').textContent = "Equipments: " +  scheduling.equipment.map(e => `${e.name} x ${e.quantity}`).join(`   `);
-    message.append(initialDate, finalDate, teacher, group, classroom, equipments);
-    wrapper.appendChild(message);
-    wrapper.innerHTML += `<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
-    alertPlaceholder.append(wrapper);
+    createLi("Id:", scheduling.id);
+    createLi("Initial date:", scheduling.initialDate);
+    createLi("Final date:", scheduling.finalDate);
+    createLi("Classroom:", scheduling.classroom.name);
+    createLi("Class:", scheduling.group.name);
+    createLi("Teacher:", scheduling.teacher.name);
+    if (scheduling.equipment.length > 0){
+        alertPlaceholder.appendChild(document.createTextNode("Equipments:"));
+        for (key in scheduling.equipment) {
+            createLi(`${scheduling.equipment[key].quantity} x `, scheduling.equipment[key].name);
+        }
+    }
+}
+
+function createLi(key, attribute) {
+    const li = document.createElement("li");
+    const text = document.createTextNode(`${key} ${attribute}`);
+    li.appendChild(text);
+    alertPlaceholder.appendChild(li)
 }

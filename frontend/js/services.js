@@ -9,6 +9,7 @@
     rodar o JSON server:
     navegar até o diretório "src\main\resources\static\js" e digitar o comando:
     json-server --watch db.json
+    json-server --host 192.168.1.XXX db.json
     padrão de rota do JSON server:
     http://localhost:3000/name
 
@@ -29,7 +30,7 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
 
-const adress = "192.168.1.4:8080";
+const adress = "192.168.1.3:3000";
 
 async function getData(entity) {
     const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
@@ -76,7 +77,7 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         equipment: equipments
     });
 
-    const responseText = await postData(`http://${adress}/schedulings/insertScheduling`, data);
+    const responseText = await postData(`http://${adress}/schedulings/`, data);
 }
 
 function verificarHora(initialHour, finalHour) {
