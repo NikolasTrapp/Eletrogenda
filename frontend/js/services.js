@@ -30,10 +30,10 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
 
-const adress = "localhost:8080";
+const adress = "https://agenda-eletro.herokuapp.com";
 
 async function getData(entity) {
-    const request = await fetch(`http://${adress}/${entity}/`); // pegando os dados do backend
+    const request = await fetch(`${adress}/${entity}/`); // pegando os dados do backend
     const data = await request.json(); // transformando os dados em json
     return data; // Retornando os dados
 }
@@ -77,7 +77,7 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         equipment: equipments
     });
 
-    const responseText = await postData(`http://${adress}/schedulings/insertScheduling`, data);
+    const responseText = await postData(`${adress}/schedulings/insertScheduling`, data);
     if (responseText.status === 400){
         alert(responseText.error);
     } else {
