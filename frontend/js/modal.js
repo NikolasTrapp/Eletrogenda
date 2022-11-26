@@ -42,17 +42,19 @@ function getColSpan(inititalHour, finalHour) {
     const i = new Date(convertData(inititalHour)).getTime() / 60000;
     const f = new Date(convertData(finalHour)).getTime() / 60000;
     let d = Math.floor((f - i) / 45);
-    d += (checkHour(finalHour) >= "09:45" && checkHour(inititalHour) < "13:30") ? 1 : 0;
-    d += (checkHour(finalHour) >= "16:00") ? 1 : 0;
+    // d += (checkHour(finalHour) >= "09:45" && checkHour(inititalHour) < "13:30") ? 1 : 0;
+    // d += (checkHour(finalHour) >= "16:00") ? 1 : 0;
     return d;
 }
 
 function getPositionFromMarker(tbody, tr, initialHour, finalHour) {
-    let partsI = initialHour.substring(11).split(":");
-    let partsF = finalHour.substring(11).split(":");
-    let minutes = partsI[0] * 60;
-    let diference = (partsF[0] > "12") ? minutes + parseInt(partsI[1]) - (13 * 60 + 30) : minutes + parseInt(partsI[1]) - 8 * 60;
+    const partsI = initialHour.substring(11).split(":");
+    const partsF = finalHour.substring(11).split(":");
+    const minutes = partsI[0] * 60 + parseInt(partsI[1]);
+    let diference = (partsF[0] > "12") ? minutes - (13 * 60 + 30) : minutes - 8 * 60;
     let position = (partsF[0] > "12") ? Math.floor(diference / 45) + 7 : Math.floor(diference / 45);
+    position += (partsI[0] == "09" && partsI[1] == "45") ? 1 : 0;
+    position += (partsI[0] == "16" && partsI[1] == "00") ? 1 : 0;
 
     for (let i = 0; i < position; i++) {
         let td = document.createElement("td");

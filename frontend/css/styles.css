@@ -89,21 +89,16 @@ body {
 
 }
 
-@media (max-width: 991px) {
-    .modal-content {
-        width: 100% !important;
-        background-color: #052904!important;
-    }
+#table{
+    margin: 0;
 }
 
 
-.modal-content {
-    width: 55rem !important;
-}
-
-.modal-dialog {
+#schedule-dialog {
     display: flex !important;
     justify-content: center;
+    align-items: center;
+    max-width: 54rem;
 }
 
 .day-marker {

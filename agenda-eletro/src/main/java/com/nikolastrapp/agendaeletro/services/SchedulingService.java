@@ -41,7 +41,6 @@ public class SchedulingService {
 		}
 		ArrayList<Scheduling> schedulings = schedulingReporitory.getClassesClassrooms(scheduling.getGroup().getId(),
 				scheduling.getClassroom().getId());
-		schedulings.forEach(System.out::println);
 		for (Scheduling s : schedulings) {
 			if (scheduling.isBetween(s.getInitialDate(), s.getFinalDate())) throw new NotCompatibleDate();
 		}
