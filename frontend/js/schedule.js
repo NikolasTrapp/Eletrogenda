@@ -116,7 +116,7 @@ getData("schedulings").then(
         data = schedulings; // Atribuir os valores à variável no escopo global
         loadValuesToDropdowns();
     }).catch( // Se der erro:
-        (err) => alert(err) // Mostra o erro podre
+        () => showAlert("Error!", "Failed to contact with the backend", "error", "Close") // Mostra o erro podre
     ).finally(() => {
         generateCalendar(currentMonth, currentYear); // Chamar a função de gerar o calendario
     });

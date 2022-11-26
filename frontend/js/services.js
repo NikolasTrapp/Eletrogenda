@@ -30,8 +30,8 @@
 //Para caso de não querer fazer login manualmente
 sessionStorage.setItem("teacher", JSON.stringify({ "id": "1" }));
 
-// const adress = "https://agenda-eletro.herokuapp.com";
-const adress = "http://192.168.1.3:8080";
+const adress = "https://agenda-eletro.herokuapp.com";
+// const adress = "http://192.168.1.3:8080";
 
 async function getData(entity) {
     const request = await fetch(`${adress}/${entity}/`); // pegando os dados do backend
