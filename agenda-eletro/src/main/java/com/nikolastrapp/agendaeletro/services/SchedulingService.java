@@ -1,6 +1,7 @@
 package com.nikolastrapp.agendaeletro.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,13 +37,14 @@ public class SchedulingService {
 
 	public Scheduling insert(Scheduling scheduling) {
 		if (!scheduling.checkCompatibility()) {
-			System.out.println("oi");
 			throw new InvalidDateException("Invalid date format.");
 		}
 		ArrayList<Scheduling> schedulings = schedulingReporitory.getClassesClassrooms(scheduling.getGroup().getId(),
 				scheduling.getClassroom().getId());
 		for (Scheduling s : schedulings) {
-			if (scheduling.isBetween(s.getInitialDate(), s.getFinalDate())) throw new NotCompatibleDate();
+			Date id = s.getInitialDate();
+			Date fd = s.getFinalDate();
+			if (scheduling.isBetween(id, fd)) throw new NotCompatibleDate();
 		}
 		return schedulingReporitory.save(scheduling);
 	}

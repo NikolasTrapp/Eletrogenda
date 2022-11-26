@@ -28,10 +28,10 @@
 */
 
 //Para caso de não querer fazer login manualmente
-sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
+sessionStorage.setItem("teacher", JSON.stringify({ "id": "1" }));
 
-const adress = "https://agenda-eletro.herokuapp.com";
-// const adress = "http://192.168.1.3:8080";
+// const adress = "https://agenda-eletro.herokuapp.com";
+const adress = "http://192.168.1.3:8080";
 
 async function getData(entity) {
     const request = await fetch(`${adress}/${entity}/`); // pegando os dados do backend
@@ -63,7 +63,7 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
     let day = document.getElementById("add-schedule-modal-label").textContent;
 
     // Verificando se a hora compreende entre (08:00 e 12:00) ou (13:30 e 17:30)
-    if (verificarHora(initialHour, finalHour)){
+    if (verificarHora(initialHour, finalHour)) {
         alert("Invalid hour!");
         return null; // Sair da função
     }
@@ -77,12 +77,21 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         group: { "id": group },
         equipment: equipments
     });
-    console.log(data);
     const responseText = await postData(`${adress}/schedulings/insertScheduling`, data);
-    console.log(responseText);
-    if (responseText.status === 400 || responseText.status === 500 || responseText.status === 409){
-        alert(responseText.error);
+    if (responseText.status === 400 || responseText.status === 500 || responseText.status === 409) {
+        showAlert("Error!", `${responseText.status} - ${responseText.error}`, "error", "Close");
+    } else {
+        showAlert("Success!", `${responseText.status} - ${responseText.error}`, "error", "Close");
     }
+}
+
+function showAlert(title, text, icon, confirmButtonText){
+    Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        confirmButtonText: confirmButtonText
+    });
 }
 
 function verificarHora(initialHour, finalHour) {
@@ -90,5 +99,5 @@ function verificarHora(initialHour, finalHour) {
     let finalH = new Date('2022-01-01 ' + finalHour);
 
     return initialH >= finalH;
-    
+
 }

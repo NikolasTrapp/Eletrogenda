@@ -42,8 +42,8 @@ function getColSpan(inititalHour, finalHour) {
     const i = new Date(convertData(inititalHour)).getTime() / 60000;
     const f = new Date(convertData(finalHour)).getTime() / 60000;
     let d = Math.floor((f - i) / 45);
-    // d += (checkHour(finalHour) >= "09:45" && checkHour(inititalHour) < "13:30") ? 1 : 0;
-    // d += (checkHour(finalHour) >= "16:00") ? 1 : 0;
+    d += (checkHour(inititalHour) < "09:45" && checkHour(finalHour) >= "09:45" && checkHour(inititalHour) < "13:30") ? 1 : 0;
+    d += (checkHour(finalHour) >= "16:00") ? 1 : 0;
     return d;
 }
 
@@ -82,7 +82,10 @@ function getValues() {
     let nodeEquipments = document.querySelectorAll(".checked .item-text");
     let equipments = [];
 
-    if (group == 0 || classroom == 0 || teacher.id == 0) return false;
+    if (group == 0 || classroom == 0 || teacher.id == 0) {
+        showAlert("Hey!", "You left some field empty.", "warning", "Close");
+        return false;
+    };
 
     nodeEquipments.forEach(e => {
         equipments.push({
