@@ -6,11 +6,11 @@ body {
     background-color: beige;
 }
 
-#logo{
+#logo {
     margin-left: 83px;
 }
 
-.menu{
+.menu {
     display: flex;
     padding: 0;
 }
@@ -38,25 +38,25 @@ body {
 }
 
 .schedule-btn:focus {
-  outline: var(--outline);
-  outline-offset: -6px;
+    outline: var(--outline);
+    outline-offset: -6px;
 }
 
-#schedule-container{
+#schedule-container {
     padding-top: 20px;
 }
 
-.week-header{
+.week-header {
     background-color: #349a46;
     color: white;
-    font-weight:bold;
+    font-weight: bold;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.day{
+.day {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,15 +65,16 @@ body {
     height: 80px;
 }
 
-.col{
+.col {
     border: solid;
     border-width: 1px;
     border-color: black;
     box-shadow: 7px 10px 0px 2px rgb(2, 63, 15);
 }
 
-.col:hover{
-    background-color:#052904 ; color: #fffcff;
+.col:hover {
+    background-color: #052904;
+    color: #fffcff;
 }
 
 .circle {
@@ -85,19 +86,27 @@ body {
     /* margin: 0.5px; */
     margin: auto;
     position: relative;
-    
+
 }
 
-.modal-content{
-    width: 55rem!important;
+@media (max-width: 991px) {
+    .modal-content {
+        width: 100% !important;
+        background-color: #052904!important;
+    }
 }
 
-.modal-dialog{
-    display: flex!important;
+
+.modal-content {
+    width: 55rem !important;
+}
+
+.modal-dialog {
+    display: flex !important;
     justify-content: center;
 }
 
-.day-marker{
+.day-marker {
     width: 100%;
     height: 20px;
     border: 1px solid black;

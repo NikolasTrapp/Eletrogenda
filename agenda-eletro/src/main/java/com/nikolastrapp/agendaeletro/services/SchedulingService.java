@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.nikolastrapp.agendaeletro.entities.Equipment;
 import com.nikolastrapp.agendaeletro.entities.Scheduling;
 import com.nikolastrapp.agendaeletro.repositories.SchedulingReporitory;
-import com.nikolastrapp.agendaeletro.services.exceptions.DatabaseException;
+import com.nikolastrapp.agendaeletro.services.exceptions.InvalidDateException;
 import com.nikolastrapp.agendaeletro.services.exceptions.NotCompatibleDate;
 import com.nikolastrapp.agendaeletro.services.exceptions.ResourceNotFoundException;
 
@@ -35,13 +35,15 @@ public class SchedulingService {
 	}
 
 	public Scheduling insert(Scheduling scheduling) {
-		if (!scheduling.compareTime()) {
-			throw new DatabaseException("Invalid date format.");
+		if (!scheduling.checkCompatibility()) {
+			System.out.println("oi");
+			throw new InvalidDateException("Invalid date format.");
 		}
 		ArrayList<Scheduling> schedulings = schedulingReporitory.getClassesClassrooms(scheduling.getGroup().getId(),
 				scheduling.getClassroom().getId());
+		schedulings.forEach(System.out::println);
 		for (Scheduling s : schedulings) {
-			if (scheduling.isCompatible(s.getInitialDate(), s.getFinalDate())) throw new NotCompatibleDate();
+			if (scheduling.isBetween(s.getInitialDate(), s.getFinalDate())) throw new NotCompatibleDate();
 		}
 		return schedulingReporitory.save(scheduling);
 	}

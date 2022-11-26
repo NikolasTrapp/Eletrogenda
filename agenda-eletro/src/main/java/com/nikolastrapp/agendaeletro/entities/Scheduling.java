@@ -155,18 +155,42 @@ public class Scheduling implements Serializable {
 	public void setGroup(Class group) {
 		this.group = group;
 	}
+	
+	public int getMinutes(Date date) {
+		//Retorna quantos minutos tem um horario de uma data
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.setTime(date);
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		return hours*60+minutes;
+	}
 
-	//Método para comparar se o tempo é válido
-	public boolean compareTime() {
-		Date today = new Date(); // Pegar a data atual
-		Calendar gc = new GregorianCalendar(); // Criar um objeto Calendar
-		gc.setTime(initialDate); // Adicionar o valor da data inicial para o calendar
-		// Pegar a diferença de tempo entre a data inicial e a data final:
+	public boolean checkPeriod() {
+		//Verifica se a hora está num periodo só True se sim, False se não
+		return (getMinutes(initialDate) >= 480 && getMinutes(finalDate) <= 720) || (getMinutes(initialDate) >= 810 && getMinutes(finalDate) <= 1050);
+	}
+	
+	public boolean checkIfTimeHas45Min() {
+		//Verifica se a diferença entre as horas tem mais de 45 minutos True se sim, False se não
 		int diference = (int) TimeUnit.MILLISECONDS.toMinutes(finalDate.getTime() - initialDate.getTime());
-		boolean isGreater = initialDate.after(today);
-		boolean haveMoreThan45 = diference >= 45;
-		boolean isSunday = gc.get(Calendar.DAY_OF_WEEK) != 	Calendar.SUNDAY;
-		return isGreater && haveMoreThan45 && isSunday;
+		return diference >= 45;
+	}
+	
+	public boolean isSunday() {
+		// Verifica se a data é um domingo True se não, False se sim
+		Calendar gc = new GregorianCalendar();
+		gc.setTime(initialDate);
+		return gc.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY;
+	}
+	
+	public boolean isGreater() {
+		// Verifica se data inicial é depois do dia do cadastro True se sim, False se não
+		Date today = new Date();
+		return initialDate.after(today);
+	}
+	
+	public boolean checkCompatibility() {
+		return checkPeriod() && checkIfTimeHas45Min() && isSunday() && isGreater();
 	}
 
 	// Métodos hashCode e equals para comprar objetos caso necessário
@@ -186,11 +210,13 @@ public class Scheduling implements Serializable {
 		Scheduling other = (Scheduling) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	public boolean isCompatible(Date iDate, Date fDate) {
-		boolean a = (initialDate.after(iDate) || initialDate.equals(iDate)) && (initialDate.before(fDate) || initialDate.equals(fDate));
-		boolean b = (finalDate.after(iDate) || finalDate.equals(iDate)) && (finalDate.before(fDate) || finalDate.equals(fDate));
-		return a || b;
+	
+	public boolean isBetween(Date firstDate, Date secondDate) {
+		//Esta função verifica se a data inicial ou a data final estão entre uma data inicial/final
+		//de um agendamento que já consta no banco de dados returna True se sim, False se não.
+		boolean initialCheck = initialDate.compareTo(firstDate) >= 0 && initialDate.compareTo(secondDate) <= 0;
+		boolean finalCheck = finalDate.compareTo(firstDate) >= 0 && finalDate.compareTo(secondDate) <= 0; 
+		return initialCheck || finalCheck;
 	}
 
 }

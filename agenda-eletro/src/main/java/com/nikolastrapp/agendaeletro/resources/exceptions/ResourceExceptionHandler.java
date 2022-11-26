@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.nikolastrapp.agendaeletro.services.exceptions.DatabaseException;
+import com.nikolastrapp.agendaeletro.services.exceptions.InvalidDateException;
 import com.nikolastrapp.agendaeletro.services.exceptions.NotCompatibleDate;
 import com.nikolastrapp.agendaeletro.services.exceptions.ResourceNotFoundException;
 
@@ -41,6 +42,15 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(NotCompatibleDate.class)
 	public ResponseEntity<StandartError> notCompatibleDate(NotCompatibleDate e, HttpServletRequest request) {
 		String error = "This date is already registered.";
+		HttpStatus status = HttpStatus.CONFLICT;
+		StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(),
+				request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(InvalidDateException.class)
+	public ResponseEntity<StandartError> invalidDate(InvalidDateException e, HttpServletRequest request) {
+		String error = "Invalid date.";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandartError err = new StandartError(Instant.now(), status.value(), error, e.getMessage(),
 				request.getRequestURI());

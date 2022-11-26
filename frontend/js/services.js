@@ -31,6 +31,7 @@
 sessionStorage.setItem("teacher", JSON.stringify({"id": "1"}));
 
 const adress = "https://agenda-eletro.herokuapp.com";
+// const adress = "http://localhost:8080";
 
 async function getData(entity) {
     const request = await fetch(`${adress}/${entity}/`); // pegando os dados do backend
@@ -76,13 +77,11 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
         group: { "id": group },
         equipment: equipments
     });
-
+    console.log(data);
     const responseText = await postData(`${adress}/schedulings/insertScheduling`, data);
-    if (responseText.status === 400){
+    console.log(responseText);
+    if (responseText.status === 400 || responseText.status === 500 || responseText.status === 409){
         alert(responseText.error);
-    } else {
-        alert("sucesso pai");
-        window.location.reload();
     }
 }
 
