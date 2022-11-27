@@ -81,7 +81,7 @@ async function sendData(initialHour, finalHour, group, classroom, teacher, equip
     if (responseText.status === 400 || responseText.status === 500 || responseText.status === 409) {
         showAlert("Error!", `${responseText.status} - ${responseText.error}`, "error", "Close");
     } else {
-        showAlert("Success!", `${responseText.status} - ${responseText.error}`, "error", "Close");
+        showAlert("Success!", "Your registered a new schedule", "success", "Close");
     }
 }
 
