@@ -3,8 +3,9 @@
 }
 
 body {
-    background-color: whitesmoke; /*background-color: beige;*/
-}   
+    background-color: whitesmoke;
+    /*background-color: beige;*/
+}
 
 #logo {
     margin-left: 83px;
@@ -89,7 +90,7 @@ body {
 
 }
 
-#table{
+#table {
     margin: 0;
     overflow-x: auto;
 }
@@ -126,7 +127,7 @@ body {
     box-sizing: border-box;
     position: relative;
     display: block;
-    transform: scale(var(--ggs,1));
+    transform: scale(var(--ggs, 1));
     width: 20px;
     height: 20px;
     border: 2px solid;
@@ -134,6 +135,7 @@ body {
     color: white;
     background-color: #349a46;
 }
+
 .gg-info::after,
 .gg-info::before {
     content: "";
@@ -145,23 +147,28 @@ body {
     background: currentColor;
     left: 7px
 }
+
 .gg-info::after {
     bottom: 2px;
     height: 8px
 }
+
 .gg-info::before {
     height: 2px;
     top: 2px
-}.gg-info {
+}
+
+.gg-info {
     box-sizing: border-box;
     position: relative;
     display: block;
-    transform: scale(var(--ggs,1));
+    transform: scale(var(--ggs, 1));
     width: 20px;
     height: 20px;
     border: 2px solid;
     border-radius: 40px
 }
+
 .gg-info::after,
 .gg-info::before {
     content: "";
@@ -173,52 +180,50 @@ body {
     background: currentColor;
     left: 7px
 }
+
 .gg-info::after {
     bottom: 2px;
     height: 8px
 }
+
 .gg-info::before {
     height: 2px;
     top: 2px
 }
 
-
-
 ul a {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: whitesmoke;
-  color: black;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: whitesmoke;
+    color: black;
 }
 
 li {
-  float: left;
+    float: left;
 }
 
 .nav-link {
     font-size: 20px;
-  display: block;
-  color: #349a46;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-weight: bold; 
+    display: block;
+    color: #349a46;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
 }
-.nav-link:hover{ opacity: 70%;
+
+.nav-link:hover {
+    opacity: 70%;
     color: grey;
 
 }
 
-
-
-
-
-  
-  .gg-menu {
-    transform: scale(var(--ggs,1))
+.gg-menu {
+    transform: scale(var(--ggs, 1))
 }
+
 .gg-menu,
 .gg-menu::after,
 .gg-menu::before {
@@ -230,23 +235,23 @@ li {
     border-radius: 3px;
     background: currentColor
 }
+
 .gg-menu::after,
 .gg-menu::before {
     content: "";
     position: absolute;
     top: -6px
 }
+
 .gg-menu::after {
     top: 6px
 }
 
-.btn{
-background-color: #349a46;
-font-weight: bold; 
-border: none;
-
+.btn {
+    /* background-color: #349a46; */
+    font-weight: bold;
+    border: none;
 }
-
 
 .btn:hover {
     background-color: #052904;
