@@ -133,7 +133,7 @@ body {
     border: 2px solid;
     border-radius: 40px;
     color: white;
-    background-color: #349a46;
+    background-color: red;
 }
 
 .gg-info::after,
@@ -200,9 +200,7 @@ ul a {
     color: black;
 }
 
-li {
-    float: left;
-}
+
 
 .nav-link {
     font-size: 20px;

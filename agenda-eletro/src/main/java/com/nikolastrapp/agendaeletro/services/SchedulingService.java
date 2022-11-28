@@ -42,9 +42,9 @@ public class SchedulingService {
 		ArrayList<Scheduling> schedulings = schedulingReporitory.getClassesClassrooms(scheduling.getGroup().getId(),
 				scheduling.getClassroom().getId());
 		for (Scheduling s : schedulings) {
-			Date id = s.getInitialDate();
-			Date fd = s.getFinalDate();
-			if (scheduling.isBetween(id, fd)) throw new NotCompatibleDate();
+			Date id = scheduling.getInitialDate();
+			Date fd = scheduling.getFinalDate();
+			if (s.isBetween(id, fd)) throw new NotCompatibleDate();
 		}
 		return schedulingReporitory.save(scheduling);
 	}
