@@ -74,8 +74,8 @@ function populateSchedulings() {
         let col = document.getElementById(scheduling.initialDate.substring(0, 10));
         if (col != null) {
             const div = document.createElement("div");
-            div.className = "circle";
-            col.appendChild(div);
+            div.className = "gg-info";
+            if (col.innerHTML.indexOf(div.className) == -1){col.appendChild(div);}
         }
     }
 }
