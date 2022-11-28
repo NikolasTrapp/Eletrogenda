@@ -1,7 +1,7 @@
 function showListModal() {
     document.querySelector("#show-details").innerHTML = "";
 
-    // Pegar a div que conterá a lista de agendamentos deste dia modal
+    // Pegar a div que conterá a lista de agendamentos deste dia
     const schedules = document.getElementById("schedules");
     //Adicionar o titulo à janela (data pressionada)
     document.getElementById("schedule-modal-label").textContent = this.id;
@@ -22,19 +22,21 @@ function showListModal() {
 }
 
 function createMarker(scheduling) {
-    let div = document.createElement("div"); // Criando o marcador
+    const div = document.createElement("div"); // Criando o marcador
     div.addEventListener("click", () => {
         showScheduleDetails(scheduling);
     });
     div.className = "day-marker"; // Adicionando a classe de estilos ao marcador
-    div.style = `background-color: ${scheduling.classroom.color};` // Adicionando cor ao marcador
+    div.style.backgroundColor = scheduling.classroom.color; // Adicionando cor ao marcador
     div.textContent = scheduling.classroom.name;
-    let tr = document.createElement("tr"); // Criando linha do marcador
-    let td = document.createElement("td"); // Criando a celula do marcador
-    td.colSpan = getColSpan(scheduling.initialDate, scheduling.finalDate) + 1; // Pegando o tamanho do marcador
-    getPositionFromMarker(schedules, tr, scheduling.initialDate, scheduling.finalDate);
+    const tr = document.createElement("tr"); // Criando linha do marcador
+    const td = document.createElement("td"); // Criando a celula do marcador
+    const colspanValue = getColSpan(scheduling.initialDate, scheduling.finalDate) + 1; // Pegando o tamanho do marcador
+    td.colSpan = colspanValue;
+    const positionFromMarker = getPositionFromMarker(tr, scheduling.initialDate, scheduling.finalDate);
     td.appendChild(div); // Adicionando o marcador a celula
     tr.appendChild(td); // Adicionando a celula a linha
+    fillRow(positionFromMarker, colspanValue, tr);
     return tr;
 }
 
@@ -47,7 +49,7 @@ function getColSpan(inititalHour, finalHour) {
     return d;
 }
 
-function getPositionFromMarker(tbody, tr, initialHour, finalHour) {
+function getPositionFromMarker(tr, initialHour, finalHour) {
     const partsI = initialHour.substring(11).split(":");
     const partsF = finalHour.substring(11).split(":");
     const minutes = partsI[0] * 60 + parseInt(partsI[1]);
@@ -57,10 +59,11 @@ function getPositionFromMarker(tbody, tr, initialHour, finalHour) {
     position += (partsI[0] == "16" && partsI[1] == "00") ? 1 : 0;
 
     for (let i = 0; i < position; i++) {
-        let td = document.createElement("td");
+        const td = document.createElement("td");
         tr.appendChild(td);
     }
-    tbody.appendChild(tr);
+
+    return position;
 }
 
 function convertData(data) {
@@ -71,6 +74,13 @@ function convertData(data) {
 function checkHour(data){
     const parts = data.split(/[ /]/);
     return parts[3];
+}
+
+function fillRow(positionFromMarker, colspanValue, tr){
+    for (let i = 0; i < 14 - positionFromMarker - colspanValue; i++){
+        const td = document.createElement("td");
+        tr.appendChild(td);
+    }
 }
 
 function getValues() {
